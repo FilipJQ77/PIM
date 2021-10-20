@@ -1,10 +1,59 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    //later on it should be changed for home screen or menu
-    home: BoardScreen(),
-  ));
+void main() => runApp(const App());
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BabbleWords!',
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      //TODO Create our own purple MaterialColor
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text('BabbleWords!'),
+          ),
+          body: const BoardScreen()),
+    );
+  }
+}
+
+// todo implement this in the hand below
+class HandLetter extends StatefulWidget {
+  const HandLetter({Key? key}) : super(key: key);
+
+  @override
+  _HandLetterState createState() => _HandLetterState();
+}
+
+class _HandLetterState extends State<HandLetter> {
+  String letter = "";
+
+  void setLetter(String letter) {
+    if (letter.length != 1) {
+      throw Exception("The string should only be 1 letter");
+      //TODO better exception
+    }
+    setState(() {
+      this.letter = letter;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Center(child: Text(letter)),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class BoardScreen extends StatefulWidget {
@@ -18,12 +67,6 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[400],
-      appBar: AppBar(
-        title: Text('Babble Words!'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[700],
-      ),
       body: Column(
         children: [
           // BOARD
@@ -35,8 +78,7 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                       color: Colors.cyan,
-                      child: Center(child: Text('board here'))
-                  ),
+                      child: const Center(child: Text('board here'))),
                 ),
               ],
             ),
@@ -51,99 +93,92 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     color: Colors.yellow,
                     child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
                                     color: Colors.grey[400],
-                                    child: Center(child: Text('A'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                                    child: Center(child: Text('A'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('B'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: Text('B'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('C'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('C'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('D'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: Text('D'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('E'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('E'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('F'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: Text('F'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('G'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('G'))),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -158,10 +193,9 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    //padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
+                      //padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                       color: Colors.green,
-                      child: Center(child: Text('buttons here'))
-                  ),
+                      child: const Center(child: Text('buttons here'))),
                 ),
               ],
             ),
@@ -171,4 +205,3 @@ class _BoardScreenState extends State<BoardScreen> {
     );
   }
 }
-
