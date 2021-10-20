@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    //later on it should be changed for home screen or menu
     home: BoardScreen(),
   ));
 }
@@ -25,6 +26,7 @@ class _BoardScreenState extends State<BoardScreen> {
       ),
       body: Column(
         children: [
+          // BOARD
           Expanded(
             flex: 8,
             child: Row(
@@ -32,9 +34,8 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                       color: Colors.cyan,
-                      child: Text('board here')
+                      child: Center(child: Text('board here'))
                   ),
                 ),
               ],
@@ -42,14 +43,108 @@ class _BoardScreenState extends State<BoardScreen> {
           ),
           // HAND
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   child: Container(
                     color: Colors.yellow,
-                    child: Text('hand here')
+                    child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('A'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      color: Colors.grey[600],
+                                      child: Center(child: Text('B'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      color: Colors.grey[400],
+                                      child: Center(child: Text('C'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      color: Colors.grey[600],
+                                      child: Center(child: Text('D'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      color: Colors.grey[400],
+                                      child: Center(child: Text('E'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      color: Colors.grey[600],
+                                      child: Center(child: Text('F'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                      color: Colors.grey[400],
+                                      child: Center(child: Text('G'))
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                    ),
                   ),
                 ),
               ],
@@ -65,7 +160,7 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     //padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                       color: Colors.green,
-                      child: Text('buttons here')
+                      child: Center(child: Text('buttons here'))
                   ),
                 ),
               ],
