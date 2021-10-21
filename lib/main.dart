@@ -286,7 +286,6 @@ class _BoardScreenState extends State<BoardScreen> {
                          ],
                       ),
                   ),
-                      child: const Center(child: Text('buttons here'))),
                 ),
               ],
             ),
