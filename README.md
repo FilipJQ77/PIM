@@ -2,7 +2,7 @@
 
 ![GitHub language count](https://img.shields.io/github/languages/count/FilipJQ77/PIM?style=plastic)
 ![GitHub top language](https://img.shields.io/github/languages/top/FilipJQ77/PIM?style=plastic)
-![GitHub repo size](https://img.shields.io/github/repo-size/FilipJQ77/PIM?style=plastic)
+![Lines of code](https://img.shields.io/tokei/lines/github/FilipJQ77/PIM?style=plastic)
 
 ![GitHub issues](https://img.shields.io/github/issues/FilipJQ77/PIM?style=plastic)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/FilipJQ77/PIM?style=plastic)
