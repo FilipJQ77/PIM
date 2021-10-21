@@ -67,12 +67,6 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[400],
-      appBar: AppBar(
-        title: Text('Babble Words!'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[700],
-      ),
       body: Column(
         children: [
           // BOARD
