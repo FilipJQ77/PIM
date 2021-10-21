@@ -160,7 +160,82 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     //padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
                       color: Colors.green,
-                      child: Center(child: Text('buttons here'))
+                      // child: Center(child: Text('buttons here')),
+                      child:
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child:ElevatedButton.icon(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)
+                                  ),
+                                  primary: Colors.amber,
+                                    onPrimary: Colors.black),
+                                icon: const Icon(
+                                  Icons.undo_rounded,
+                                  //color: Colors.white,
+                                  size: 20.0,
+                                ),
+                                label: const Text('UNDO'),
+                            ),
+                          ),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)
+                                ),
+                                primary: Colors.amber,
+                                  onPrimary: Colors.black),
+                              icon: const Icon(
+                                  Icons.change_circle_rounded,
+                                  //color: Colors.white,
+                                  size: 20.0,
+                              ),
+                              label: const Text('EXCHANGE'),
+                            ),
+                          ),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30)
+                                  ),
+                                  primary: Colors.amber,
+                                  onPrimary: Colors.black),
+                              icon: const Icon(
+                                  Icons.shuffle_on_rounded,
+                                  //color: Colors.white,
+                                  size: 20.0,
+                              ),
+                              label: const Text('SHUFFLE'),
+                            ),
+                          ),
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30)
+                                  ),
+                                  primary: Colors.amber,
+                                  onPrimary: Colors.black),
+                              icon: const Icon(
+                                  Icons.skip_next_rounded,
+                                  //color: Colors.white,
+                                  size: 20.0,
+                              ),
+                              //color: Colors.amber,
+                              label: const Text('PASS'),
+                            ),
+                          )
+                         ],
+                      ),
                   ),
                 ),
               ],
