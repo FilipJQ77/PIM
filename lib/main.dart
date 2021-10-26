@@ -12,10 +12,22 @@ class App extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       //TODO Create our own purple MaterialColor
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text('BabbleWords!'),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80), // here the desired height
+          child: AppBar(
+            //title: const Text('BabbleWords!'),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/Logo2.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
           ),
-          body: const BoardScreen()),
+        ),
+          body: const BoardScreen()
+      ),
     );
   }
 }
