@@ -205,7 +205,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.deepPurple, //const Color(0xFF761be4),
+                    color: const Color(0xFF761be4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
