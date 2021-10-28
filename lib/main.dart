@@ -62,7 +62,7 @@ class LetterBag {
     source: https://en.wikipedia.org/wiki/Scrabble_letter_distributions
     - 100 letters
 
-    - 2 blank tiles (0 p.) (maybe temporary without blanks?)
+    - 2 blank tiles (0 p.)
     - E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4 (1 p.)
     - D ×4, G ×3 (2 p.)
     - B ×2, C ×2, M ×2, P ×2 (3 p.)
@@ -74,93 +74,134 @@ class LetterBag {
     - Each player draws seven letters
   */
   final _random = Random();
-  List <String> letters = [];
+  List<String> letters = [];
 
-  LetterBag(){
+  LetterBag() {
     fillBag();
   }
 
-  void addLetterToBag(String letter, int numberOfRepetitions){
-    for(var i=0;i<numberOfRepetitions;i++) {letters.add(letter);}
+  void fillBagWithLetter(String letter, int numberOfRepetitions) {
+    for (var i = 0; i < numberOfRepetitions; i++) {
+      letters.add(letter);
+    }
   }
 
   void fillBag() {
-    // TODO add blanks - 0p, temporary without blanks in bag
+    // blank tile - 0p
+    fillBagWithLetter(' ', 2);
     // 1p
-    addLetterToBag('E', 12);
-    addLetterToBag('A', 9);
-    addLetterToBag('I', 9);
-    addLetterToBag('O', 8);
-    addLetterToBag('N', 6);
-    addLetterToBag('R', 6);
-    addLetterToBag('T', 6);
-    addLetterToBag('L', 4);
-    addLetterToBag('S', 4);
-    addLetterToBag('U', 4);
+    fillBagWithLetter('E', 12);
+    fillBagWithLetter('A', 9);
+    fillBagWithLetter('I', 9);
+    fillBagWithLetter('O', 8);
+    fillBagWithLetter('N', 6);
+    fillBagWithLetter('R', 6);
+    fillBagWithLetter('T', 6);
+    fillBagWithLetter('L', 4);
+    fillBagWithLetter('S', 4);
+    fillBagWithLetter('U', 4);
     // 2p
-    addLetterToBag('D', 4);
-    addLetterToBag('G', 3);
+    fillBagWithLetter('D', 4);
+    fillBagWithLetter('G', 3);
     // 3p
-    addLetterToBag('B', 2);
-    addLetterToBag('C', 2);
-    addLetterToBag('M', 2);
-    addLetterToBag('P', 2);
+    fillBagWithLetter('B', 2);
+    fillBagWithLetter('C', 2);
+    fillBagWithLetter('M', 2);
+    fillBagWithLetter('P', 2);
     // 4p
-    addLetterToBag('F', 2);
-    addLetterToBag('H', 2);
-    addLetterToBag('V', 2);
-    addLetterToBag('W', 2);
-    addLetterToBag('Y', 2);
+    fillBagWithLetter('F', 2);
+    fillBagWithLetter('H', 2);
+    fillBagWithLetter('V', 2);
+    fillBagWithLetter('W', 2);
+    fillBagWithLetter('Y', 2);
     // 5p
-    addLetterToBag('K', 1);
+    fillBagWithLetter('K', 1);
     // 8p
-    addLetterToBag('J', 1);
-    addLetterToBag('X', 1);
+    fillBagWithLetter('J', 1);
+    fillBagWithLetter('X', 1);
     // 10p
-    addLetterToBag('Q', 1);
-    addLetterToBag('Z', 1);
+    fillBagWithLetter('Q', 1);
+    fillBagWithLetter('Z', 1);
   }
 
-  // TODO we can move it to other class
-  int getLetterValue(String letter){
-    if (letter == 'Q' || letter == 'Z') {return 10;}
-    else if(letter == 'J' || letter == 'X') {return 8;}
-    else if(letter == 'K') {return 5;}
-    else if(letter == 'F' || letter == 'H' || letter == 'V' || letter == 'W' || letter == 'Y') {return 4;}
-    else if(letter == 'B' || letter == 'C' || letter == 'M' || letter == 'P') {return 3;}
-    else if(letter == 'D' || letter == 'G') {return 2;}
-    else if(letter == ' ') {return 0;} // blanks
-    return 1; // E, A, I, O ... S, U
+  static int getLetterValue(String letter) {
+    switch (letter) {
+      case 'Q':
+      case 'Z':
+        return 10;
+      case 'J':
+      case 'X':
+        return 8;
+      case 'K':
+        return 5;
+      case 'F':
+      case 'H':
+      case 'V':
+      case 'W':
+      case 'Y':
+        return 4;
+      case 'B':
+      case 'C':
+      case 'M':
+      case 'P':
+        return 3;
+      case 'D':
+      case 'G':
+        return 2;
+      case 'A':
+      case 'E':
+      case 'I':
+      case 'L':
+      case 'N':
+      case 'O':
+      case 'R':
+      case 'S':
+      case 'T':
+      case 'U':
+        return 1;
+      case ' ':
+        return 0;
+      default:
+        throw Exception(
+            "Cannot get value of something that's not a correct tile");
+    }
   }
 
-  int getBagSize(){
+  int getBagSize() {
     return letters.length;
   }
 
-
   /*
-     Generates a positive random integer uniformly distributed on the range
+     Generates a random integer uniformly distributed
      from [min], inclusive, to [max], exclusive.
     */
   int randomInt(int min, int max) => min + _random.nextInt(max - min);
 
-  String drawOneLetter(){
-    String letter = letters.removeAt(randomInt(0, getBagSize()));
-    return letter;
+  Iterable<String> getLettersFromBag(int numberOfLetters) {
+    if (numberOfLetters > getBagSize()) {
+      throw Exception("The letter bag does not have enough tiles");
+    }
+    List<String> drawnLetters = [];
+    for (var i = 0; i < numberOfLetters; i++) {
+      drawnLetters.add(letters.removeAt(randomInt(0, getBagSize())));
+    }
+
+    return drawnLetters;
   }
 
-  List <String> drawHand(){
-    List <String> hand = [];
-    for(var i=0;i<7;i++) {hand.add(drawOneLetter());}
-    return hand;
+  Iterable<String> drawHand() {
+    return getLettersFromBag(7);
   }
 
-  bool isEmpty(){
-    if( getBagSize() != 0) return false;
+  void addLettersToBag(Iterable<String> lettersToAdd) {
+    letters.addAll(lettersToAdd);
+  }
+
+  bool isEmpty() {
+    if (getBagSize() != 0) return false;
     return true;
   }
 }
-
 
 class BoardScreen extends StatefulWidget {
   const BoardScreen({Key? key}) : super(key: key);
@@ -184,8 +225,7 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                       color: Colors.cyan,
-                      child: Center(child: Text('board here'))
-                  ),
+                      child: Center(child: Text('board here'))),
                 ),
               ],
             ),
@@ -200,99 +240,92 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     color: Colors.yellow,
                     child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
                                     color: Colors.grey[400],
-                                    child: Center(child: Text('A'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                                    child: Center(child: Text('A'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('B'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: Text('B'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('C'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('C'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('D'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: Text('D'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('E'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('E'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('F'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: Text('F'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('G'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: Center(child: Text('G'))),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -308,83 +341,78 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                     //padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
-                      color: Colors.green,
-                      // child: Center(child: Text('buttons here')),
-                      child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child:ElevatedButton.icon(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  primary: Colors.amber,
-                                    onPrimary: Colors.black),
-                                icon: const Icon(
-                                  Icons.undo_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                                ),
-                                label: const Text('UNDO'),
-                            ),
-                          ),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
+                    color: Colors.green,
+                    // child: Center(child: Text('buttons here')),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)
-                                ),
+                                    borderRadius: BorderRadius.circular(30)),
                                 primary: Colors.amber,
-                                  onPrimary: Colors.black),
-                              icon: const Icon(
-                                  Icons.change_circle_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                              ),
-                              label: const Text('EXCHANGE'),
+                                onPrimary: Colors.black),
+                            icon: const Icon(
+                              Icons.undo_rounded,
+                              //color: Colors.white,
+                              size: 20.0,
                             ),
+                            label: const Text('UNDO'),
                           ),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  primary: Colors.amber,
-                                  onPrimary: Colors.black),
-                              icon: const Icon(
-                                  Icons.shuffle_on_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                              ),
-                              label: const Text('SHUFFLE'),
+                        ),
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                primary: Colors.amber,
+                                onPrimary: Colors.black),
+                            icon: const Icon(
+                              Icons.change_circle_rounded,
+                              //color: Colors.white,
+                              size: 20.0,
                             ),
+                            label: const Text('EXCHANGE'),
                           ),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  primary: Colors.amber,
-                                  onPrimary: Colors.black),
-                              icon: const Icon(
-                                  Icons.skip_next_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                              ),
-                              //color: Colors.amber,
-                              label: const Text('PASS'),
+                        ),
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                primary: Colors.amber,
+                                onPrimary: Colors.black),
+                            icon: const Icon(
+                              Icons.shuffle_on_rounded,
+                              //color: Colors.white,
+                              size: 20.0,
                             ),
-                          )
-                         ],
-                      ),
+                            label: const Text('SHUFFLE'),
+                          ),
+                        ),
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                primary: Colors.amber,
+                                onPrimary: Colors.black),
+                            icon: const Icon(
+                              Icons.skip_next_rounded,
+                              //color: Colors.white,
+                              size: 20.0,
+                            ),
+                            //color: Colors.amber,
+                            label: const Text('PASS'),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -395,4 +423,3 @@ class _BoardScreenState extends State<BoardScreen> {
     );
   }
 }
-
