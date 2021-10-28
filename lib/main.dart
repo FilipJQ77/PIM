@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(const App());
 
@@ -55,6 +56,105 @@ class _HandLetterState extends State<HandLetter> {
     );
   }
 }
+
+class LetterBag {
+  /*
+    source: https://en.wikipedia.org/wiki/Scrabble_letter_distributions
+    - 100 letters
+
+    - 2 blank tiles (0 p.) (maybe temporary without blanks?)
+    - E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4 (1 p.)
+    - D ×4, G ×3 (2 p.)
+    - B ×2, C ×2, M ×2, P ×2 (3 p.)
+    - F ×2, H ×2, V ×2, W ×2, Y ×2 (4 p.)
+    - K ×1 (5 p.)
+    - J ×1, X ×1 (8 p.)
+    - Q ×1, Z ×1 (10 p.)
+
+    - Each player draws seven letters
+  */
+  final _random = Random();
+  List <String> letters = [];
+
+  LetterBag(){
+    fillBag();
+  }
+
+  void addLetterToBag(String letter, int numberOfRepetitions){
+    for(var i=0;i<numberOfRepetitions;i++) {letters.add(letter);}
+  }
+
+  void fillBag() {
+    // TODO add blanks - 0p, temporary without blanks in bag
+    // 1p
+    addLetterToBag('E', 12);
+    addLetterToBag('A', 9);
+    addLetterToBag('I', 9);
+    addLetterToBag('O', 8);
+    addLetterToBag('N', 6);
+    addLetterToBag('R', 6);
+    addLetterToBag('T', 6);
+    addLetterToBag('L', 4);
+    addLetterToBag('S', 4);
+    addLetterToBag('U', 4);
+    // 2p
+    addLetterToBag('D', 4);
+    addLetterToBag('G', 3);
+    // 3p
+    addLetterToBag('B', 2);
+    addLetterToBag('C', 2);
+    addLetterToBag('M', 2);
+    addLetterToBag('P', 2);
+    // 4p
+    addLetterToBag('F', 2);
+    addLetterToBag('H', 2);
+    addLetterToBag('V', 2);
+    addLetterToBag('W', 2);
+    addLetterToBag('Y', 2);
+    // 5p
+    addLetterToBag('K', 1);
+    // 8p
+    addLetterToBag('J', 1);
+    addLetterToBag('X', 1);
+    // 10p
+    addLetterToBag('Q', 1);
+    addLetterToBag('Z', 1);
+  }
+
+  // TODO we can move it to other class
+  int getLetterValue(String letter){
+    if (letter == 'Q' || letter == 'Z') {return 10;}
+    else if(letter == 'J' || letter == 'X') {return 8;}
+    else if(letter == 'K') {return 5;}
+    else if(letter == 'F' || letter == 'H' || letter == 'V' || letter == 'W' || letter == 'Y') {return 4;}
+    else if(letter == 'B' || letter == 'C' || letter == 'M' || letter == 'P') {return 3;}
+    else if(letter == 'D' || letter == 'G') {return 2;}
+    else if(letter == ' ') {return 0;} // blanks
+    return 1; // E, A, I, O ... S, U
+  }
+
+  int getBagSize(){
+    return letters.length;
+  }
+
+
+  /*
+     Generates a positive random integer uniformly distributed on the range
+     from [min], inclusive, to [max], exclusive.
+    */
+  int randomInt(int min, int max) => min + _random.nextInt(max - min);
+
+  String drawOneLetter(){
+    String letter = letters.removeAt(randomInt(0, getBagSize()));
+    return letter;
+  }
+
+  bool isEmpty(){
+    if( getBagSize() != 0) return false;
+    return true;
+  }
+}
+
 
 class BoardScreen extends StatefulWidget {
   const BoardScreen({Key? key}) : super(key: key);
