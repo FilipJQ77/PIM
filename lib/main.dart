@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 void main() => runApp(const App());
 
@@ -7,27 +8,31 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'BabbleWords!',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       //TODO Create our own purple MaterialColor
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80), // here the desired height
-          child: AppBar(
-            //title: const Text('BabbleWords!'),
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/Logo2.png'),
-                  fit: BoxFit.fill,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget> [
+                IconButton(
+                  icon: Image.asset(
+                    'assets/images/BabbleHome.png',
+                    color: Colors.lightBlue
+                  ),
+                  onPressed: () {},
+                  iconSize: 120,
                 ),
-              ),
-            ),
+              ],
+            )
           ),
-        ),
           body: const BoardScreen()
-      ),
+    ),
     );
   }
 }
@@ -90,7 +95,7 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                       color: Colors.cyan,
-                      child: Center(child: Text('board here'))
+                      child: const Center(child: Text('board here'))
                   ),
                 ),
               ],
@@ -114,7 +119,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                     color: Colors.grey[400],
-                                    child: Center(child: Text('A'))
+                                    child: const Center(child: Text('A'))
                                   ),
                                 ),
                               ],
@@ -127,7 +132,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                       color: Colors.grey[600],
-                                      child: Center(child: Text('B'))
+                                      child: const Center(child: Text('B'))
                                   ),
                                 ),
                               ],
@@ -140,7 +145,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                       color: Colors.grey[400],
-                                      child: Center(child: Text('C'))
+                                      child: const Center(child: Text('C'))
                                   ),
                                 ),
                               ],
@@ -153,7 +158,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                       color: Colors.grey[600],
-                                      child: Center(child: Text('D'))
+                                      child: const Center(child: Text('D'))
                                   ),
                                 ),
                               ],
@@ -166,7 +171,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                       color: Colors.grey[400],
-                                      child: Center(child: Text('E'))
+                                      child: const Center(child: Text('E'))
                                   ),
                                 ),
                               ],
@@ -179,7 +184,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                       color: Colors.grey[600],
-                                      child: Center(child: Text('F'))
+                                      child: Center(child: const Text('F'))
                                   ),
                                 ),
                               ],
@@ -192,7 +197,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                 Expanded(
                                   child: Container(
                                       color: Colors.grey[400],
-                                      child: Center(child: Text('G'))
+                                      child: const Center(child: Text('G'))
                                   ),
                                 ),
                               ],
