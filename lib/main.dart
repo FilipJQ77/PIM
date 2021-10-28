@@ -149,6 +149,12 @@ class LetterBag {
     return letter;
   }
 
+  List <String> drawHand(){
+    List <String> hand = [];
+    for(var i=0;i<7;i++) {hand.add(drawOneLetter());}
+    return hand;
+  }
+
   bool isEmpty(){
     if( getBagSize() != 0) return false;
     return true;
