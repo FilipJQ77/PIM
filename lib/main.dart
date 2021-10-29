@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:pim_word_builder/function_button.dart';
 
 void main() => runApp(const App());
 
@@ -13,8 +15,19 @@ class App extends StatelessWidget {
       //TODO Create our own purple MaterialColor
       home: Scaffold(
           appBar: AppBar(
-            title: const Text('BabbleWords!'),
-          ),
+              automaticallyImplyLeading: false,
+              centerTitle: true,
+              title: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  IconButton(
+                    icon: Image.asset('assets/images/BabbleHome.png',
+                        color: const Color(0xFF89E41B)),
+                    onPressed: () {},
+                    iconSize: 120,
+                  ),
+                ],
+              )),
           body: const BoardScreen()),
     );
   }
@@ -78,8 +91,7 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                       color: Colors.cyan,
-                      child: Center(child: Text('board here'))
-                  ),
+                      child: const Center(child: Text('board here'))),
                 ),
               ],
             ),
@@ -94,99 +106,92 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     color: Colors.yellow,
                     child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
                                     color: Colors.grey[400],
-                                    child: Center(child: Text('A'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                                    child: const Center(child: Text('A'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('B'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: const Center(child: Text('B'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('C'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: const Center(child: Text('C'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('D'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: const Center(child: Text('D'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('E'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: const Center(child: Text('E'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[600],
-                                      child: Center(child: Text('F'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[600],
+                                    child: Center(child: const Text('F'))),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                      color: Colors.grey[400],
-                                      child: Center(child: Text('G'))
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    color: Colors.grey[400],
+                                    child: const Center(child: Text('G'))),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -201,84 +206,22 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    //padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
-                      color: Colors.green,
-                      // child: Center(child: Text('buttons here')),
-                      child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child:ElevatedButton.icon(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  primary: Colors.amber,
-                                    onPrimary: Colors.black),
-                                icon: const Icon(
-                                  Icons.undo_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                                ),
-                                label: const Text('UNDO'),
-                            ),
-                          ),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)
-                                ),
-                                primary: Colors.amber,
-                                  onPrimary: Colors.black),
-                              icon: const Icon(
-                                  Icons.change_circle_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                              ),
-                              label: const Text('EXCHANGE'),
-                            ),
-                          ),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  primary: Colors.amber,
-                                  onPrimary: Colors.black),
-                              icon: const Icon(
-                                  Icons.shuffle_on_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                              ),
-                              label: const Text('SHUFFLE'),
-                            ),
-                          ),
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  primary: Colors.amber,
-                                  onPrimary: Colors.black),
-                              icon: const Icon(
-                                  Icons.skip_next_rounded,
-                                  //color: Colors.white,
-                                  size: 20.0,
-                              ),
-                              //color: Colors.amber,
-                              label: const Text('PASS'),
-                            ),
-                          )
-                         ],
-                      ),
+                    color: const Color(0xFF761be4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const [
+                        FunctionButton(
+                            icon: Icons.undo_rounded,
+                            text: 'UNDO'),
+                        FunctionButton(
+                            icon: Icons.change_circle_rounded,
+                            text: 'EXCHANGE'),
+                        FunctionButton(
+                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE'),
+                        FunctionButton(
+                            icon: Icons.skip_next_rounded, text: 'PASS'),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -289,4 +232,3 @@ class _BoardScreenState extends State<BoardScreen> {
     );
   }
 }
-
