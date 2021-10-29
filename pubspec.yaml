@@ -53,6 +53,9 @@ flutter_icons:
   image_path: "assets/icon/Icon.png"
   android: true
   ios: true
+  remove_alpha_ios: true
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon/Icon_foreground.png"
 
 
 # For information on the generic Dart part of this file, see the
