@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pim_word_builder/function_button.dart';
 
 void main() => runApp(const App());
 
@@ -21,7 +22,7 @@ class App extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: Image.asset('assets/images/BabbleHome.png',
-                      color: const Color(0xFF89E41B)),
+                        color: const Color(0xFF89E41B)),
                     onPressed: () {},
                     iconSize: 120,
                   ),
@@ -208,115 +209,17 @@ class _BoardScreenState extends State<BoardScreen> {
                     color: const Color(0xFF761be4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                primary: const Color(0xFF89E41B),
-                                onPrimary: Colors.black),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(Icons.undo_rounded, size: 30.0),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    "UNDO",
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {},
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                primary: const Color(0xFF89E41B),
-                                onPrimary: Colors.black),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(Icons.change_circle_rounded, size: 30.0),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    "EXCHANGE",
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {},
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                primary: const Color(0xFF89E41B),
-                                onPrimary: Colors.black),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(Icons.shuffle_on_rounded, size: 30.0),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    "SHUFFLE",
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {},
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                primary: const Color(0xFF89E41B),
-                                onPrimary: Colors.black),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(Icons.skip_next_rounded, size: 30.0),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Text(
-                                    "PASS",
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {},
-                          ),
+                      children: const [
+                        FunctionButton(
+                            icon: Icons.undo_rounded,
+                            text: 'UNDO'),
+                        FunctionButton(
+                            icon: Icons.change_circle_rounded,
+                            text: 'EXCHANGE'),
+                        FunctionButton(
+                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE'),
+                        FunctionButton(
+                            icon: Icons.skip_next_rounded, text: 'PASS'),
                       ],
                     ),
                   ),
