@@ -17,7 +17,7 @@ class _FunctionButtonState extends State<FunctionButton> {
       style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30)),
-        primary: Colors.deepPurpleAccent,
+        primary: Colors.deepPurple,
         onPrimary: Colors.white,
         shadowColor: Colors.greenAccent),
       child: Column(
