@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                     Image.asset('assets/images/BabbleMainScreen.png'),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
