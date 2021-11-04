@@ -8,7 +8,7 @@ final int BOARD_SIZE = 15;
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     border: Border.all(
-      color: Colors.black,
+      color: const Color(0xFF273a46),
       width: 8,
     ),
   );

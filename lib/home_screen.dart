@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                     Image.asset('assets/images/BabbleMainScreen.png'),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: Colors.deepPurple,
                         onPrimary: Colors.white,
                         shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -105,10 +105,9 @@ class HomeScreen extends StatelessWidget {
         ));
   }
 }
-
 Widget _creditsPopUp(BuildContext context) {
   return AlertDialog(
-    title: const Text('BabbleWord! was created by'),
+    title: const Text('BabbleWords! was created by'),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       children: const <Widget>[
@@ -123,7 +122,7 @@ Widget _creditsPopUp(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: const Text('Close'),
+        child: const Text('Close', style: TextStyle(color: Colors.deepPurpleAccent)),
       ),
     ],
   );

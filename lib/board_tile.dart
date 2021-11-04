@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     border: Border.all(
-      color: Colors.black,
+      color: const Color(0xFF273a46),
       width: 1,
     ),
   );

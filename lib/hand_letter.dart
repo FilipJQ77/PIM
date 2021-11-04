@@ -33,9 +33,9 @@ class _HandLetterState extends State<HandLetter> {
             child: Container(
               padding: const EdgeInsets.all(13),
               decoration: BoxDecoration(
-                color: const Color(0xFFDCBAA9),
+                color: const Color(0xFF273a46),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF65463E)),
+                border: Border.all(color: const Color(0xfffaf9fa)),
               ),
               child: Center(child: Text(letter)),
             ),
