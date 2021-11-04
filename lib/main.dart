@@ -29,7 +29,7 @@ class App extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: Image.asset('assets/images/BabbleHome.png',
-                        color: const Color(0xFF89E41B)),
+                        color: Colors.white),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -63,10 +63,10 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      color: Colors.yellow,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: const Center(
+                      color: const Color(0xfffaf9fa),
+                      child: const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Center(
                             child: Board()
                         ),
                       )
@@ -83,7 +83,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.yellow,
+                    color: const Color(0xfffaf9fa),
                     child: Row(
                       children: [
                         HandLetter(),
@@ -102,13 +102,13 @@ class _BoardScreenState extends State<BoardScreen> {
           ),
           // BUTTONS
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   child: Container(
-                    color: const Color(0xFF761be4),
+                    color: const Color(0xfffaf9fa),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: const [

@@ -35,7 +35,7 @@ class _HandLetterState extends State<HandLetter> {
               decoration: BoxDecoration(
                 color: const Color(0xFFDCBAA9),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF65463E)),
+                border: Border.all(color: const Color(0xFF273a46)),
               ),
               child: Center(child: Text(letter)),
             ),
