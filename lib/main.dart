@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pim_word_builder/function_button.dart';
+import 'package:pim_word_builder/board.dart';
 
 void main() => runApp(const App());
 
@@ -90,8 +91,14 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      color: Colors.cyan,
-                      child: const Center(child: Text('board here'))),
+                      color: Colors.yellow,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: const Center(
+                            child: Board()
+                        ),
+                      )
+                  ),
                 ),
               ],
             ),
