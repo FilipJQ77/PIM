@@ -35,7 +35,7 @@ class _BoardState extends State<Board> {
               child: Row(
                 children: [
                   for (var j = 1; j <= BOARD_SIZE; j++)
-                    Expanded(child: BoardTile(text: " ", isTaken: true, xCoord: j, yCoord: i))],
+                    Expanded(child: BoardTile(text: " ", isTaken: false, xCoord: j, yCoord: i))],
                 ),
             ),
         ],
