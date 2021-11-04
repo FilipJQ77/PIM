@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pim_word_builder/function_button.dart';
+import 'package:pim_word_builder/home_screen.dart';
 
-void main() => runApp(const App());
+void main() {
+  runApp(const MaterialApp(
+    home: HomeScreen(),
+  ));
+}
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -23,7 +28,9 @@ class App extends StatelessWidget {
                   IconButton(
                     icon: Image.asset('assets/images/BabbleHome.png',
                         color: const Color(0xFF89E41B)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     iconSize: 120,
                   ),
                 ],
@@ -210,9 +217,7 @@ class _BoardScreenState extends State<BoardScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: const [
-                        FunctionButton(
-                            icon: Icons.undo_rounded,
-                            text: 'UNDO'),
+                        FunctionButton(icon: Icons.undo_rounded, text: 'UNDO'),
                         FunctionButton(
                             icon: Icons.change_circle_rounded,
                             text: 'EXCHANGE'),

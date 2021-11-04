@@ -73,6 +73,8 @@ flutter:
   assets:
      - assets/images/BabbleAppLogo.png
      - assets/images/BabbleHome.png
+     - assets/images/BabbleMainScreen.png
+     - assets/images/HomeBackground_unsplash.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
