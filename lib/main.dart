@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pim_word_builder/function_button.dart';
 import 'package:pim_word_builder/home_screen.dart';
 import 'package:pim_word_builder/board.dart';
+import 'package:pim_word_builder/hand_letter.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -37,42 +38,6 @@ class App extends StatelessWidget {
                 ],
               )),
           body: const BoardScreen()),
-    );
-  }
-}
-
-// todo implement this in the hand below
-class HandLetter extends StatefulWidget {
-  const HandLetter({Key? key}) : super(key: key);
-
-  @override
-  _HandLetterState createState() => _HandLetterState();
-}
-
-class _HandLetterState extends State<HandLetter> {
-  String letter = "";
-
-  void setLetter(String letter) {
-    if (letter.length != 1) {
-      throw Exception("The string should only be 1 letter");
-      //TODO better exception
-    }
-    setState(() {
-      this.letter = letter;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Center(child: Text(letter)),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -121,90 +86,13 @@ class _BoardScreenState extends State<BoardScreen> {
                     color: Colors.yellow,
                     child: Row(
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[400],
-                                    child: const Center(child: Text('A'))),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[600],
-                                    child: const Center(child: Text('B'))),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[400],
-                                    child: const Center(child: Text('C'))),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[600],
-                                    child: const Center(child: Text('D'))),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[400],
-                                    child: const Center(child: Text('E'))),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[600],
-                                    child: Center(child: const Text('F'))),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    color: Colors.grey[400],
-                                    child: const Center(child: Text('G'))),
-                              ),
-                            ],
-                          ),
-                        ),
+                        HandLetter(),
+                        HandLetter(),
+                        HandLetter(),
+                        HandLetter(),
+                        HandLetter(),
+                        HandLetter(),
+                        HandLetter(),
                       ],
                     ),
                   ),
