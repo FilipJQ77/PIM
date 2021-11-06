@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aaaaaa.pim_word_builder"> <!-- TODO package name-->
+    package="pim.babblewords"> <!-- TODO package name-->
    <application
         android:label="BabbleWords!"
         android:icon="@mipmap/ic_launcher">
