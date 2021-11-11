@@ -1,4 +1,4 @@
-package com.example.aaaaaa.pim_word_builder
+package pim.babblewords
 
 import io.flutter.embedding.android.FlutterActivity
 
