@@ -27,18 +27,21 @@ class _BoardState extends State<Board> {
     return Container(
       // color: Colors.cyan,
       decoration: myBoxDecoration(),
-      child: Column(
-        children: [
-          for (var i = 1; i <= BOARD_SIZE; i++)
-            Expanded(
-              flex: 1,
-              child: Row(
-                children: [
-                  for (var j = 1; j <= BOARD_SIZE; j++)
-                    Expanded(child: BoardTile(text: " ", isTaken: false, xCoord: j, yCoord: i))],
-                ),
-            ),
-        ],
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Column(
+          children: [
+            for (var i = 1; i <= BOARD_SIZE; i++)
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: [
+                    for (var j = 1; j <= BOARD_SIZE; j++)
+                      Expanded(child: BoardTile(text: " ", isTaken: false, xCoord: j, yCoord: i))],
+                  ),
+              ),
+          ],
+        ),
       ),
     );
   }
