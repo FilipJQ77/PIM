@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+BoxDecoration myBoxDecoration() {
+  return BoxDecoration(
+    color: const Color(0xFF273a46),
+    borderRadius: BorderRadius.circular(10),
+    border: Border.all(color: const Color(0xfffaf9fa)),
+  );
+}
+
+
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
   const HandLetter({Key? key}) : super(key: key);
@@ -31,13 +40,18 @@ class _HandLetterState extends State<HandLetter> {
           TextButton(
             onPressed: () {  },
             child: Container(
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                color: const Color(0xFF273a46),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xfffaf9fa)),
+              padding: const EdgeInsets.all(10),
+              decoration: myBoxDecoration(),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Center(
+                    child: Text(
+                        letter,
+                        style: const TextStyle(
+                            color: Color(0xfffaf9fa))
+                )
+                ),
               ),
-              child: Center(child: Text(letter)),
             ),
           ),
         ],
