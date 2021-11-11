@@ -3,7 +3,10 @@ import 'dart:math';
 
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
-  const HandLetter({Key? key}) : super(key: key);
+  final String letterValue;
+  final int handLetterId;
+
+  const HandLetter({Key? key, required this.letterValue, required this.handLetterId}) : super(key: key);
 
   @override
   _HandLetterState createState() => _HandLetterState();
@@ -29,7 +32,10 @@ class _HandLetterState extends State<HandLetter> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           TextButton(
-            onPressed: () {  },
+            onPressed: () {
+              print(widget.letterValue);
+              print(widget.handLetterId);
+            },
             child: Container(
               padding: const EdgeInsets.all(13),
               decoration: BoxDecoration(
@@ -37,7 +43,13 @@ class _HandLetterState extends State<HandLetter> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: const Color(0xfffaf9fa)),
               ),
-              child: Center(child: Text(letter)),
+              child: Center(
+                  child:
+                    Text(
+                      widget.letterValue,
+                      style: TextStyle( color: Colors.white),
+                    )
+              ),
             ),
           ),
         ],
