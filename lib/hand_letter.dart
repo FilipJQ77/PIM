@@ -9,13 +9,14 @@ BoxDecoration myBoxDecoration() {
   );
 }
 
-
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
   final String letterValue;
   final int handLetterId;
 
-  const HandLetter({Key? key, required this.letterValue, required this.handLetterId}) : super(key: key);
+  const HandLetter(
+      {Key? key, required this.letterValue, required this.handLetterId})
+      : super(key: key);
 
   @override
   _HandLetterState createState() => _HandLetterState();
@@ -44,6 +45,7 @@ class _HandLetterState extends State<HandLetter> {
             onPressed: () {
               print(widget.letterValue);
               print(widget.handLetterId);
+              setLetter("A");
             },
             child: Container(
               padding: const EdgeInsets.all(10),
@@ -51,19 +53,8 @@ class _HandLetterState extends State<HandLetter> {
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Center(
-                    child: Text(
-                        letter,
-                        style: const TextStyle(
-                            color: Color(0xfffaf9fa))
-                )
-                ),
-              ),
-              child: Center(
-                  child:
-                    Text(
-                      widget.letterValue,
-                      style: TextStyle( color: Colors.white),
-                    )
+                    child: Text(letter,
+                        style: const TextStyle(color: Color(0xfffaf9fa)))),
               ),
             ),
           ),
