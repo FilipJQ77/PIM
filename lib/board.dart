@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/board_tile.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 // Scrabble board size -> 15x15
 
@@ -8,7 +9,7 @@ const int boardSize = 15;
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     border: Border.all(
-      color: const Color(0xFF273a46),
+      color: AppColors.navyBlue,
       width: 8,
     ),
   );

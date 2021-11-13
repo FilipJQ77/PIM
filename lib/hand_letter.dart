@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:pim_word_builder/app_colors.dart';
+
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
-    color: const Color(0xFF273a46),
+    color: AppColors.navyBlue,
     borderRadius: BorderRadius.circular(10),
-    border: Border.all(color: const Color(0xfffaf9fa)),
+    border: Border.all(color: AppColors.misty),
   );
 }
 
