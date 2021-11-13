@@ -4,7 +4,7 @@ import 'package:pim_word_builder/function_button.dart';
 import 'package:pim_word_builder/home_screen.dart';
 import 'package:pim_word_builder/board.dart';
 import 'package:pim_word_builder/hand_letter.dart';
-import 'package:pim_word_builder/parameters.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -19,7 +19,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BabbleWords!',
-      theme: ThemeData(primarySwatch: SetColor.purple),
+      theme: ThemeData(primarySwatch: AppColors.purple),
       //TODO Create our own purple MaterialColor
       home: Scaffold(
           appBar: AppBar(
@@ -30,7 +30,7 @@ class App extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: Image.asset('assets/images/BabbleHome.png',
-                        color: SetColor.white),
+                        color: AppColors.white),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -64,7 +64,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      color: SetColor.misty,
+                      color: AppColors.misty,
                       child: const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Center(child: Board()),
@@ -81,7 +81,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    color: SetColor.misty,
+                    color: AppColors.misty,
                     child: Row(
                       children: [
                         HandLetter(),
@@ -106,7 +106,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    color: SetColor.misty,
+                    color: AppColors.misty,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: const [

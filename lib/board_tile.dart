@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/parameters.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     border: Border.all(
-      color: SetColor.darkGreen,
+      color: AppColors.navyBlue,
       width: 1,
     ),
   );

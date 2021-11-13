@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'dart:io' show Platform, exit;
 import 'package:flutter/services.dart';
 import 'package:pim_word_builder/main.dart';
-import 'package:pim_word_builder/parameters.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Container(
-              color: SetColor.gray,
+              color: AppColors.transparentGray,
             ),
             Center(
               child: Column(
@@ -36,9 +36,9 @@ class HomeScreen extends StatelessWidget {
                   Image.asset('assets/images/BabbleMainScreen.png'),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: SetColor.purple,
-                      onPrimary: SetColor.white,
-                      shadowColor: SetColor.lightGreen,
+                      primary: AppColors.purple,
+                      onPrimary: AppColors.white,
+                      shadowColor: AppColors.lightGreen,
                       elevation: 3,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0)),
@@ -54,9 +54,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: SetColor.purple,
-                      onPrimary: SetColor.white,
-                      shadowColor: SetColor.lightGreen,
+                      primary: AppColors.purple,
+                      onPrimary: AppColors.white,
+                      shadowColor: AppColors.lightGreen,
                       elevation: 3,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0)),
@@ -67,9 +67,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: SetColor.purple,
-                      onPrimary: SetColor.white,
-                      shadowColor: SetColor.lightGreen,
+                      primary: AppColors.purple,
+                      onPrimary: AppColors.white,
+                      shadowColor: AppColors.lightGreen,
                       elevation: 3,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0)),
@@ -86,9 +86,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: SetColor.purple,
-                      onPrimary: SetColor.white,
-                      shadowColor: SetColor.lightGreen,
+                      primary: AppColors.purple,
+                      onPrimary: AppColors.white,
+                      shadowColor: AppColors.lightGreen,
                       elevation: 3,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0)),
@@ -129,7 +129,7 @@ Widget _creditsPopUp(BuildContext context) {
           Navigator.of(context).pop();
         },
         child:
-            const Text('Close', style: TextStyle(color: SetColor.lightPurple)),
+            const Text('Close', style: TextStyle(color: AppColors.lightPurple)),
       ),
     ],
   );

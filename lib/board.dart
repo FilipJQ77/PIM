@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/board_tile.dart';
-import 'package:pim_word_builder/parameters.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 // Scrable board size -> 15x15
 
@@ -9,7 +9,7 @@ final int BOARD_SIZE = 15;
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     border: Border.all(
-      color: SetColor.darkGreen,
+      color: AppColors.navyBlue,
       width: 8,
     ),
   );

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:pim_word_builder/parameters.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
-    color: SetColor.darkGreen,
+    color: AppColors.navyBlue,
     borderRadius: BorderRadius.circular(10),
-    border: Border.all(color: SetColor.misty),
+    border: Border.all(color: AppColors.misty),
   );
 }
 
@@ -47,7 +47,7 @@ class _HandLetterState extends State<HandLetter> {
                 aspectRatio: 1,
                 child: Center(
                     child: Text(letter,
-                        style: const TextStyle(color: SetColor.misty))),
+                        style: const TextStyle(color: AppColors.misty))),
               ),
             ),
           ),

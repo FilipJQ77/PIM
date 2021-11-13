@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/parameters.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 class FunctionButton extends StatefulWidget {
   final IconData icon;
@@ -19,9 +19,9 @@ class _FunctionButtonState extends State<FunctionButton> {
       style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          primary: SetColor.purple,
-          onPrimary: SetColor.white,
-          shadowColor: SetColor.lightGreen),
+          primary: AppColors.purple,
+          onPrimary: AppColors.white,
+          shadowColor: AppColors.lightGreen),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
