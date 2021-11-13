@@ -11,15 +11,14 @@ void main() {
   ));
 }
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+class GameScreen extends StatelessWidget {
+  const GameScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BabbleWords!',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
-      //TODO Create our own purple MaterialColor
       home: Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,

@@ -4,6 +4,30 @@ import 'dart:io' show Platform, exit;
 import 'package:flutter/services.dart';
 import 'package:pim_word_builder/main.dart';
 
+Widget _creditsPopUp(BuildContext context) {
+  return AlertDialog(
+    title: const Text('BabbleWords! was created by'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: const <Widget>[
+        Text("Maciej Byczko"),
+        Text("Filip Przygoński"),
+        Text("Filip Sołdon"),
+        Text("Jakub Tołściuk"),
+      ],
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Close',
+            style: TextStyle(color: Colors.deepPurpleAccent)),
+      ),
+    ],
+  );
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -43,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const App()),
+                          MaterialPageRoute(builder: (context) => const GameScreen()),
                         );
                       },
                     ),
@@ -104,26 +128,4 @@ class HomeScreen extends StatelessWidget {
           )
         ));
   }
-}
-Widget _creditsPopUp(BuildContext context) {
-  return AlertDialog(
-    title: const Text('BabbleWords! was created by'),
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: const <Widget>[
-        Text("Maciej Byczko"),
-        Text("Filip Przygoński"),
-        Text("Filip Sołdon"),
-        Text("Jakub Tołściuk"),
-      ],
-    ),
-    actions: <Widget>[
-      TextButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        child: const Text('Close', style: TextStyle(color: Colors.deepPurpleAccent)),
-      ),
-    ],
-  );
 }
