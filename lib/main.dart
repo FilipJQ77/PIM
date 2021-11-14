@@ -19,8 +19,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BabbleWords!',
-      theme: ThemeData(primarySwatch: AppColors.purple),
-      //TODO Create our own purple MaterialColor
+      theme: ThemeData(primarySwatch: AppColors.purple), // AppBar color
       home: Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -64,7 +63,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      color: AppColors.misty,
+                      color: AppColors.white,
                       child: const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Center(child: Board()),

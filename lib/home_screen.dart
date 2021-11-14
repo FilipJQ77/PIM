@@ -5,14 +5,24 @@ import 'package:flutter/services.dart';
 import 'package:pim_word_builder/main.dart';
 import 'package:pim_word_builder/app_colors.dart';
 
+ButtonStyle myButtonDecoration() {
+  return ElevatedButton.styleFrom(
+    primary: AppColors.purple,
+    onPrimary: AppColors.white,
+    shadowColor: AppColors.purple,
+    elevation: 3,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(32.0)),
+    minimumSize: const Size(100, 40),
+  );
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.deepPurple),
-        //TODO Create our own purple MaterialColor
         home: Scaffold(
             body: Stack(
           children: [
@@ -35,15 +45,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Image.asset('assets/images/BabbleMainScreen.png'),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.purple,
-                      onPrimary: AppColors.white,
-                      shadowColor: AppColors.lightGreen,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32.0)),
-                      minimumSize: const Size(100, 40),
-                    ),
+                    style: myButtonDecoration(),
                     child: const Text('Start Game'),
                     onPressed: () {
                       Navigator.push(
@@ -53,28 +55,12 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.purple,
-                      onPrimary: AppColors.white,
-                      shadowColor: AppColors.lightGreen,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32.0)),
-                      minimumSize: const Size(100, 40),
-                    ),
+                    style: myButtonDecoration(),
                     child: const Text('Options'),
                     onPressed: () {},
                   ),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.purple,
-                      onPrimary: AppColors.white,
-                      shadowColor: AppColors.lightGreen,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32.0)),
-                      minimumSize: const Size(100, 40),
-                    ),
+                    style: myButtonDecoration(),
                     child: const Text('Authors'),
                     onPressed: () {
                       showDialog(
@@ -85,15 +71,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.purple,
-                      onPrimary: AppColors.white,
-                      shadowColor: AppColors.lightGreen,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(32.0)),
-                      minimumSize: const Size(100, 40),
-                    ),
+                    style: myButtonDecoration(),
                     child: const Text('Exit'),
                     onPressed: () {
                       if (Platform.isAndroid) {
@@ -129,7 +107,7 @@ Widget _creditsPopUp(BuildContext context) {
           Navigator.of(context).pop();
         },
         child:
-            const Text('Close', style: TextStyle(color: AppColors.lightPurple)),
+            const Text('Close', style: TextStyle(color: AppColors.purple)),
       ),
     ],
   );

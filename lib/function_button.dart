@@ -21,7 +21,7 @@ class _FunctionButtonState extends State<FunctionButton> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           primary: AppColors.purple,
           onPrimary: AppColors.white,
-          shadowColor: AppColors.lightGreen),
+          shadowColor: AppColors.purple),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
