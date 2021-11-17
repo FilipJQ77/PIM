@@ -120,7 +120,7 @@ class LetterBag {
     */
   int randomInt(int min, int max) => min + _random.nextInt(max - min);
 
-  Iterable<String> getLettersFromBag(int numberOfLetters) {
+  List<String> getLettersFromBag(int numberOfLetters) {
     if (numberOfLetters > getBagSize()) {
       throw Exception("The letter bag does not have enough tiles");
     }
