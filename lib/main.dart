@@ -4,6 +4,7 @@ import 'package:pim_word_builder/function_button.dart';
 import 'package:pim_word_builder/home_screen.dart';
 import 'package:pim_word_builder/board.dart';
 import 'package:pim_word_builder/hand_letter.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -18,8 +19,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BabbleWords!',
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      //TODO Create our own purple MaterialColor
+      theme: ThemeData(primarySwatch: AppColors.purple), // AppBar color
       home: Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: Image.asset('assets/images/BabbleHome.png',
-                        color: Colors.white),
+                        color: AppColors.white),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -63,14 +63,11 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      color: const Color(0xfffaf9fa),
+                      color: AppColors.white,
                       child: const Padding(
                         padding: EdgeInsets.all(20.0),
-                        child: Center(
-                            child: Board()
-                        ),
-                      )
-                  ),
+                        child: Center(child: Board()),
+                      )),
                 ),
               ],
             ),
@@ -83,7 +80,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    color: const Color(0xfffaf9fa),
+                    color: AppColors.misty,
                     child: Row(
                       children: [
                         HandLetter(),
@@ -108,7 +105,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    color: const Color(0xfffaf9fa),
+                    color: AppColors.misty,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: const [

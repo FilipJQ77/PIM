@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:pim_word_builder/app_colors.dart';
+
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
-    color: const Color(0xFF273a46),
+    color: AppColors.navyBlue,
     borderRadius: BorderRadius.circular(10),
-    border: Border.all(color: const Color(0xfffaf9fa)),
+    border: Border.all(color: AppColors.misty),
   );
 }
-
 
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
@@ -38,19 +39,15 @@ class _HandLetterState extends State<HandLetter> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           TextButton(
-            onPressed: () {  },
+            onPressed: () {},
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: myBoxDecoration(),
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Center(
-                    child: Text(
-                        letter,
-                        style: const TextStyle(
-                            color: Color(0xfffaf9fa))
-                )
-                ),
+                    child: Text(letter,
+                        style: const TextStyle(color: AppColors.misty))),
               ),
             ),
           ),
