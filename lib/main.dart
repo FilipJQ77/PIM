@@ -63,7 +63,7 @@ class _BoardScreenState extends State<BoardScreen> {
               children: [
                 Expanded(
                   child: Container(
-                      color: AppColors.white,
+                      color: AppColors.misty,
                       child: const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Center(child: Board()),
@@ -116,7 +116,7 @@ class _BoardScreenState extends State<BoardScreen> {
                         FunctionButton(
                             icon: Icons.shuffle_on_rounded, text: 'SHUFFLE'),
                         FunctionButton(
-                            icon: Icons.skip_next_rounded, text: 'PASS'),
+                            icon: Icons.skip_next_rounded, text: 'END TURN'),
                       ],
                     ),
                   ),
