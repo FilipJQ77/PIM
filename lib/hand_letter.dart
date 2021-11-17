@@ -13,7 +13,12 @@ BoxDecoration myBoxDecoration() {
 
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
-  const HandLetter({Key? key}) : super(key: key);
+  final String letterValue;
+  final int handLetterId;
+
+  const HandLetter(
+      {Key? key, required this.letterValue, required this.handLetterId})
+      : super(key: key);
 
   @override
   _HandLetterState createState() => _HandLetterState();
@@ -39,7 +44,11 @@ class _HandLetterState extends State<HandLetter> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              print(widget.letterValue);
+              print(widget.handLetterId);
+              setLetter("A");
+            },
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: myBoxDecoration(),
@@ -47,7 +56,7 @@ class _HandLetterState extends State<HandLetter> {
                 aspectRatio: 1,
                 child: Center(
                     child: Text(letter,
-                        style: const TextStyle(color: AppColors.misty))),
+                        style: const TextStyle(color: Color(0xfffaf9fa)))),
               ),
             ),
           ),

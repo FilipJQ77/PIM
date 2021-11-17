@@ -12,8 +12,8 @@ void main() {
   ));
 }
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+class GameScreen extends StatelessWidget {
+  const GameScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +83,13 @@ class _BoardScreenState extends State<BoardScreen> {
                     color: AppColors.misty,
                     child: Row(
                       children: [
-                        HandLetter(),
-                        HandLetter(),
-                        HandLetter(),
-                        HandLetter(),
-                        HandLetter(),
-                        HandLetter(),
-                        HandLetter(),
+                        HandLetter(letterValue: "O", handLetterId: 1,),
+                        HandLetter(letterValue: "T", handLetterId: 2,),
+                        HandLetter(letterValue: "A", handLetterId: 3,),
+                        HandLetter(letterValue: "C", handLetterId: 4,),
+                        HandLetter(letterValue: "H", handLetterId: 5,),
+                        HandLetter(letterValue: "I", handLetterId: 6,),
+                        HandLetter(letterValue: "S", handLetterId: 7,),
                       ],
                     ),
                   ),
