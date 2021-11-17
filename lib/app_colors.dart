@@ -11,4 +11,13 @@ class AppColors {
   static const lightPurple = Colors.deepPurpleAccent;
   static const lightGreen = Colors.greenAccent;
   static const cyan = Colors.cyan;
+
+  // Basic
+  static const black = Colors.black;
+
+  // Tile colors
+  static const pink = Color.fromRGBO(255, 153, 255, 1.0);
+  static const red = Colors.red;
+  static const darkBlue = Color.fromRGBO(0, 101, 255, 1.0);
+  static const aqua = Color.fromRGBO(102, 204, 255, 1.0);
 }

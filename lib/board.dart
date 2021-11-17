@@ -27,8 +27,13 @@ class Board extends StatefulWidget {
     for (var i = 0; i < boardSize; i++) {
       tiles.add(<BoardTile>[]);
       for (var j = 0; j < boardSize; j++) {
-        tiles[i]
-            .add(BoardTile(text: " ", isTaken: false, xCoord: i, yCoord: j));
+        tiles[i].add(BoardTile(
+          text: " ",
+          isTaken: false,
+          xCoord: i,
+          yCoord: j,
+          tileColor: TileParams.tileColor(i, j),
+        ));
       }
     }
   }
