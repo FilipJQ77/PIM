@@ -11,11 +11,11 @@ BoxDecoration myBoxDecoration() {
 
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
-  final String letterValue;
+  final String letterValue = "";
   final int handLetterId;
 
   const HandLetter(
-      {Key? key, required this.letterValue, required this.handLetterId})
+      {Key? key, required this.handLetterId})
       : super(key: key);
 
   @override
