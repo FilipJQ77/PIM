@@ -81,9 +81,9 @@ class TileParams {
         ((y == 2 || y == 6 || y == 8 || y == 12) && (x == 6 || x == 8))) {
       colour = AppColors.aqua;
     }
-    if (x == 7 && y == 7) {
-      colour = AppColors.pink;
-    }
+    // if (x == 7 && y == 7) {
+    //   colour = AppColors.transparentGray;
+    // }
     return colour;
   }
 }
