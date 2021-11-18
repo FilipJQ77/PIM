@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/board.dart';
+import 'package:pim_word_builder/board_timer.dart';
 import 'package:pim_word_builder/hand_letter.dart';
 import 'package:pim_word_builder/function_button.dart';
 import 'package:pim_word_builder/app_colors.dart';
@@ -38,7 +39,24 @@ class _BoardScreenState extends State<BoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        // TIMER ETC
         children: [
+          Expanded(
+            flex: 2,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Container(
+                    color: AppColors.misty,
+                    child: const Center(child: BoardTimer(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // TIMER ETC
           // BOARD
           Expanded(
             flex: 8,
