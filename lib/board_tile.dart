@@ -58,7 +58,7 @@ class _BoardTileState extends State<BoardTile> {
 
 class TileParams {
   static Color tileColor(int x, int y) {
-    Color colour = AppColors.white;
+    Color colour = AppColors.green;
     if ((x == y) || (x + y == 14)) {
       colour = AppColors.pink;
     }

@@ -16,8 +16,9 @@ class AppColors {
   static const black = Colors.black;
 
   // Tile colors
-  static const pink = Color.fromRGBO(255, 153, 255, 1.0);
-  static const red = Colors.red;
+  static const pink = Color.fromRGBO(210, 153, 200, 1.0);
+  static const red = Color.fromRGBO(220, 80, 80, 1.0);
   static const darkBlue = Color.fromRGBO(0, 101, 255, 1.0);
   static const aqua = Color.fromRGBO(102, 204, 255, 1.0);
+  static const green = Color.fromRGBO(31, 180, 74, 1.0);
 }
