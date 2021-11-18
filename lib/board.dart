@@ -36,6 +36,7 @@ class Board extends StatefulWidget {
         ));
       }
     }
+    tiles[7][7].text = "🌟";
   }
 
   @override
