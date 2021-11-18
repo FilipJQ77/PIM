@@ -35,7 +35,7 @@ class GameScreen extends StatelessWidget {
                   ),
                 ],
               )),
-          body: const BoardScreen()),
+          body: BoardScreen()),
     );
   }
 }

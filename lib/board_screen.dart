@@ -3,9 +3,31 @@ import 'package:pim_word_builder/board.dart';
 import 'package:pim_word_builder/hand_letter.dart';
 import 'package:pim_word_builder/function_button.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/letter_bag.dart';
 
 class BoardScreen extends StatefulWidget {
-  const BoardScreen({Key? key}) : super(key: key);
+  List<HandLetter> handLetters = [];
+  static String lastClickedLetter = "X";
+
+  static void setLastLetter(String letter) {
+    lastClickedLetter = letter;
+    print("OK $letter");
+  }
+
+  static String getLastLetter() {
+    return lastClickedLetter;
+  }
+
+//
+  BoardScreen({Key? key}) : super(key: key) {
+    const int numberOfLetters = 7;
+    var letterBag = LetterBag();
+    List<String> playerLetters = letterBag.getLettersFromBag(numberOfLetters);
+    for (int i = 0; i < numberOfLetters; i++) {
+      handLetters
+          .add(HandLetter(handLetterId: i, letterValue: playerLetters[i]));
+    }
+  }
 
   @override
   _BoardScreenState createState() => _BoardScreenState();
@@ -26,8 +48,8 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                       color: AppColors.misty,
-                      child: const Padding(
-                        padding: EdgeInsets.all(20.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
                         child: Center(child: Board()),
                       )),
                 ),
@@ -44,15 +66,7 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     color: AppColors.misty,
                     child: Row(
-                      children: [
-                        HandLetter(handLetterId: 1,),
-                        HandLetter(handLetterId: 2,),
-                        HandLetter(handLetterId: 3,),
-                        HandLetter(handLetterId: 4,),
-                        HandLetter(handLetterId: 5,),
-                        HandLetter(handLetterId: 6,),
-                        HandLetter(handLetterId: 7,),
-                      ],
+                      children: widget.handLetters,
                     ),
                   ),
                 ),

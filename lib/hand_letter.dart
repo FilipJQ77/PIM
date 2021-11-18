@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/board_screen.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
@@ -11,11 +12,10 @@ BoxDecoration myBoxDecoration() {
 
 // todo implement this in the hand below
 class HandLetter extends StatefulWidget {
-  final String letterValue = "";
+  String letterValue = "";
   final int handLetterId;
 
-  const HandLetter(
-      {Key? key, required this.handLetterId})
+  HandLetter({Key? key, required this.handLetterId, required this.letterValue})
       : super(key: key);
 
   @override
@@ -43,9 +43,9 @@ class _HandLetterState extends State<HandLetter> {
         children: <Widget>[
           TextButton(
             onPressed: () {
+              BoardScreen.setLastLetter(widget.letterValue);
               print(widget.letterValue);
               print(widget.handLetterId);
-              setLetter("A");
             },
             child: Container(
               padding: const EdgeInsets.all(10),
@@ -53,7 +53,7 @@ class _HandLetterState extends State<HandLetter> {
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Center(
-                    child: Text(letter,
+                    child: Text(widget.letterValue,
                         style: const TextStyle(color: Color(0xfffaf9fa)))),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/board_screen.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
@@ -11,11 +12,11 @@ BoxDecoration myBoxDecoration() {
 }
 
 class BoardTile extends StatefulWidget {
-  final String text;
+  String text;
   final bool isTaken; // if tile is taken -> letter is placed on the tile
   final int xCoord;
   final int yCoord;
-  const BoardTile(
+  BoardTile(
       {Key? key,
       required this.text,
       required this.isTaken,
@@ -35,6 +36,9 @@ class _BoardTileState extends State<BoardTile> {
         int x = widget.xCoord;
         int y = widget.yCoord;
         print("Clicked on tile ($x,$y)");
+        setState(() {
+          widget.text = BoardScreen.getLastLetter();
+        });
       },
       child: Container(
         decoration: myBoxDecoration(),
