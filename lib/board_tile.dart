@@ -13,10 +13,10 @@ BoxDecoration myBoxDecoration() {
 
 class BoardTile extends StatefulWidget {
   String text;
-  final bool isTaken; // if tile is taken -> letter is placed on the tile
+  bool isTaken; // if tile is taken -> letter is placed on the tile
   final int xCoord;
   final int yCoord;
-  final Color tileColor;
+  Color tileColor;
   BoardTile(
       {Key? key,
       required this.text,
@@ -40,16 +40,21 @@ class _BoardTileState extends State<BoardTile> {
         print("Clicked on tile ($x,$y)");
         setState(() {
           widget.text = BoardScreen.getLastLetter();
+          widget.isTaken = true;
+          widget.tileColor = AppColors.creme;
         });
       },
       child: Container(
         decoration: BoxDecoration(
             color: widget.tileColor,
             border: Border.all(color: AppColors.black)),
+
         // color: Colors.purple,
         child: Padding(
           padding: const EdgeInsets.all(2.0),
-          child: Center(child: Text(widget.text)),
+          child: Center(
+              child: Text(widget.text,
+                  style: const TextStyle(fontWeight: FontWeight.bold))),
         ),
       ),
     );
