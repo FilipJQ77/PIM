@@ -1,11 +1,13 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:pim_word_builder/utils.dart';
 
-void getWordsFromFileTest() {
-  var words = Utils.getWordsFromFile("assets/data/wordsGB.txt");
-  assert(words.isNotEmpty);
-}
+void getWordsFromFileTest() async {}
 
 void main() {
-  getWordsFromFileTest();
+  group('Utils', () {
+    test('Get words from file should have some words', () async {
+      var words = await Utils.getWordsFromFile("assets/data/wordsGB.txt");
+      expect(words.isNotEmpty, true);
+    });
+  });
 }
-

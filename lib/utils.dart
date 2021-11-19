@@ -1,7 +1,7 @@
-import 'dart:io';
+import 'dart:io' as io;
 
 class Utils {
-  static List<String> getWordsFromFile(String filepath) {
-    return File(filepath).readAsLinesSync(); // TODO asynchronous in future
+  static Future<List<String>> getWordsFromFile(String filepath) {
+    return io.File(filepath).readAsLines();
   }
 }
