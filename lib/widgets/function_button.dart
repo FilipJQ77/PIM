@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 
+// todo w sumie to chyba bedzie stateless? w sensie raz mu przypiszemy
+// ikone, tekst, funkcje, i to sie nie bedzie zmieniac
 class FunctionButton extends StatefulWidget {
   final IconData icon;
   final String text;

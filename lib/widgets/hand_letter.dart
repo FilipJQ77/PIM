@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/app_colors.dart';
-import 'package:pim_word_builder/board_screen.dart';
+import '/views/board_view.dart';
+
+import '../app_colors.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
@@ -10,7 +11,7 @@ BoxDecoration myBoxDecoration() {
   );
 }
 
-// todo implement this in the hand below
+
 class HandLetter extends StatefulWidget {
   String letterValue = "";
   final int handLetterId;
@@ -43,7 +44,7 @@ class _HandLetterState extends State<HandLetter> {
         children: <Widget>[
           TextButton(
             onPressed: () {
-              BoardScreen.setLastLetter(widget.letterValue);
+              BoardView.setLastLetter(widget.letterValue);
               print(widget.letterValue);
               print(widget.handLetterId);
             },

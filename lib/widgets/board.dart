@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/board_tile.dart';
-import 'package:pim_word_builder/board_screen.dart';
+import 'package:pim_word_builder/widgets/board_tile.dart';
 import 'package:pim_word_builder/app_colors.dart';
 
 // Scrabble board size -> 15x15

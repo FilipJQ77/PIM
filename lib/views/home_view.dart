@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'dart:io' show Platform, exit;
+import 'dart:io' as io;
 import 'package:flutter/services.dart';
-import 'package:pim_word_builder/main.dart';
-import 'package:pim_word_builder/app_colors.dart';
+import '../app_colors.dart';
+import 'game_view.dart';
 
 ButtonStyle myButtonDecoration() {
   return ElevatedButton.styleFrom(
@@ -16,8 +15,8 @@ ButtonStyle myButtonDecoration() {
   );
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const GameScreen()),
+                    MaterialPageRoute(builder: (context) => const GameView()),
                   );
                 },
               ),
@@ -76,10 +75,10 @@ class HomeScreen extends StatelessWidget {
                 style: myButtonDecoration(),
                 child: const Text('Exit'),
                 onPressed: () {
-                  if (Platform.isAndroid) {
+                  if (io.Platform.isAndroid) {
                     SystemNavigator.pop();
-                  } else if (Platform.isIOS) {
-                    exit(0);
+                  } else if (io.Platform.isIOS) {
+                    io.exit(0);
                   }
                 },
               ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/board.dart';
-import 'package:pim_word_builder/board_timer.dart';
-import 'package:pim_word_builder/hand_letter.dart';
-import 'package:pim_word_builder/function_button.dart';
+import 'package:pim_word_builder/widgets/board.dart';
+import 'package:pim_word_builder/widgets/board_timer.dart';
+import 'package:pim_word_builder/widgets/hand_letter.dart';
+import 'package:pim_word_builder/widgets/function_button.dart';
 import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/letter_bag.dart';
 
-class BoardScreen extends StatefulWidget {
+class BoardView extends StatefulWidget {
   List<HandLetter> handLetters = [];
   static String lastClickedLetter = "X";
 
@@ -19,8 +19,7 @@ class BoardScreen extends StatefulWidget {
     return lastClickedLetter;
   }
 
-//
-  BoardScreen({Key? key}) : super(key: key) {
+  BoardView({Key? key}) : super(key: key) {
     const int numberOfLetters = 7;
     var letterBag = LetterBag();
     List<String> playerLetters = letterBag.getLettersFromBag(numberOfLetters);
@@ -31,15 +30,14 @@ class BoardScreen extends StatefulWidget {
   }
 
   @override
-  _BoardScreenState createState() => _BoardScreenState();
+  _BoardViewState createState() => _BoardViewState();
 }
 
-class _BoardScreenState extends State<BoardScreen> {
+class _BoardViewState extends State<BoardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        // TIMER ETC
         children: [
           Expanded(
             // flex: 2,

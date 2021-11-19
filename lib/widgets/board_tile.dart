@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/app_colors.dart';
-import 'package:pim_word_builder/board_screen.dart';
+import '../app_colors.dart';
+import '/views/board_view.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
@@ -39,7 +39,7 @@ class _BoardTileState extends State<BoardTile> {
         int y = widget.yCoord;
         print("Clicked on tile ($x,$y)");
         setState(() {
-          widget.text = BoardScreen.getLastLetter();
+          widget.text = BoardView.getLastLetter();
           widget.isTaken = true;
           widget.tileColor = AppColors.creme;
         });
