@@ -134,7 +134,6 @@ Widget _rulesPopUp(BuildContext context) {
           Text("2. Complete your turn by clicking End Turn Button.\n"),
           Text(
               "3. Play passes to the next player. The second player, and then each in turn, adds one or more letters to those already played to form new words. All letters played on a turn must be placed in one row across or down the board, to form at least one complete word. If, at the same time, they touch others letters in adjacent rows, those must also form complete words, crossword fashion, with all such letters. The player gets full credit for all words formed or modified on his or her turn."),
-          // Text("Asd"),
           Text("4. New words may be formed by:         "),
           Text(
               "  - Adding one or more letters to a word or letters already on the board."),
