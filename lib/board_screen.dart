@@ -50,19 +50,16 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     color: AppColors.misty,
                     child: Center(
-                      child: Row(
+                      child: Column(
                         children: const <Widget>[
-                          Text("    Gracz 1",
+                          Icon(Icons.accessibility,
+                              size: 50, color: AppColors.lightPurple),
+                          Text("Player 1",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: AppColors.navyBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20)),
-                          Icon(Icons.accessibility,
-                              size: 30, color: AppColors.purple),
-                          SizedBox(
-                            width: 4,
-                          ),
                         ],
                       ),
                     ),
@@ -76,6 +73,7 @@ class _BoardScreenState extends State<BoardScreen> {
                         "Round\nTimer",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -86,14 +84,14 @@ class _BoardScreenState extends State<BoardScreen> {
                   child: Container(
                     color: AppColors.misty,
                     child: Center(
-                      child: Row(
+                      child: Column(
                         children: const <Widget>[
                           Icon(Icons.accessibility,
-                              size: 30, color: AppColors.purple),
+                              size: 50, color: AppColors.purple),
                           // SizedBox(
                           //   width: 5,
                           // ),
-                          Text("Gracz 2",
+                          Text("Player 2",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: AppColors.navyBlue,
@@ -115,14 +113,22 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: ElevatedButton(
-                          onPressed: null,
-                          child: Text(
-                            "Punkty\n69",
-                            style: TextStyle(color: AppColors.black),
-                            textAlign: TextAlign.center,
-                          )),
+                    child: Column(
+                      children: [
+                        const Center(
+                            child: Text("Points",
+                                style: TextStyle(fontWeight: FontWeight.bold))),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.black,
+                              elevation: 10,
+                            ),
+                            onPressed: () {},
+                            child: const Text("69"),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -137,14 +143,22 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: ElevatedButton(
-                          onPressed: null,
-                          child: Text(
-                            "Punkty\n69",
-                            style: TextStyle(color: AppColors.black),
-                            textAlign: TextAlign.center,
-                          )),
+                    child: Column(
+                      children: [
+                        const Center(
+                            child: Text("Points",
+                                style: TextStyle(fontWeight: FontWeight.bold))),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.black,
+                              elevation: 10,
+                            ),
+                            onPressed: () {},
+                            child: const Text("69"),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -155,7 +169,7 @@ class _BoardScreenState extends State<BoardScreen> {
           // TIMER ETC
           // BOARD
           Expanded(
-            flex: 8,
+            flex: 5,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
