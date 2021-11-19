@@ -46,9 +46,9 @@ class HomeScreen extends StatelessWidget {
                 style: myButtonDecoration(),
                 child: const Text('Start Game'),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const GameScreen()),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => _startPopUp(context),
                   );
                 },
               ),
@@ -210,4 +210,114 @@ Widget _rulesPopUp(BuildContext context) {
       ),
     ],
   );
+}
+
+Widget _startPopUp(BuildContext context) {
+  return AlertDialog(
+      title: const Text("Insert players names:"),
+      content: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: TextEditingController(),
+                  textInputAction: TextInputAction.go,
+                  // keyboardType: const TextInputType(),
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Player 1"),
+                ),
+              ),
+              Expanded(
+                child: TextFormField(
+                  controller: TextEditingController(),
+                  textInputAction: TextInputAction.go,
+                  // keyboardType: const TextInputType(),
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Player 2"),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: DropDownMenu()),
+              Expanded(child: DropDownMenu()),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        Expanded(
+          child: Row(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancel',
+                    style: TextStyle(color: AppColors.purple)),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const GameScreen()),
+                  );
+                },
+                child: const Text(
+                  'Start Game!',
+                  style: TextStyle(color: AppColors.purple),
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ]);
+}
+
+class DropDownMenu extends StatefulWidget {
+  const DropDownMenu({Key? key}) : super(key: key);
+
+  @override
+  State<DropDownMenu> createState() => _DropDownMenuState();
+}
+
+/// This is the private State class that goes with MyStatefulWidget.
+class _DropDownMenuState extends State<DropDownMenu> {
+  String dropdownValue = 'One';
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_downward),
+      iconSize: 24,
+      elevation: 16,
+      style: const TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String? newValue) {
+        setState(() {
+          dropdownValue = newValue!;
+        });
+      },
+      items: <String>['One', 'Two', 'Free', 'Four']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
 }
