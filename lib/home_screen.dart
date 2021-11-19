@@ -142,7 +142,6 @@ Widget _rulesPopUp(BuildContext context) {
           Text(
               "  - Placing a complete word parallel to a word already played so that adjacent letters also form complete words."),
           Text("\nBonuses\n", style: TextStyle(fontWeight: FontWeight.bold)),
-
           Text.rich(
             TextSpan(
               children: <TextSpan>[
@@ -191,7 +190,6 @@ Widget _rulesPopUp(BuildContext context) {
               ],
             ),
           ),
-
           Text("Each bonus can be used only once,    "),
           Text("The effect of two premium squares are multiplying."),
           Text("\nBINGO!",

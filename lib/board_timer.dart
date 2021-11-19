@@ -21,9 +21,12 @@ class _BoardTimerState extends State<BoardTimer> {
         },
         builder: (BuildContext context, Duration value, Widget? child) {
           final minutes = value.inMinutes;
-          final seconds = value.inSeconds % 60;
+          String seconds = (value.inSeconds % 60).toString();
+          if (seconds.length == 1) {
+            seconds = "0" + seconds;
+          }
           return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 3),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -38,8 +41,7 @@ class _BoardTimerState extends State<BoardTimer> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30)),
                 ],
-              )
-          );
+              ));
         });
   }
 }
