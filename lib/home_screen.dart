@@ -133,8 +133,8 @@ Widget _rulesPopUp(BuildContext context) {
           Text("Diagonal words are not allowed.\n"),
           Text("2. Complete your turn by clicking End Turn Button.\n"),
           Text(
-              "3. Play passes to the next player. The second player, and then each in turn, adds one or more letters to those already played to form new words. All letters played on a turn must be placed in one row across or down the board, to form at least one complete word. If, at the same time, they touch others letters in adjacent rows, those must also form complete words, crossword fashion, with all such letters. The player gets full credit for all words formed or modified on his or her turn.\n"),
-          Text("4. New words may be formed by:"),
+              "3. Play passes to the next player. The second player, and then each in turn, adds one or more letters to those already played to form new words. All letters played on a turn must be placed in one row across or down the board, to form at least one complete word. If, at the same time, they touch others letters in adjacent rows, those must also form complete words, crossword fashion, with all such letters. The player gets full credit for all words formed or modified on his or her turn."),
+          Text("4. New words may be formed by:         "),
           Text(
               "  - Adding one or more letters to a word or letters already on the board."),
           Text(
@@ -142,26 +142,56 @@ Widget _rulesPopUp(BuildContext context) {
           Text(
               "  - Placing a complete word parallel to a word already played so that adjacent letters also form complete words."),
           Text("\nBonuses\n", style: TextStyle(fontWeight: FontWeight.bold)),
-          Text(
-            "Red Tiles",
-            style: TextStyle(color: AppColors.red),
+
+          Text.rich(
+            TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                    text: "Red Tiles: ",
+                    style: TextStyle(color: AppColors.red)),
+                TextSpan(
+                  text: 'Word points counts triple   \n',
+                ),
+              ],
+            ),
           ),
-          Text("Word points counts triple"),
-          Text("Pink Tiles", style: TextStyle(color: AppColors.pink)),
-          Text(
-            "Word points counts double, including star on center",
-            textAlign: TextAlign.center,
+          Text.rich(
+            TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                    text: "Pink Tiles: ",
+                    style: TextStyle(color: AppColors.pink)),
+                TextSpan(
+                  text: "Word points counts double, including star on center\n",
+                ),
+              ],
+            ),
           ),
-          Text(
-            "Dark Blue Tiles",
-            style: TextStyle(color: AppColors.darkBlue),
+          Text.rich(
+            TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                    text: "Dark Blue Tiles: ",
+                    style: TextStyle(color: AppColors.darkBlue)),
+                TextSpan(
+                  text: "Letter on tile counts triple\n",
+                ),
+              ],
+            ),
           ),
-          Text("Letter on tile counts triple"),
-          Text(
-            "Light Blue Tiles",
-            style: TextStyle(color: AppColors.aqua),
+          Text.rich(
+            TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                    text: "Light Blue Tiles: ",
+                    style: TextStyle(color: AppColors.aqua)),
+                TextSpan(
+                  text: "Letter on tile counts double\n",
+                ),
+              ],
+            ),
           ),
-          Text("Letter on tile counts double\n"),
+
           Text("Each bonus can be used only once,    "),
           Text("The effect of two premium squares are multiplying."),
           Text("\nBINGO!",
