@@ -54,7 +54,9 @@ class _HandLetterState extends State<HandLetter> {
                 aspectRatio: 1,
                 child: Center(
                     child: Text(widget.letterValue,
-                        style: const TextStyle(color: Color(0xfffaf9fa)))),
+                        style: const TextStyle(
+                            color: AppColors.misty,
+                            fontWeight: FontWeight.bold))),
               ),
             ),
           ),
