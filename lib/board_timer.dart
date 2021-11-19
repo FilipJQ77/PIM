@@ -26,7 +26,7 @@ class _BoardTimerState extends State<BoardTimer> {
             seconds = "0" + seconds;
           }
           return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 3),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
