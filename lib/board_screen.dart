@@ -67,6 +67,10 @@ class _BoardScreenState extends State<BoardScreen> {
                     ),
                   ),
                 ),
+                const Expanded(
+                    child: Center(
+                        child: Text("Easter Egg HAHAHA",
+                            style: TextStyle(color: AppColors.white)))),
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
