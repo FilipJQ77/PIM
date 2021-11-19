@@ -21,5 +21,5 @@ class AppColors {
   static const darkBlue = Color.fromRGBO(0, 101, 255, 1.0);
   static const aqua = Color.fromRGBO(102, 204, 255, 1.0);
   static const green = Color.fromRGBO(31, 180, 74, 1.0);
-  static const creme = Color.fromRGBO(250, 235, 214, 1.0);
+  static const cream = Color.fromRGBO(250, 235, 214, 1.0);
 }

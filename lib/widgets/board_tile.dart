@@ -41,7 +41,7 @@ class _BoardTileState extends State<BoardTile> {
         setState(() {
           widget.text = BoardView.getLastLetter();
           widget.isTaken = true;
-          widget.tileColor = AppColors.creme;
+          widget.tileColor = AppColors.cream;
         });
       },
       child: Container(
