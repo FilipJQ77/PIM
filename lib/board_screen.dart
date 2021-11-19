@@ -42,20 +42,111 @@ class _BoardScreenState extends State<BoardScreen> {
         // TIMER ETC
         children: [
           Expanded(
-            flex: 2,
+            // flex: 2,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(child: BoardTimer(),
+                    child: Center(
+                      child: Row(
+                        children: const <Widget>[
+                          Text("Gracz 1",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColors.navyBlue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
+                          Icon(Icons.accessibility,
+                              size: 30, color: AppColors.purple),
+                          SizedBox(
+                            width: 5,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: AppColors.misty,
+                    child: const Center(
+                      child: Text(
+                        "Round\nTimer",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: AppColors.misty,
+                    child: Center(
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(Icons.accessibility,
+                              size: 30, color: AppColors.purple),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text("Gracz 2",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: AppColors.navyBlue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
           ),
+          Expanded(
+            // flex: 2,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Container(
+                    color: AppColors.misty,
+                    child: const Center(
+                      child: ElevatedButton(
+                          onPressed: null,
+                          child: Text(
+                            "data 1",
+                            style: TextStyle(color: AppColors.black),
+                          )),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: AppColors.misty,
+                    child: const Center(
+                      child: BoardTimer(),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: AppColors.misty,
+                    child: const Center(
+                      child: ElevatedButton(
+                          onPressed: null,
+                          child: Text(
+                            "data 2",
+                            style: TextStyle(color: AppColors.black),
+                          )),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           // TIMER ETC
           // BOARD
           Expanded(
@@ -74,6 +165,7 @@ class _BoardScreenState extends State<BoardScreen> {
               ],
             ),
           ),
+
           // HAND
           Expanded(
             flex: 1,
