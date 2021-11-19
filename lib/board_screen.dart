@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pim_word_builder/board.dart';
 import 'package:pim_word_builder/board_timer.dart';
 import 'package:pim_word_builder/hand_letter.dart';
@@ -51,6 +52,7 @@ class _BoardScreenState extends State<BoardScreen> {
                     color: AppColors.misty,
                     child: Center(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: const <Widget>[
                           Icon(Icons.accessibility,
                               size: 50, color: AppColors.lightPurple),
@@ -68,29 +70,12 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: Text(
-                        "Round\nTimer",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: AppColors.misty,
                     child: Center(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: const <Widget>[
                           Icon(Icons.accessibility,
                               size: 50, color: AppColors.purple),
-                          // SizedBox(
-                          //   width: 5,
-                          // ),
                           Text("Player 2",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -135,8 +120,13 @@ class _BoardScreenState extends State<BoardScreen> {
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: BoardTimer(),
+                    child: Column(
+                      children: const <Widget>[
+                        Text("Round Timer",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20)),
+                        BoardTimer(),
+                      ],
                     ),
                   ),
                 ),
