@@ -47,28 +47,33 @@ class _BoardState extends State<Board> {
   Widget build(BuildContext context) {
     return Container(
       decoration: myBoxDecoration(),
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: Column(
-          children: [
-            for (var i = 0; i < boardSize; i++)
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    for (var j = 0; j < boardSize; j++)
-                      Expanded(
-                        child: widget.tiles[i][j],
+      child: InteractiveViewer(
+        // panEnabled: true,
+        minScale: 1,
+        maxScale: 4,
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: Column(
+            children: [
+              for (var i = 0; i < boardSize; i++)
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    children: [
+                      for (var j = 0; j < boardSize; j++)
+                        Expanded(
+                          child: widget.tiles[i][j],
 
-                        // onTap: () {
-                        //   widget.tiles[i][j].text =
-                        //       BoardScreen.getLastLetter();
-                        // }
-                      )
-                  ],
+                          // onTap: () {
+                          //   widget.tiles[i][j].text =
+                          //       BoardScreen.getLastLetter();
+                          // }
+                        )
+                    ],
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
