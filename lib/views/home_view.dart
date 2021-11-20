@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pim_word_builder/views/game_view.dart';
 import '../app_colors.dart';
 import 'package:pim_word_builder/widgets/home_button.dart';
 
@@ -29,7 +30,7 @@ class HomeView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/BabbleMainScreen.png'),
-                      startGameButton(context),
+                      startGameButton(context, const GameView()),
                       rulesButton(context),
                       authorsButton(context),
                       exitButton(),

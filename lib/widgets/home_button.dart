@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pim_word_builder/views/game_view.dart';
 import 'dart:io' as io;
 import '../app_colors.dart';
 
@@ -23,11 +22,11 @@ ElevatedButton _genericHomeButton(String text, Function function) {
   );
 }
 
-ElevatedButton startGameButton(BuildContext context) {
+ElevatedButton startGameButton(BuildContext context, Widget route) {
   return _genericHomeButton('Start Game', () {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const GameView()),
+      MaterialPageRoute(builder: (context) => route),
     );
   });
 }

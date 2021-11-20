@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pim_word_builder/widgets/app_bar.dart';
 import '../app_colors.dart';
 import 'board_view.dart';
+
+
 
 class GameView extends StatelessWidget {
   const GameView({Key? key}) : super(key: key);
@@ -10,23 +13,8 @@ class GameView extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: AppColors.purple),
       home: Scaffold(
-          appBar: AppBar(
-              automaticallyImplyLeading: false,
-              centerTitle: true,
-              title: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  IconButton(
-                    icon: Image.asset('assets/images/BabbleHome.png',
-                        color: AppColors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    iconSize: 120,
-                  ),
-                ],
-              )),
-          body: BoardView()),
+          appBar: appBar(context),
+          body: BoardView()), // TODO body powinno byc zbiorem boarda, reki gracza, i guziczkow
     );
   }
 }
