@@ -63,7 +63,7 @@ ElevatedButton exitButton() {
 AlertDialog _rulesPopup(BuildContext context) {
   return AlertDialog(
     title: const Text(
-      'BabbleWords!\nRules',
+      'Rules',
       textAlign: TextAlign.center,
     ),
     content: SingleChildScrollView(
@@ -72,77 +72,89 @@ AlertDialog _rulesPopup(BuildContext context) {
         children: const <Widget>[
           Text("Description\n", style: TextStyle(fontWeight: FontWeight.bold)),
           Text(
-              "BabbleWords! is a word game in which two players score points by placing tiles, each bearing a single letter, onto a game board divided into a 15×15 grid of squares. The tiles must form words that, in crossword fashion, read `left to right` in rows or `downward` in columns, and be included in a standard dictionary or lexicon."),
+              "BabbleWords! is a word game in which two players score points by "
+              "placing tiles, each bearing a single letter, "
+              "onto a game board divided into a 15×15 grid of squares. "
+              "The tiles must form words that, in crossword fashion, "
+              "read 'left to right' in rows or 'downward' in columns, "
+              "and be included in a standard dictionary or lexicon.",
+              textAlign: TextAlign.justify),
           Text("\nGameplay\n", style: TextStyle(fontWeight: FontWeight.bold)),
           Text(
-              "1. The first player combines two or more of his or her letters to form a word and places it on the board to read either across or down with one letter on the center square."),
-          Text("Diagonal words are not allowed.\n"),
-          Text("2. Complete your turn by clicking End Turn Button.\n"),
+              "1. The first player combines two or more of their letters to form "
+              "a word and places it on the board to read either across "
+              "or down with one letter on the center square. "
+              "Diagonal words are not allowed.\n",
+              textAlign: TextAlign.justify),
           Text(
-              "3. Play passes to the next player. The second player, and then each in turn, adds one or more letters to those already played to form new words. All letters played on a turn must be placed in one row across or down the board, to form at least one complete word. If, at the same time, they touch others letters in adjacent rows, those must also form complete words, crossword fashion, with all such letters. The player gets full credit for all words formed or modified on his or her turn."),
-          Text("4. New words may be formed by:         "),
+              "2. The player completes their turn by clicking the End Turn Button. "
+              "If a player cannot think of a word, "
+              "they can also pass their round without placing a tile.\n",
+              textAlign: TextAlign.justify),
           Text(
-              "  - Adding one or more letters to a word or letters already on the board."),
+              "3. Then each player in turn, adds one or more letters to those "
+              "already placed to form new words. All letters played "
+              "on a turn must be placed in one row across or down the board, "
+              "to form at least one complete word. If, at the same time, "
+              "they touch others letters in adjacent rows, "
+              "those must also form complete words, crossword fashion, "
+              "with all such letters. The player gets full credit "
+              "for all words formed or modified on his or her turn.\n",
+              textAlign: TextAlign.justify),
           Text(
-              "  - Placing a word at right angles to a word already on the board. The new word must use one of the letters already on the board or must add a letter to it.   "),
-          Text(
-              "  - Placing a complete word parallel to a word already played so that adjacent letters also form complete words."),
+              "4. New words may be formed by:\n"
+              " - Adding one or more letters to a word or letters"
+              " already on the board.\n"
+              " - Placing a word at right angles to a word already on the board. "
+              "The new word must use one of the letters already on the board "
+              "or must add a letter to it.\n"
+              " - Placing a complete word parallel to a word already played "
+              "so that adjacent letters also form complete words.",
+              textAlign: TextAlign.justify),
           Text("\nBonuses\n", style: TextStyle(fontWeight: FontWeight.bold)),
           Text.rich(
-            TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: "Red Tiles: ",
-                    style: TextStyle(color: AppColors.red)),
-                TextSpan(
-                  text: 'Word points counts triple   \n',
-                ),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: "Pink Tiles: ",
-                    style: TextStyle(color: AppColors.pink)),
-                TextSpan(
-                  text: "Word points counts double, including star on center\n",
-                ),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: "Dark Blue Tiles: ",
-                    style: TextStyle(color: AppColors.darkBlue)),
-                TextSpan(
-                  text: "Letter on tile counts triple\n",
-                ),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: "Light Blue Tiles: ",
-                    style: TextStyle(color: AppColors.aqua)),
-                TextSpan(
-                  text: "Letter on tile counts double\n",
-                ),
-              ],
-            ),
-          ),
-          Text("Each bonus can be used only once,    "),
-          Text("The effect of two premium squares are multiplying."),
-          Text("\nBINGO!",
+              TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                      text: "Red Tiles: ",
+                      style: TextStyle(color: AppColors.red)),
+                  TextSpan(
+                    text: 'Word points are tripled.\n\n',
+                  ),
+                  TextSpan(
+                      text: "Pink Tiles: ",
+                      style: TextStyle(color: AppColors.pink)),
+                  TextSpan(
+                    text:
+                        "Word points are doubled, including the star on the center.\n\n",
+                  ),
+                  TextSpan(
+                      text: "Dark Blue Tiles: ",
+                      style: TextStyle(color: AppColors.darkBlue)),
+                  TextSpan(
+                    text: "Letter on tile counts triple.\n\n",
+                  ),
+                  TextSpan(
+                      text: "Light Blue Tiles: ",
+                      style: TextStyle(color: AppColors.aqua)),
+                  TextSpan(
+                    text: "Letter on tile counts double.\n\n",
+                  ),
+                ],
+              ),
+              textAlign: TextAlign.justify),
+          Text(
+              "Each bonus can only be used once, "
+              "the effect of two premium squares are multiplying.\n\n",
+              textAlign: TextAlign.justify),
+          Text("Jackpot!\n",
               style: TextStyle(
                   color: AppColors.purple, fontWeight: FontWeight.bold)),
           Text(
-              "If you play seven tiles on a turn, it's a Bingo. You score a premium of 50 points after totaling our score for the turn.")
+              "If a player plays all seven tiles from their hand on a turn, "
+              "they score a bonus of 50 points after counting"
+              " all other points from the turn.",
+              textAlign: TextAlign.justify)
         ],
       ),
     ),
@@ -151,7 +163,7 @@ AlertDialog _rulesPopup(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: const Text("Okay, got it!\n Let's play!",
+        child: const Text("Okay, got it!",
             style: TextStyle(color: AppColors.purple)),
       ),
     ],
