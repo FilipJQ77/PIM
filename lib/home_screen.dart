@@ -221,9 +221,12 @@ Widget _startPopUp(BuildContext context) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(
+              SizedBox(
+                width: 110,
                 child: TextFormField(
+                  maxLength: 10,
                   controller: TextEditingController(),
                   textInputAction: TextInputAction.go,
                   // keyboardType: const TextInputType(),
@@ -231,8 +234,10 @@ Widget _startPopUp(BuildContext context) {
                       border: OutlineInputBorder(), hintText: "Player 1"),
                 ),
               ),
-              Expanded(
+              SizedBox(
+                width: 110,
                 child: TextFormField(
+                  maxLength: 10,
                   controller: TextEditingController(),
                   textInputAction: TextInputAction.go,
                   // keyboardType: const TextInputType(),
@@ -245,39 +250,44 @@ Widget _startPopUp(BuildContext context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(child: DropDownMenu()),
-              Expanded(child: DropDownMenu()),
+              Expanded(child: Center(child: DropDownMenu())),
+              Expanded(child: Center(child: DropDownMenu())),
             ],
           )
         ],
       ),
       actions: <Widget>[
         Expanded(
-          child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cancel',
-                    style: TextStyle(color: AppColors.purple)),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const GameScreen()),
-                  );
-                },
-                child: const Text(
-                  'Start Game!',
-                  style: TextStyle(color: AppColors.purple),
-                  textAlign: TextAlign.right,
+          child: Center(
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cancel',
+                      style: TextStyle(color: AppColors.purple)),
                 ),
-              ),
-            ],
+                const Text("Easter egg HAHA",
+                    style: TextStyle(color: AppColors.white)),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GameScreen()),
+                    );
+                  },
+                  child: const Text(
+                    'Start Game!',
+                    style: TextStyle(color: AppColors.purple),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ]);
@@ -292,7 +302,7 @@ class DropDownMenu extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _DropDownMenuState extends State<DropDownMenu> {
-  String dropdownValue = 'One';
+  String dropdownValue = 'Blue';
 
   @override
   Widget build(BuildContext context) {
@@ -311,7 +321,7 @@ class _DropDownMenuState extends State<DropDownMenu> {
           dropdownValue = newValue!;
         });
       },
-      items: <String>['One', 'Two', 'Free', 'Four']
+      items: <String>['Blue', 'Violet', 'Green', 'Orange']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
