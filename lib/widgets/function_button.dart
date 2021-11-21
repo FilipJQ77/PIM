@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/views/board_view.dart';
+import 'package:pim_word_builder/widgets/board.dart';
 
 // todo w sumie to chyba bedzie stateless? w sensie raz mu przypiszemy
 // ikone, tekst, funkcje, i to sie nie bedzie zmieniac
 class FunctionButton extends StatefulWidget {
   final IconData icon;
   final String text;
+  final GlobalKey<BoardState> boardStateRef;
+
+  void undo() {
+    // lastClickedLetter = letter;
+    print("Clicked undo button");
+  }
   //final Function onPressed;
-  const FunctionButton({Key? key, required this.icon, required this.text})
+  FunctionButton({Key? key, required this.icon, required this.text, required this.boardStateRef})
       : super(key: key);
 
   @override
@@ -44,7 +52,11 @@ class _FunctionButtonState extends State<FunctionButton> {
         ],
       ),
       onPressed: () {
-        //widget.onPressed();
+        // TODO maybe change this conception
+        if(widget.text == 'UNDO') {
+          widget.boardStateRef.currentState!.removeLetterFromBoard(
+              BoardView.lastClickedLetterXCoord, BoardView.lastClickedLetterYCoord);
+        }
       },
     );
   }

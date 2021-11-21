@@ -8,18 +8,36 @@ import 'package:pim_word_builder/letter_bag.dart';
 
 class BoardView extends StatefulWidget {
   List<HandLetter> handLetters = [];
+
+  // board and board state refs
+  GlobalKey<BoardState> myBoardKey = GlobalKey();
+  Board board = Board();
+
   static String lastClickedLetter = "X";
+  static int lastClickedLetterXCoord = 0;
+  static int lastClickedLetterYCoord = 0;
 
   static void setLastLetter(String letter) {
     lastClickedLetter = letter;
     print("OK $letter");
   }
 
+  static void setLastClickedLetterXCoord(int x){
+    lastClickedLetterXCoord = x;
+  }
+
+  static void setLastClickedLetterYCoord(int y){
+    lastClickedLetterYCoord = y;
+  }
+
   static String getLastLetter() {
     return lastClickedLetter;
   }
 
-  BoardView({Key? key}) : super(key: key) {
+  BoardView({Key? key}) : super(key: key)
+  {
+    // overwrite board ref with new board ref but this time with key (board state ref)
+    board = Board(key: myBoardKey);
     const int numberOfLetters = 7;
     var letterBag = LetterBag();
     List<String> playerLetters = letterBag.getLettersFromBag(numberOfLetters);
@@ -162,7 +180,7 @@ class _BoardViewState extends State<BoardView> {
                       color: AppColors.misty,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Center(child: Board()),
+                        child: Center(child: widget.board),
                       )),
                 ),
               ],
@@ -197,15 +215,15 @@ class _BoardViewState extends State<BoardView> {
                     color: AppColors.misty,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        FunctionButton(icon: Icons.undo_rounded, text: 'UNDO'),
+                      children: [
+                        FunctionButton(icon: Icons.undo_rounded, text: 'UNDO', boardStateRef: widget.myBoardKey,),
                         FunctionButton(
                             icon: Icons.change_circle_rounded,
-                            text: 'EXCHANGE'),
+                            text: 'EXCHANGE', boardStateRef: widget.myBoardKey),
                         FunctionButton(
-                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE'),
+                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE', boardStateRef: widget.myBoardKey),
                         FunctionButton(
-                            icon: Icons.skip_next_rounded, text: 'END TURN'),
+                            icon: Icons.skip_next_rounded, text: 'END TURN', boardStateRef: widget.myBoardKey),
                       ],
                     ),
                   ),

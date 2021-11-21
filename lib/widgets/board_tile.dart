@@ -38,6 +38,8 @@ class _BoardTileState extends State<BoardTile> {
         int x = widget.xCoord;
         int y = widget.yCoord;
         print("Clicked on tile ($x,$y)");
+        BoardView.setLastClickedLetterXCoord(x);
+        BoardView.setLastClickedLetterYCoord(y);
         setState(() {
           widget.text = BoardView.getLastLetter();
           widget.isTaken = true;

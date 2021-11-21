@@ -16,10 +16,7 @@ BoxDecoration myBoxDecoration() {
 }
 
 class Board extends StatefulWidget {
-  //final array = List.generate(rows,
-  //(i) => List.generate(cols + 1, (j) => i + j * cols + 1, growable: false),
-  //growable: false);
-  //List<List<BoardTile>> tiles = List.generate(boardSize, (_) => List(boardSize), growable: false);
+
   List<List<BoardTile>> tiles = [[]];
 
   Board({Key? key}) : super(key: key) {
@@ -39,10 +36,27 @@ class Board extends StatefulWidget {
   }
 
   @override
-  _BoardState createState() => _BoardState();
+  BoardState createState() => BoardState();
 }
 
-class _BoardState extends State<Board> {
+class BoardState extends State<Board> {
+
+  void removeLetterFromBoard(int x, int y){
+    print("Triggered removeLetterFromBoard");
+    var text = " ";
+    if(x == 7  && y == 7) text = "🌟"; // middle tile
+    setState(() {
+
+      widget.tiles[x][y] = BoardTile(
+        text: text,
+        isTaken: false,
+        xCoord: x,
+        yCoord: y,
+        tileColor: TileParams.tileColor(x, y),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
