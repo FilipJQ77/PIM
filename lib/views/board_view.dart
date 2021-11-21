@@ -13,18 +13,11 @@ class BoardView extends StatefulWidget {
   GlobalKey<BoardState> myBoardKey = GlobalKey();
   Board board = Board();
 
-  static String lastClickedLetter = "X";
+  // default last clicked letter is None (string)
+  // change for "None" after every placement!
+  static String lastClickedLetter = "None";
   static List<int> lastClickedLetterXCoords = [];
   static List<int> lastClickedLetterYCoords = [];
-
-  static void setLastLetter(String letter) {
-    lastClickedLetter = letter;
-    print("OK $letter");
-  }
-
-  static String getLastLetter() {
-    return lastClickedLetter;
-  }
 
   BoardView({Key? key}) : super(key: key)
   {

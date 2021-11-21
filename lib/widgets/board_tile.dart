@@ -35,13 +35,16 @@ class _BoardTileState extends State<BoardTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if(BoardView.lastClickedLetter == "None") return; // if none letter -> quit
+
         int x = widget.xCoord;
         int y = widget.yCoord;
         print("Clicked on tile ($x,$y)");
         BoardView.lastClickedLetterXCoords.add(x);
         BoardView.lastClickedLetterYCoords.add(y);
         setState(() {
-          widget.text = BoardView.getLastLetter();
+          widget.text = BoardView.lastClickedLetter;
+          BoardView.lastClickedLetter = "None";
           widget.isTaken = true;
           widget.tileColor = AppColors.cream;
         });

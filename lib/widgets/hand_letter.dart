@@ -44,7 +44,7 @@ class _HandLetterState extends State<HandLetter> {
         children: <Widget>[
           TextButton(
             onPressed: () {
-              BoardView.setLastLetter(widget.letterValue);
+              BoardView.lastClickedLetter = widget.letterValue;
               print(widget.letterValue);
               print(widget.handLetterId);
             },
