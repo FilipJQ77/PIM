@@ -14,20 +14,12 @@ class BoardView extends StatefulWidget {
   Board board = Board();
 
   static String lastClickedLetter = "X";
-  static int lastClickedLetterXCoord = 0;
-  static int lastClickedLetterYCoord = 0;
+  static List<int> lastClickedLetterXCoords = [];
+  static List<int> lastClickedLetterYCoords = [];
 
   static void setLastLetter(String letter) {
     lastClickedLetter = letter;
     print("OK $letter");
-  }
-
-  static void setLastClickedLetterXCoord(int x){
-    lastClickedLetterXCoord = x;
-  }
-
-  static void setLastClickedLetterYCoord(int y){
-    lastClickedLetterYCoord = y;
   }
 
   static String getLastLetter() {
