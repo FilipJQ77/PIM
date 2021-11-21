@@ -13,12 +13,6 @@ class BoardView extends StatefulWidget {
   GlobalKey<BoardState> myBoardKey = GlobalKey();
   Board board = Board();
 
-  // default last clicked letter is None (string)
-  // change for "None" after every placement!
-  static String lastClickedLetter = "None";
-  static List<int> lastClickedLetterXCoords = [];
-  static List<int> lastClickedLetterYCoords = [];
-
   BoardView({Key? key}) : super(key: key)
   {
     // overwrite board ref with new board ref but this time with key (board state ref)
@@ -28,7 +22,7 @@ class BoardView extends StatefulWidget {
     List<String> playerLetters = letterBag.getLettersFromBag(numberOfLetters);
     for (int i = 0; i < numberOfLetters; i++) {
       handLetters
-          .add(HandLetter(handLetterId: i, letterValue: playerLetters[i]));
+          .add(HandLetter(handLetterId: i, letterValue: playerLetters[i], boardStateRef: myBoardKey,));
     }
   }
 

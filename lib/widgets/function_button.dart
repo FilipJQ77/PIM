@@ -54,12 +54,13 @@ class _FunctionButtonState extends State<FunctionButton> {
       onPressed: () {
         // TODO maybe change this conception
         if(widget.text == 'UNDO') {
-          if(BoardView.lastClickedLetterXCoords.isEmpty){
+          if(widget.boardStateRef.currentState!.getLastClickedLetterXCoords().isEmpty){
             print("LastClickedLetterX/yCoords List is empty");
             return;
           }
           widget.boardStateRef.currentState!.removeLetterFromBoard(
-              BoardView.lastClickedLetterXCoords.removeLast(), BoardView.lastClickedLetterYCoords.removeLast());
+              widget.boardStateRef.currentState!.getLastClickedLetterXCoords().removeLast(),
+              widget.boardStateRef.currentState!.getLastClickedLetterYCoords().removeLast());
         }
       },
     );

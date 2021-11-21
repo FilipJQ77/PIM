@@ -18,18 +18,25 @@ BoxDecoration myBoxDecoration() {
 class Board extends StatefulWidget {
 
   List<List<BoardTile>> tiles = [[]];
+  List<List<GlobalKey<BoardTileState>>> myBoardTilesKeys = [[]];
+  // test
+
 
   Board({Key? key}) : super(key: key) {
     for (var i = 0; i < boardSize; i++) {
       tiles.add(<BoardTile>[]);
+      myBoardTilesKeys.add(<GlobalKey<BoardTileState>>[]);
       for (var j = 0; j < boardSize; j++) {
+        GlobalKey<BoardTileState> myBoardTileKey = GlobalKey();
         tiles[i].add(BoardTile(
           text: " ",
           isTaken: false,
           xCoord: i,
           yCoord: j,
           tileColor: TileParams.tileColor(i, j),
+          key: myBoardTileKey
         ));
+        myBoardTilesKeys[i].add(myBoardTileKey);
       }
     }
     tiles[7][7].text = "🌟";
@@ -40,6 +47,26 @@ class Board extends StatefulWidget {
 }
 
 class BoardState extends State<Board> {
+
+  String lastClickedLetter = "None";
+  List<int> lastClickedLetterXCoords = [];
+  List<int> lastClickedLetterYCoords = [];
+
+  void setLastClickedLetter(String letter){
+    setState(() {
+      lastClickedLetter = letter;
+    });
+    print("Last clicked hand letter:");
+    print(lastClickedLetter);
+  }
+
+  List<int> getLastClickedLetterXCoords(){
+    return lastClickedLetterXCoords;
+  }
+
+  List<int> getLastClickedLetterYCoords(){
+    return lastClickedLetterYCoords;
+  }
 
   void removeLetterFromBoard(int x, int y){
     print("Triggered removeLetterFromBoard");
@@ -76,7 +103,17 @@ class BoardState extends State<Board> {
                     children: [
                       for (var j = 0; j < boardSize; j++)
                         Expanded(
-                          child: widget.tiles[i][j],
+                          child: GestureDetector(
+                              onTap: () {
+                                print("Clicked on tile in board");
+                                if(lastClickedLetter == "None") return; // if none letter -> quit
+                                print("Clicked on tile ($i,$j)");
+                                lastClickedLetterXCoords.add(i);
+                                lastClickedLetterYCoords.add(j);
+                                widget.myBoardTilesKeys[i][j].currentState!.placeLetterOnTile(lastClickedLetter);
+                                lastClickedLetter = "None";
+                                },
+                              child: widget.tiles[i][j]),
 
                           // onTap: () {
                           //   widget.tiles[i][j].text =

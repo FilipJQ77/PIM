@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/views/board_view.dart';
+import 'package:pim_word_builder/widgets/board.dart';
 
 import '../app_colors.dart';
 
@@ -15,8 +16,9 @@ BoxDecoration myBoxDecoration() {
 class HandLetter extends StatefulWidget {
   String letterValue = "";
   final int handLetterId;
+  final GlobalKey<BoardState> boardStateRef;
 
-  HandLetter({Key? key, required this.handLetterId, required this.letterValue})
+  HandLetter({Key? key, required this.handLetterId, required this.letterValue, required this.boardStateRef})
       : super(key: key);
 
   @override
@@ -44,7 +46,7 @@ class _HandLetterState extends State<HandLetter> {
         children: <Widget>[
           TextButton(
             onPressed: () {
-              BoardView.lastClickedLetter = widget.letterValue;
+              widget.boardStateRef.currentState!.setLastClickedLetter(widget.letterValue);
               print(widget.letterValue);
               print(widget.handLetterId);
             },

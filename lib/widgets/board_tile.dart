@@ -27,40 +27,32 @@ class BoardTile extends StatefulWidget {
       : super(key: key);
 
   @override
-  _BoardTileState createState() => _BoardTileState();
+  BoardTileState createState() => BoardTileState();
 }
 
-class _BoardTileState extends State<BoardTile> {
+class BoardTileState extends State<BoardTile> {
+
+  void placeLetterOnTile(String letter){
+    setState(() {
+      widget.text = letter;
+      widget.isTaken = true;
+      widget.tileColor = AppColors.cream;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if(BoardView.lastClickedLetter == "None") return; // if none letter -> quit
+    return Container(
+      decoration: BoxDecoration(
+          color: widget.tileColor,
+          border: Border.all(color: AppColors.black)),
 
-        int x = widget.xCoord;
-        int y = widget.yCoord;
-        print("Clicked on tile ($x,$y)");
-        BoardView.lastClickedLetterXCoords.add(x);
-        BoardView.lastClickedLetterYCoords.add(y);
-        setState(() {
-          widget.text = BoardView.lastClickedLetter;
-          BoardView.lastClickedLetter = "None";
-          widget.isTaken = true;
-          widget.tileColor = AppColors.cream;
-        });
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: widget.tileColor,
-            border: Border.all(color: AppColors.black)),
-
-        // color: Colors.purple,
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Center(
-              child: Text(widget.text,
-                  style: const TextStyle(fontWeight: FontWeight.bold))),
-        ),
+      // color: Colors.purple,
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Center(
+            child: Text(widget.text,
+                style: const TextStyle(fontWeight: FontWeight.bold))),
       ),
     );
   }
