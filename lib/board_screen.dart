@@ -181,9 +181,9 @@ class _BoardScreenState extends State<BoardScreen> {
 
           // HAND
           Expanded(
-            flex: 1,
+            // flex: 1,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   child: Container(

@@ -39,8 +39,9 @@ class _HandLetterState extends State<HandLetter> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
           TextButton(
             onPressed: () {
               BoardScreen.setLastLetter(widget.letterValue);
