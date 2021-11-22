@@ -35,6 +35,7 @@ class _BoardViewState extends State<BoardView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        // TIMER ETC
         children: [
           Expanded(
             // flex: 2,
@@ -45,50 +46,36 @@ class _BoardViewState extends State<BoardView> {
                   child: Container(
                     color: AppColors.misty,
                     child: Center(
-                      child: Row(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: const <Widget>[
-                          Text("    Gracz 1",
+                          Icon(Icons.accessibility,
+                              size: 50, color: AppColors.lightPurple),
+                          Text("Player 1",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: AppColors.navyBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20)),
-                          Icon(Icons.accessibility,
-                              size: 30, color: AppColors.purple),
-                          SizedBox(
-                            width: 4,
-                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    color: AppColors.misty,
-                    child: const Center(
-                      child: Text(
-                        "Round\nTimer",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
+                const Expanded(
+                    child: Center(
+                        child: Text("Easter Egg HAHAHA",
+                            style: TextStyle(color: AppColors.white)))),
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
                     child: Center(
-                      child: Row(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: const <Widget>[
                           Icon(Icons.accessibility,
-                              size: 30, color: AppColors.purple),
-                          // SizedBox(
-                          //   width: 5,
-                          // ),
-                          Text("Gracz 2",
+                              size: 50, color: AppColors.purple),
+                          Text("Player 2",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: AppColors.navyBlue,
@@ -110,36 +97,57 @@ class _BoardViewState extends State<BoardView> {
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: ElevatedButton(
-                          onPressed: null,
-                          child: Text(
-                            "Punkty\n69",
-                            style: TextStyle(color: AppColors.black),
-                            textAlign: TextAlign.center,
-                          )),
+                    child: Column(
+                      children: [
+                        const Center(
+                            child: Text("Points",
+                                style: TextStyle(fontWeight: FontWeight.bold))),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.black,
+                              elevation: 10,
+                            ),
+                            onPressed: () {},
+                            child: const Text("69"),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: BoardTimer(),
+                    child: Column(
+                      children: const <Widget>[
+                        Text("Round Timer",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20)),
+                        BoardTimer(),
+                      ],
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
-                    child: const Center(
-                      child: ElevatedButton(
-                          onPressed: null,
-                          child: Text(
-                            "Punkty\n69",
-                            style: TextStyle(color: AppColors.black),
-                            textAlign: TextAlign.center,
-                          )),
+                    child: Column(
+                      children: [
+                        const Center(
+                            child: Text("Points",
+                                style: TextStyle(fontWeight: FontWeight.bold))),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.black,
+                              elevation: 10,
+                            ),
+                            onPressed: () {},
+                            child: const Text("69"),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -150,7 +158,7 @@ class _BoardViewState extends State<BoardView> {
           // TIMER ETC
           // BOARD
           Expanded(
-            flex: 8,
+            flex: 5,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -168,9 +176,9 @@ class _BoardViewState extends State<BoardView> {
 
           // HAND
           Expanded(
-            flex: 1,
+            // flex: 1,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   child: Container(
@@ -198,11 +206,11 @@ class _BoardViewState extends State<BoardView> {
                         FunctionButton(icon: Icons.undo_rounded, text: 'UNDO', boardStateRef: widget.myBoardKey,),
                         FunctionButton(
                             icon: Icons.change_circle_rounded,
-                            text: 'EXCHANGE', boardStateRef: widget.myBoardKey),
+                            text: 'EXCHANGE', boardStateRef: widget.myBoardKey,),
                         FunctionButton(
-                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE', boardStateRef: widget.myBoardKey),
+                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE', boardStateRef: widget.myBoardKey,),
                         FunctionButton(
-                            icon: Icons.skip_next_rounded, text: 'END TURN', boardStateRef: widget.myBoardKey),
+                            icon: Icons.skip_next_rounded, text: 'END TURN', boardStateRef: widget.myBoardKey,),
                       ],
                     ),
                   ),

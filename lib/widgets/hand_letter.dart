@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '/views/board_view.dart';
 import 'package:pim_word_builder/widgets/board.dart';
-
 import '../app_colors.dart';
 
 BoxDecoration myBoxDecoration() {
@@ -42,8 +41,9 @@ class _HandLetterState extends State<HandLetter> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
           TextButton(
             onPressed: () {
               widget.boardStateRef.currentState!.setLastClickedLetter(widget.letterValue);

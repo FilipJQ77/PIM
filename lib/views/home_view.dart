@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'dart:io' show Platform, exit;
+import 'package:flutter/services.dart';
 import 'package:pim_word_builder/views/game_view.dart';
+import 'package:pim_word_builder/main.dart';
 import '../app_colors.dart';
 import 'package:pim_word_builder/widgets/home_button.dart';
+
+
+ButtonStyle myButtonDecoration() {
+  return ElevatedButton.styleFrom(
+    primary: AppColors.purple,
+    onPrimary: AppColors.white,
+    shadowColor: AppColors.purple,
+    elevation: 3,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
+    minimumSize: const Size(100, 40),
+  );
+}
+
 
 const homeContainerDecoration = BoxDecoration(
     image: DecorationImage(
@@ -30,7 +47,7 @@ class HomeView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/BabbleMainScreen.png'),
-                      startGameButton(context, const GameView()),
+                      startGameButton(context),
                       rulesButton(context),
                       authorsButton(context),
                       exitButton(),
@@ -41,3 +58,4 @@ class HomeView extends StatelessWidget {
             )));
   }
 }
+
