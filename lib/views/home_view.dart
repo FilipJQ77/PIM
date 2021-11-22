@@ -19,7 +19,6 @@ ButtonStyle myButtonDecoration() {
   );
 }
 
-
 const homeContainerDecoration = BoxDecoration(
     image: DecorationImage(
       image: AssetImage("assets/images/HomeBackground_unsplash.jpg"),
@@ -33,6 +32,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+            resizeToAvoidBottomInset: false,
             body: Stack(
               children: [
                 Container(
