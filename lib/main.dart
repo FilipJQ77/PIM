@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/home_view.dart';
+import 'package:pim_word_builder/views/home_view.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -7,5 +7,3 @@ void main() {
     home: HomeView(),
   ));
 }
-
-

@@ -5,6 +5,8 @@ import 'package:pim_word_builder/widgets/hand_letter.dart';
 import 'package:pim_word_builder/widgets/function_button.dart';
 import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/letter_bag.dart';
+import 'package:pim_word_builder/widgets/player_name_icon.dart';
+import 'package:pim_word_builder/widgets/player_points.dart';
 
 class BoardView extends StatefulWidget {
   List<HandLetter> handLetters = [];
@@ -13,16 +15,18 @@ class BoardView extends StatefulWidget {
   GlobalKey<BoardState> myBoardKey = GlobalKey();
   Board board = Board();
 
-  BoardView({Key? key}) : super(key: key)
-  {
+  BoardView({Key? key}) : super(key: key) {
     // overwrite board ref with new board ref but this time with key (board state ref)
     board = Board(key: myBoardKey);
     const int numberOfLetters = 7;
     var letterBag = LetterBag();
     List<String> playerLetters = letterBag.getLettersFromBag(numberOfLetters);
     for (int i = 0; i < numberOfLetters; i++) {
-      handLetters
-          .add(HandLetter(handLetterId: i, letterValue: playerLetters[i], boardStateRef: myBoardKey,));
+      handLetters.add(HandLetter(
+        handLetterId: i,
+        letterValue: playerLetters[i],
+        boardStateRef: myBoardKey,
+      ));
     }
   }
 
@@ -41,81 +45,22 @@ class _BoardViewState extends State<BoardView> {
             // flex: 2,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+              children: const [
+                PlayerNameIcon(playerName: "Player 1"),
                 Expanded(
-                  child: Container(
-                    color: AppColors.misty,
                     child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const <Widget>[
-                          Icon(Icons.accessibility,
-                              size: 50, color: AppColors.lightPurple),
-                          Text("Player 1",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: AppColors.navyBlue,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const Expanded(
-                    child: Center(
-                        child: Text("Easter Egg HAHAHA",
+                        child: Text("",
                             style: TextStyle(color: AppColors.white)))),
-                Expanded(
-                  child: Container(
-                    color: AppColors.misty,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const <Widget>[
-                          Icon(Icons.accessibility,
-                              size: 50, color: AppColors.purple),
-                          Text("Player 2",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: AppColors.navyBlue,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // TODO DO POPRAWKI NATYCHMIASTOWO >:C
+                PlayerNameIcon(playerName: "Player 2"),
               ],
             ),
           ),
           Expanded(
-            // flex: 2,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: Container(
-                    color: AppColors.misty,
-                    child: Column(
-                      children: [
-                        const Center(
-                            child: Text("Points",
-                                style: TextStyle(fontWeight: FontWeight.bold))),
-                        Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: AppColors.black,
-                              elevation: 10,
-                            ),
-                            onPressed: () {},
-                            child: const Text("69"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const PlayerPoints(points: 69),
                 Expanded(
                   child: Container(
                     color: AppColors.misty,
@@ -129,28 +74,7 @@ class _BoardViewState extends State<BoardView> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    color: AppColors.misty,
-                    child: Column(
-                      children: [
-                        const Center(
-                            child: Text("Points",
-                                style: TextStyle(fontWeight: FontWeight.bold))),
-                        Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: AppColors.black,
-                              elevation: 10,
-                            ),
-                            onPressed: () {},
-                            child: const Text("69"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const PlayerPoints(points: 69),
               ],
             ),
           ),
@@ -191,7 +115,7 @@ class _BoardViewState extends State<BoardView> {
               ],
             ),
           ),
-          // BUTTONS
+          // BUTTONS todo buttons widget
           Expanded(
             flex: 1,
             child: Row(
@@ -203,14 +127,26 @@ class _BoardViewState extends State<BoardView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FunctionButton(icon: Icons.undo_rounded, text: 'UNDO', boardStateRef: widget.myBoardKey,),
                         FunctionButton(
-                            icon: Icons.change_circle_rounded,
-                            text: 'EXCHANGE', boardStateRef: widget.myBoardKey,),
+                          icon: Icons.undo_rounded,
+                          text: 'UNDO',
+                          boardStateRef: widget.myBoardKey,
+                        ),
                         FunctionButton(
-                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE', boardStateRef: widget.myBoardKey,),
+                          icon: Icons.change_circle_rounded,
+                          text: 'EXCHANGE',
+                          boardStateRef: widget.myBoardKey,
+                        ),
                         FunctionButton(
-                            icon: Icons.skip_next_rounded, text: 'END TURN', boardStateRef: widget.myBoardKey,),
+                          icon: Icons.shuffle_on_rounded,
+                          text: 'SHUFFLE',
+                          boardStateRef: widget.myBoardKey,
+                        ),
+                        FunctionButton(
+                          icon: Icons.skip_next_rounded,
+                          text: 'END TURN',
+                          boardStateRef: widget.myBoardKey,
+                        ),
                       ],
                     ),
                   ),

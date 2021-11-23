@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
-import '../app_colors.dart';
 import 'board_view.dart';
 
 
