@@ -7,7 +7,7 @@ BoxDecoration myBoxDecoration() {
   return BoxDecoration(
     color: AppColors.navyBlue,
     borderRadius: BorderRadius.circular(10),
-    border: Border.all(color: AppColors.misty),
+    border: Border.all(color: AppColors.mistyWhite),
   );
 }
 
@@ -58,7 +58,7 @@ class _HandLetterState extends State<HandLetter> {
                 child: Center(
                     child: Text(widget.letterValue,
                         style: const TextStyle(
-                            color: AppColors.misty,
+                            color: AppColors.mistyWhite,
                             fontWeight: FontWeight.bold))),
               ),
             ),

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 
-class PlayerNameIcon extends StatelessWidget {
+// todo przerobic to potem na stateful PORZĄDNIE
+class PlayerInfo extends StatelessWidget {
   final String playerName;
+  final int points;
 
-  const PlayerNameIcon({
+  const PlayerInfo({
     Key? key,
     required this.playerName,
+    required this.points,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: AppColors.misty,
+        color: AppColors.mistyWhite,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -26,6 +29,19 @@ class PlayerNameIcon extends StatelessWidget {
                       color: AppColors.navyBlue,
                       fontWeight: FontWeight.bold,
                       fontSize: 20)),
+              const Center(
+                  child: Text("Points",
+                      style: TextStyle(fontWeight: FontWeight.bold))),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColors.black,
+                    elevation: 10,
+                  ),
+                  onPressed: () {},
+                  child: Text(points.toString()),
+                ),
+              ),
             ],
           ),
         ),
