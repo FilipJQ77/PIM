@@ -38,9 +38,12 @@ class _BoardViewState extends State<BoardView> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          const GameInfo(),
           Expanded(
             flex: 2,
+            child: const GameInfo(),
+          ),
+          Expanded(
+            flex: 5,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -58,6 +61,7 @@ class _BoardViewState extends State<BoardView> {
 
           // TODO WYDZIELIĆ TO JAKO WIDGET RĘKI
           Expanded(
+            flex: 1,
             child: Row(
               children: [
                 Expanded(

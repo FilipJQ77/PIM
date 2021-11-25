@@ -8,15 +8,15 @@ class GameInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          PlayerInfo(playerName: "Player 1", points: 69),
-          Timer(),
-          PlayerInfo(playerName: "Player 2", points: 69),
-        ],
-      ),
+    return Row(
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        PlayerInfo(playerName: "Player 1", points: 69),
+        Timer(),
+        PlayerInfo(playerName: "Player 2", points: 69),
+      ],
     );
   }
 }
