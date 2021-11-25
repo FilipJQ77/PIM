@@ -27,6 +27,8 @@ class _TimerState extends State<Timer> {
             child: Container(
               color: AppColors.mistyWhite,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text("Round Timer",
                       style:
