@@ -13,16 +13,18 @@ class BoardView extends StatefulWidget {
   GlobalKey<BoardState> myBoardKey = GlobalKey();
   Board board = Board();
 
-  BoardView({Key? key}) : super(key: key)
-  {
+  BoardView({Key? key}) : super(key: key) {
     // overwrite board ref with new board ref but this time with key (board state ref)
     board = Board(key: myBoardKey);
     const int numberOfLetters = 7;
     var letterBag = LetterBag();
     List<String> playerLetters = letterBag.getLettersFromBag(numberOfLetters);
     for (int i = 0; i < numberOfLetters; i++) {
-      handLetters
-          .add(HandLetter(handLetterId: i, letterValue: playerLetters[i], boardStateRef: myBoardKey,));
+      handLetters.add(HandLetter(
+        handLetterId: i,
+        letterValue: playerLetters[i],
+        boardStateRef: myBoardKey,
+      ));
     }
   }
 
@@ -31,6 +33,11 @@ class BoardView extends StatefulWidget {
 }
 
 class _BoardViewState extends State<BoardView> {
+  String playerName1 = "ERROR Player1";
+  String playerName2 = "ERROR Player2";
+
+  // _BoardViewState(this.playerName1, this.playerName2);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,12 +55,12 @@ class _BoardViewState extends State<BoardView> {
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const <Widget>[
-                          Icon(Icons.accessibility,
+                        children: <Widget>[
+                          const Icon(Icons.accessibility,
                               size: 50, color: AppColors.lightPurple),
-                          Text("Player 1",
+                          Text(playerName1,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: AppColors.navyBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20)),
@@ -72,12 +79,12 @@ class _BoardViewState extends State<BoardView> {
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const <Widget>[
-                          Icon(Icons.accessibility,
+                        children: <Widget>[
+                          const Icon(Icons.accessibility,
                               size: 50, color: AppColors.purple),
-                          Text("Player 2",
+                          Text(playerName2,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: AppColors.navyBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20)),
@@ -203,14 +210,26 @@ class _BoardViewState extends State<BoardView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FunctionButton(icon: Icons.undo_rounded, text: 'UNDO', boardStateRef: widget.myBoardKey,),
                         FunctionButton(
-                            icon: Icons.change_circle_rounded,
-                            text: 'EXCHANGE', boardStateRef: widget.myBoardKey,),
+                          icon: Icons.undo_rounded,
+                          text: 'UNDO',
+                          boardStateRef: widget.myBoardKey,
+                        ),
                         FunctionButton(
-                            icon: Icons.shuffle_on_rounded, text: 'SHUFFLE', boardStateRef: widget.myBoardKey,),
+                          icon: Icons.change_circle_rounded,
+                          text: 'EXCHANGE',
+                          boardStateRef: widget.myBoardKey,
+                        ),
                         FunctionButton(
-                            icon: Icons.skip_next_rounded, text: 'END TURN', boardStateRef: widget.myBoardKey,),
+                          icon: Icons.shuffle_on_rounded,
+                          text: 'SHUFFLE',
+                          boardStateRef: widget.myBoardKey,
+                        ),
+                        FunctionButton(
+                          icon: Icons.skip_next_rounded,
+                          text: 'END TURN',
+                          boardStateRef: widget.myBoardKey,
+                        ),
                       ],
                     ),
                   ),
