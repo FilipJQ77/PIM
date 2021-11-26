@@ -27,6 +27,8 @@ class _FunctionButtonState extends State<FunctionButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+          minimumSize: const Size(88, 50),
+          maximumSize: const Size(88, 50),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           primary: AppColors.purple,
@@ -44,7 +46,7 @@ class _FunctionButtonState extends State<FunctionButton> {
             child: Text(
               widget.text,
               style: const TextStyle(
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: FontWeight.bold,
               ),
             ),
