@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
-import '../app_colors.dart';
+import 'package:pim_word_builder/app_colors.dart';
 
-AppBar appBar(BuildContext context) {
-  return AppBar(
-      automaticallyImplyLeading: false,
-      centerTitle: true,
-      title: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          IconButton(
-            icon: Image.asset('assets/images/BabbleHome.png',
-                color: AppColors.white),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            iconSize: 120,
-          ),
-        ],
-      ));
+class BabbleAppBar extends StatelessWidget with PreferredSizeWidget {
+  const BabbleAppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PreferredSize(
+      preferredSize: preferredSize,
+      child: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: IconButton(
+          icon: Image.asset('assets/images/BabbleHome.png',
+              color: AppColors.white),
+          onPressed: () {
+            // todo chyba start popup cos zepsul bo po kliknieciu w logo jest czarny ekran
+            Navigator.of(context).pop();
+          },
+          iconSize: preferredSize.height * 2,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(50);
 }

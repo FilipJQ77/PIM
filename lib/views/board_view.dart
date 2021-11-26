@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/widgets/board.dart';
-import 'package:pim_word_builder/widgets/game_info.dart';
 import 'package:pim_word_builder/widgets/hand_letter.dart';
-import 'package:pim_word_builder/widgets/function_button.dart';
-import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/letter_bag.dart';
 
 class BoardView extends StatefulWidget {
@@ -35,88 +32,6 @@ class BoardView extends StatefulWidget {
 class _BoardViewState extends State<BoardView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: const GameInfo(),
-          ),
-          Expanded(
-            flex: 5,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Container(
-                      color: AppColors.mistyWhite,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Center(child: widget.board),
-                      )),
-                ),
-              ],
-            ),
-          ),
-
-          // TODO WYDZIELIĆ TO JAKO WIDGET RĘKI
-          Expanded(
-            flex: 1,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    color: AppColors.mistyWhite,
-                    child: Row(
-                      children: widget.handLetters,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          //TODO WYDZIELIĆ TO JAKO BUTTON ROW
-          Expanded(
-            flex: 1,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Container(
-                    color: AppColors.mistyWhite,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        FunctionButton(
-                          icon: Icons.undo_rounded,
-                          text: 'UNDO',
-                          boardStateRef: widget.myBoardKey,
-                        ),
-                        FunctionButton(
-                          icon: Icons.change_circle_rounded,
-                          text: 'EXCHANGE',
-                          boardStateRef: widget.myBoardKey,
-                        ),
-                        FunctionButton(
-                          icon: Icons.shuffle_on_rounded,
-                          text: 'SHUFFLE',
-                          boardStateRef: widget.myBoardKey,
-                        ),
-                        FunctionButton(
-                          icon: Icons.skip_next_rounded,
-                          text: 'END TURN',
-                          boardStateRef: widget.myBoardKey,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    return Container();
   }
 }
