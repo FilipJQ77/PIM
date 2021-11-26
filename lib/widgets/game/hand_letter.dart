@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/views/board_view.dart';
-import 'package:pim_word_builder/widgets/board.dart';
-import '../app_colors.dart';
+import 'package:pim_word_builder/widgets/game/board.dart';
+import '../../app_colors.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(

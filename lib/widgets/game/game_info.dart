@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/widgets/player_info.dart';
-import 'package:pim_word_builder/widgets/timer.dart';
+import 'package:pim_word_builder/widgets/game/player_info.dart';
+import 'package:pim_word_builder/widgets/game/timer.dart';
 
 // todo chyba stateful pozniej? idk tbh
 class GameInfo extends StatelessWidget {

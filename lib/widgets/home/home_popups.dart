@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/views/game_view.dart';
-import 'package:pim_word_builder/widgets/choose_color_dropdown.dart';
+import 'package:pim_word_builder/widgets/home/choose_color_dropdown.dart';
 import 'package:pim_word_builder/widgets/text_input_box.dart';
 
 class StartGamePopup extends StatelessWidget {

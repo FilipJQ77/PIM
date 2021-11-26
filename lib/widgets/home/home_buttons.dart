@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pim_word_builder/app_colors.dart';
-import 'package:pim_word_builder/widgets/home_popups.dart';
+import 'package:pim_word_builder/widgets/home/home_popups.dart';
 import 'dart:io' as io;
 
 var _homeButtonStyle = ElevatedButton.styleFrom(

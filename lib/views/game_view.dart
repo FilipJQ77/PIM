@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
-import 'package:pim_word_builder/widgets/game_button_row.dart';
-import 'package:pim_word_builder/widgets/game_info.dart';
+import 'package:pim_word_builder/widgets/game/game_button_row.dart';
+import 'package:pim_word_builder/widgets/game/game_hand.dart';
+import 'package:pim_word_builder/widgets/game/game_info.dart';
 
 class GameView extends StatelessWidget {
   const GameView({Key? key}) : super(key: key);
+
+  void undo() {
+    print("Undo");
+  }
+
+  void exchange() {
+    print("Exchange");
+  }
+
+  void shuffle() {
+    print("Shuffle");
+  }
+
+  void endTurn() {
+    print("End Turn");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +33,6 @@ class GameView extends StatelessWidget {
           body: Column(
             children: <Widget>[
               const GameInfo(),
-
               Expanded(
                 flex: 5,
                 child: Row(
@@ -33,33 +49,12 @@ class GameView extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // TODO WYDZIELIĆ TO JAKO WIDGET RĘKI
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        color: AppColors.mistyWhite,
-                        child: Row(
-                            // children: widget.handLetters,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              FunctionButtonRow(undoFunction: () {
-                print("Undo");
-              }, exchangeFunction: () {
-                print("Exchange");
-              }, shuffleFunction: () {
-                print("Shuffle");
-              }, endTurnFunction: () {
-                print("End Turn");
-              }),
+              const GameHand(),
+              FunctionButtonRow(
+                  undoFunction: undo,
+                  exchangeFunction: exchange,
+                  shuffleFunction: shuffle,
+                  endTurnFunction: endTurn),
             ],
           )),
     );

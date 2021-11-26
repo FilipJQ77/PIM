@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/widgets/game_button.dart';
+import 'package:pim_word_builder/widgets/game/game_button.dart';
 
 class FunctionButtonRow extends StatelessWidget {
   final Function undoFunction;

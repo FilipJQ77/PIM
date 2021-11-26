@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
-import 'package:pim_word_builder/widgets/home_buttons.dart';
+import 'package:pim_word_builder/widgets/home/home_buttons.dart';
 
 const homeContainerDecoration = BoxDecoration(
     image: DecorationImage(

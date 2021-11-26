@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/widgets/board.dart';
-import 'package:pim_word_builder/widgets/hand_letter.dart';
+import 'package:pim_word_builder/widgets/game/board.dart';
+import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 import 'package:pim_word_builder/letter_bag.dart';
 
 class BoardView extends StatefulWidget {
