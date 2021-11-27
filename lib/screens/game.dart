@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/letter_bag.dart';
 import 'package:pim_word_builder/player.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
 import 'package:pim_word_builder/widgets/game/board.dart';
@@ -7,6 +8,7 @@ import 'package:pim_word_builder/widgets/game/board_tile.dart';
 import 'package:pim_word_builder/widgets/game/game_button_row.dart';
 import 'package:pim_word_builder/widgets/game/game_hand.dart';
 import 'package:pim_word_builder/widgets/game/game_info.dart';
+import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 
 const int numberOfPlayers = 2;
 const int boardSize = 15;
@@ -20,15 +22,25 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   late List<Player> players;
-  late List<List<BoardTile>> boardTiles;
+  late LetterBag letterBag;
+  late List<List<HandLetter>> playerLetters; // list of letters for every player
+  late List<List<BoardTile>> boardTiles; // n x n list of tiles
 
   @override
   initState() {
     super.initState();
 
     players = [];
+    letterBag = LetterBag();
+    playerLetters = [];
+
     for (var i = 0; i < numberOfPlayers; i++) {
-      players.add(Player("Player $i", Colors.deepPurple));
+      players.add(Player("Player ${i + 1}", Colors.deepPurple));
+
+      playerLetters.add([]);
+      playerLetters[i].addAll(letterBag.drawHand().map((letter) => HandLetter(
+            letter: letter,
+          )));
     }
 
     boardTiles = [];
@@ -64,9 +76,9 @@ class _GameState extends State<Game> {
           appBar: const BabbleAppBar(),
           body: Column(
             children: <Widget>[
-              const GameInfo(),
+              GameInfo(players: players),
               Board(boardTiles: boardTiles),
-              const GameHand(),
+              GameHand(playerLetters: playerLetters[0]),
               FunctionButtonRow(
                   undoFunction: undo,
                   exchangeFunction: exchange,

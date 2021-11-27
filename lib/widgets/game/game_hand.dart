@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 
 class GameHand extends StatelessWidget {
+  final List<HandLetter> playerLetters;
+
   const GameHand({
     Key? key,
+    required this.playerLetters,
   }) : super(key: key);
 
   @override
@@ -16,8 +20,7 @@ class GameHand extends StatelessWidget {
             child: Container(
               color: AppColors.mistyWhite,
               child: Row(
-                // todo
-                // children: widget.handLetters,
+                children: playerLetters,
               ),
             ),
           ),

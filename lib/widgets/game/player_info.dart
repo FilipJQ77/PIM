@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/player.dart';
 
-// todo przerobic to potem na stateful PORZĄDNIE
+// todo przerobic to potem na stateful (?)
 class PlayerInfo extends StatelessWidget {
-  final String playerName;
-  final int points;
+  final Player player;
 
-  const PlayerInfo({
-    Key? key,
-    required this.playerName,
-    required this.points,
-  }) : super(key: key);
+  const PlayerInfo({Key? key, required this.player}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +19,7 @@ class PlayerInfo extends StatelessWidget {
             children: <Widget>[
               const Icon(Icons.accessibility,
                   size: 50, color: AppColors.purple),
-              Text(playerName,
+              Text(player.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       color: AppColors.navyBlue,
@@ -39,7 +35,7 @@ class PlayerInfo extends StatelessWidget {
                     elevation: 10,
                   ),
                   onPressed: () {},
-                  child: Text(points.toString()),
+                  child: Text(player.points.toString()),
                 ),
               ),
             ],

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pim_word_builder/player.dart';
 import 'package:pim_word_builder/widgets/game/player_info.dart';
 import 'package:pim_word_builder/widgets/game/timer.dart';
 
-// todo chyba stateful pozniej? idk tbh
 class GameInfo extends StatelessWidget {
-  const GameInfo({Key? key}) : super(key: key);
+  final List<Player> players;
+
+  const GameInfo({Key? key, required this.players}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +14,10 @@ class GameInfo extends StatelessWidget {
       flex: 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          PlayerInfo(playerName: "Player 1", points: 69),
-          Timer(),
-          PlayerInfo(playerName: "Player 2", points: 69),
+        children: [
+          PlayerInfo(player: players[0]), // todo better in the future
+          const Timer(),
+          PlayerInfo(player: players[1]),
         ],
       ),
     );
