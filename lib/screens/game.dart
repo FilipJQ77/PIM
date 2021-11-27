@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/player.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
 import 'package:pim_word_builder/widgets/game/board.dart';
+import 'package:pim_word_builder/widgets/game/board_tile.dart';
 import 'package:pim_word_builder/widgets/game/game_button_row.dart';
 import 'package:pim_word_builder/widgets/game/game_hand.dart';
 import 'package:pim_word_builder/widgets/game/game_info.dart';
+
+const int numberOfPlayers = 2;
+const int boardSize = 15;
 
 class Game extends StatefulWidget {
   const Game({Key? key}) : super(key: key);
@@ -14,6 +19,27 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
+  late List<Player> players;
+  late List<List<BoardTile>> boardTiles;
+
+  @override
+  initState() {
+    super.initState();
+
+    players = [];
+    for (var i = 0; i < numberOfPlayers; i++) {
+      players.add(Player("Player $i", Colors.deepPurple));
+    }
+
+    boardTiles = [];
+    for (var i = 0; i < boardSize; i++) {
+      boardTiles.add([]);
+      for (var j = 0; j < boardSize; j++) {
+        boardTiles[i].add(BoardTile(x: i, y: j));
+      }
+    }
+  }
+
   void undo() {
     print("Undo");
   }
@@ -39,7 +65,7 @@ class _GameState extends State<Game> {
           body: Column(
             children: <Widget>[
               const GameInfo(),
-              Board(),
+              Board(boardTiles: boardTiles),
               const GameHand(),
               FunctionButtonRow(
                   undoFunction: undo,

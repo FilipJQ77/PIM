@@ -140,11 +140,16 @@ class RulesPopup extends StatelessWidget {
                       text: 'Word points are tripled.\n\n',
                     ),
                     TextSpan(
-                        text: "Pink Tiles: ",
+                        text: "Pink Tiles",
                         style: TextStyle(color: AppColors.pink)),
                     TextSpan(
+                        text: " and "),
+                    TextSpan(
+                        text: "Gold Tile: ",
+                        style: TextStyle(color: AppColors.gold)),
+                    TextSpan(
                       text:
-                      "Word points are doubled, including the star on the center.\n\n",
+                      "Word points are doubled.\n\n",
                     ),
                     TextSpan(
                         text: "Dark Blue Tiles: ",

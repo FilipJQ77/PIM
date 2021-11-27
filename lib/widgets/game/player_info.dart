@@ -22,7 +22,7 @@ class PlayerInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               const Icon(Icons.accessibility,
-                  size: 50, color: AppColors.lightPurple),
+                  size: 50, color: AppColors.purple),
               Text(playerName,
                   textAlign: TextAlign.center,
                   style: const TextStyle(

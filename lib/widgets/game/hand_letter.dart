@@ -10,14 +10,18 @@ BoxDecoration myBoxDecoration() {
   );
 }
 
-
 class HandLetter extends StatefulWidget {
   String letterValue = "";
   final int handLetterId;
-  final GlobalKey<BoardState> boardStateRef;
 
-  HandLetter({Key? key, required this.handLetterId, required this.letterValue, required this.boardStateRef})
-      : super(key: key);
+  // final GlobalKey<BoardddState> boardStateRef;
+
+  HandLetter({
+    Key? key,
+    required this.handLetterId,
+    required this.letterValue,
+    // required this.boardStateRef
+  }) : super(key: key);
 
   @override
   _HandLetterState createState() => _HandLetterState();
@@ -45,7 +49,8 @@ class _HandLetterState extends State<HandLetter> {
         children: [
           TextButton(
             onPressed: () {
-              widget.boardStateRef.currentState!.setLastClickedLetter(widget.letterValue);
+              // widget.boardStateRef.currentState!
+              //     .setLastClickedLetter(widget.letterValue);
               print(widget.letterValue);
               print(widget.handLetterId);
             },
