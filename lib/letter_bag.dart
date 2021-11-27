@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'package:pim_word_builder/utils.dart';
 
 class LetterBag {
   /*
@@ -16,7 +16,6 @@ class LetterBag {
 
     - Each player draws seven letters
   */
-  final _random = Random();
   List<String> letters = [];
 
   LetterBag() {
@@ -114,25 +113,20 @@ class LetterBag {
     return letters.length;
   }
 
-  /*
-     Generates a random integer uniformly distributed
-     from [min], inclusive, to [max], exclusive.
-    */
-  int randomInt(int min, int max) => min + _random.nextInt(max - min);
-
   List<String> getLettersFromBag(int numberOfLetters) {
     if (numberOfLetters > getBagSize()) {
       throw Exception("The letter bag does not have enough tiles");
     }
+
     List<String> drawnLetters = [];
     for (var i = 0; i < numberOfLetters; i++) {
-      drawnLetters.add(letters.removeAt(randomInt(0, getBagSize())));
+      drawnLetters.add(letters.removeAt(Utils.randomInt(0, getBagSize())));
     }
 
     return drawnLetters;
   }
 
-  Iterable<String> drawHand() {
+  List<String> drawHand() {
     return getLettersFromBag(7);
   }
 

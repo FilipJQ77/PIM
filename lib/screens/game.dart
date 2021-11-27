@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
+import 'package:pim_word_builder/widgets/game/board.dart';
 import 'package:pim_word_builder/widgets/game/game_button_row.dart';
 import 'package:pim_word_builder/widgets/game/game_hand.dart';
 import 'package:pim_word_builder/widgets/game/game_info.dart';
 
-class GameView extends StatelessWidget {
-  const GameView({Key? key}) : super(key: key);
+class Game extends StatefulWidget {
+  const Game({Key? key}) : super(key: key);
 
+  @override
+  State<Game> createState() => _GameState();
+}
+
+class _GameState extends State<Game> {
   void undo() {
     print("Undo");
   }
@@ -33,22 +39,7 @@ class GameView extends StatelessWidget {
           body: Column(
             children: <Widget>[
               const GameInfo(),
-              Expanded(
-                flex: 5,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: Container(
-                          color: AppColors.mistyWhite,
-                          child: const Padding(
-                            padding: EdgeInsets.all(10.0),
-                            // child: Center(child: widget.board),
-                          )),
-                    ),
-                  ],
-                ),
-              ),
+              Board(),
               const GameHand(),
               FunctionButtonRow(
                   undoFunction: undo,
