@@ -30,17 +30,9 @@ class Board extends StatelessWidget {
                   children: [
                     for (var i = 0; i < boardSize; i++)
                       Expanded(
-                        flex: 1,
                         child: Row(
                           children: [
-                            for (var j = 0; j < boardSize; j++)
-                              Expanded(
-                                  child: GestureDetector(
-                                onTap: () {
-                                  print("Clicked on tile $i $j");
-                                },
-                                child: boardTiles[i][j],
-                              ))
+                            for (var j = 0; j < boardSize; j++) boardTiles[i][j]
                           ],
                         ),
                       ),

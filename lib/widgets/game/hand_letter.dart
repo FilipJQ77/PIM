@@ -3,8 +3,9 @@ import 'package:pim_word_builder/app_colors.dart';
 
 class HandLetter extends StatelessWidget {
   final String letter;
+  final Function(HandLetter thisLetter) function;
 
-  const HandLetter({Key? key, required this.letter}) : super(key: key);
+  const HandLetter({Key? key, required this.letter, required this.function}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,8 @@ class HandLetter extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              // todo
               print(letter);
+              function(this);
             },
             child: Container(
               padding: const EdgeInsets.all(10),

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 
-class BoardTile extends StatefulWidget {
+class BoardTile extends StatelessWidget {
   final int x;
   final int y;
+  final String letter;
+  final bool isTaken;
+  final Color tileColor;
+  final Function(int x, int y) function;
 
-  const BoardTile({Key? key, required this.x, required this.y})
+  const BoardTile(
+      {Key? key,
+      required this.x,
+      required this.y,
+      required this.letter,
+      required this.isTaken,
+      required this.tileColor,
+      required this.function})
       : super(key: key);
-
-  @override
-  _BoardTileState createState() => _BoardTileState();
 
   static Color getTileColor(int x, int y) {
     Color colour = AppColors.green;
@@ -35,41 +43,24 @@ class BoardTile extends StatefulWidget {
     }
     return colour;
   }
-}
-
-class _BoardTileState extends State<BoardTile> {
-  late String letter;
-  late bool isTaken;
-  late Color tileColor;
-
-  @override
-  void initState() {
-    super.initState();
-    letter = "";
-    isTaken = false;
-    tileColor = BoardTile.getTileColor(widget.x, widget.y);
-  }
-
-  void placeLetterOnTile(String letter) {
-    setState(() {
-      if (!isTaken) {
-        this.letter = letter;
-        isTaken = true;
-        tileColor = AppColors.cream;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: tileColor, border: Border.all(color: AppColors.black)),
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Center(
-            child: Text(letter,
-                style: const TextStyle(fontWeight: FontWeight.bold))),
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          function(x, y);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: tileColor, border: Border.all(color: AppColors.black)),
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Center(
+                child: Text(letter,
+                    style: const TextStyle(fontWeight: FontWeight.bold))),
+          ),
+        ),
       ),
     );
   }
