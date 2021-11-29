@@ -11,6 +11,7 @@ import 'package:pim_word_builder/widgets/game/game_info.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 
 const int numberOfPlayers = 2;
+const int handSize = 7;
 const int boardSize = 15;
 
 class Game extends StatefulWidget {
@@ -43,10 +44,11 @@ class _GameState extends State<Game> {
       players.add(Player("Player ${i + 1}", Colors.deepPurple));
 
       playerLetters.add([]);
-      playerLetters[i].addAll(letterBag.drawHand().map((letter) => HandLetter(
-            letter: letter,
-            function: newCurrentLetter,
-          )));
+      playerLetters[i].addAll(
+          letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
+                letter: letter,
+                function: newCurrentLetter,
+              )));
     }
 
     currentPlayerIndex = 0;
@@ -82,6 +84,11 @@ class _GameState extends State<Game> {
   void endTurn() {
     print("End Turn");
     setState(() {
+      currentLetters.addAll(letterBag
+          .getLettersFromBag(handSize - currentLetters.length)
+          .map((letter) =>
+              HandLetter(letter: letter, function: newCurrentLetter)));
+
       //todo improve
       currentPlayerIndex++;
       currentPlayerIndex %= numberOfPlayers;

@@ -126,10 +126,6 @@ class LetterBag {
     return drawnLetters;
   }
 
-  List<String> drawHand() {
-    return getLettersFromBag(7);
-  }
-
   void addLettersToBag(Iterable<String> lettersToAdd) {
     letters.addAll(lettersToAdd);
   }
