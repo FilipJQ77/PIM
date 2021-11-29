@@ -22,9 +22,13 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   late List<Player> players;
-  late LetterBag letterBag;
   late List<List<HandLetter>> playerLetters; // list of letters for every player
+
+  late List<HandLetter> currentLetters;
+  late int currentPlayerIndex = 0;
+
   late List<List<BoardTile>> boardTiles; // n x n list of tiles
+  late LetterBag letterBag;
 
   @override
   initState() {
@@ -42,6 +46,8 @@ class _GameState extends State<Game> {
             letter: letter,
           )));
     }
+
+    currentLetters = playerLetters[0];
 
     boardTiles = [];
     for (var i = 0; i < boardSize; i++) {
@@ -66,6 +72,12 @@ class _GameState extends State<Game> {
 
   void endTurn() {
     print("End Turn");
+    setState(() {
+      currentPlayerIndex++;
+      currentPlayerIndex %= numberOfPlayers;
+      print(currentPlayerIndex);
+      currentLetters = playerLetters[currentPlayerIndex];
+    });
   }
 
   @override
@@ -78,7 +90,7 @@ class _GameState extends State<Game> {
             children: <Widget>[
               GameInfo(players: players),
               Board(boardTiles: boardTiles),
-              GameHand(playerLetters: playerLetters[0]),
+              GameHand(playerLetters: currentLetters),
               FunctionButtonRow(
                   undoFunction: undo,
                   exchangeFunction: exchange,
