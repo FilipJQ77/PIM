@@ -75,6 +75,7 @@ class _GameState extends State<Game> {
   }
 
   void undo() {
+    if (playerMovesThisTurn.isEmpty) return;
     var lastMove = playerMovesThisTurn.removeLast();
     var x = lastMove.a;
     var y = lastMove.b;
