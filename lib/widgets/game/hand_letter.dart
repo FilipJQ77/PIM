@@ -5,7 +5,8 @@ class HandLetter extends StatelessWidget {
   final String letter;
   final Function(HandLetter thisLetter) function;
 
-  const HandLetter({Key? key, required this.letter, required this.function}) : super(key: key);
+  const HandLetter({Key? key, required this.letter, required this.function})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

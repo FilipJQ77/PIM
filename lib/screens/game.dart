@@ -110,6 +110,8 @@ class _GameState extends State<Game> {
           .map((letter) =>
               HandLetter(letter: letter, function: newCurrentLetter)));
 
+      // players[currentPlayerIndex].points += 10; // this works already btw
+
       //todo improve
       currentPlayerIndex++;
       currentPlayerIndex %= numberOfPlayers;
@@ -158,7 +160,7 @@ class _GameState extends State<Game> {
           appBar: const BabbleAppBar(),
           body: Column(
             children: <Widget>[
-              GameInfo(players: players),
+              GameInfo(players: players, endTurnFunction: endTurn),
               Board(boardTiles: boardTiles),
               GameHand(playerLetters: currentLetters),
               FunctionButtonRow(

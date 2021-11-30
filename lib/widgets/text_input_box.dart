@@ -16,8 +16,8 @@ class TextInputBox extends StatelessWidget {
         maxLength: 10,
         controller: TextEditingController(),
         textInputAction: TextInputAction.go,
-        decoration:
-        InputDecoration(border: const OutlineInputBorder(), hintText: hintText),
+        decoration: InputDecoration(
+            border: const OutlineInputBorder(), hintText: hintText),
       ),
     );
   }

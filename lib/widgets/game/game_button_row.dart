@@ -22,10 +22,10 @@ class FunctionButtonRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          UndoButton(function: undoFunction),
-          ExchangeButton(function: exchangeFunction),
-          ShuffleButton(function: shuffleFunction),
-          EndTurnButton(function: endTurnFunction)
+          UndoButton(undoFunction: undoFunction),
+          ExchangeButton(exchangeFunction: exchangeFunction),
+          ShuffleButton(shuffleFunction: shuffleFunction),
+          EndTurnButton(endTurnFunction: endTurnFunction)
         ],
       ),
     );

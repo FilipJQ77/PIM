@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 
 class Timer extends StatefulWidget {
-  const Timer({Key? key}) : super(key: key);
+  final Function endTurnFunction;
+
+  const Timer({Key? key, required this.endTurnFunction}) : super(key: key);
 
   @override
   State<Timer> createState() => _TimerState();
@@ -15,9 +17,12 @@ class _TimerState extends State<Timer> {
         duration: const Duration(minutes: 3),
         tween: Tween(begin: const Duration(minutes: 4), end: Duration.zero),
         onEnd: () {
-          print('Timer ended'); // todo jakieś kończenie tury
+          print('Timer ended');
+          widget.endTurnFunction();
+          // todo restart timera
         },
         builder: (BuildContext context, Duration value, Widget? child) {
+          // todo clean this code up,
           final minutes = value.inMinutes;
           String seconds = (value.inSeconds % 60).toString();
           if (seconds.length == 1) {
