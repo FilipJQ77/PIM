@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/screens/home.dart';
 
 class BabbleAppBar extends StatelessWidget with PreferredSizeWidget {
   const BabbleAppBar({Key? key}) : super(key: key);
@@ -17,6 +18,11 @@ class BabbleAppBar extends StatelessWidget with PreferredSizeWidget {
           onPressed: () {
             // todo chyba start popup cos zepsul bo po kliknieciu w logo jest czarny ekran
             Navigator.of(context).pop();
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Home()),
+            );
           },
           iconSize: preferredSize.height * 2,
         ),
