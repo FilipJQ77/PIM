@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/letter_bag.dart';
+import 'package:pim_word_builder/pair.dart';
 import 'package:pim_word_builder/player.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
 import 'package:pim_word_builder/widgets/game/board.dart';
@@ -32,6 +33,8 @@ class _GameState extends State<Game> {
   late List<List<BoardTile>> boardTiles; // n x n list of tiles
   late LetterBag letterBag;
 
+  late List<Pair<int, int>> playerMovesThisTurn;
+
   @override
   initState() {
     super.initState();
@@ -54,6 +57,8 @@ class _GameState extends State<Game> {
     currentPlayerIndex = 0;
     currentLetters = playerLetters[currentPlayerIndex];
 
+    playerMovesThisTurn = [];
+
     boardTiles = [];
     for (var i = 0; i < boardSize; i++) {
       boardTiles.add([]);
@@ -70,7 +75,22 @@ class _GameState extends State<Game> {
   }
 
   void undo() {
-    print("Undo");
+    var lastMove = playerMovesThisTurn.removeLast();
+    var x = lastMove.a;
+    var y = lastMove.b;
+    var letter = boardTiles[x][y].letter;
+    setState(() {
+      boardTiles[x][y] = BoardTile(
+          x: x,
+          y: y,
+          letter: "",
+          isTaken: false,
+          tileColor: BoardTile.getTileColor(x, y),
+          function: placeLetterOnBoard);
+
+      currentLetters
+          .add(HandLetter(letter: letter, function: newCurrentLetter));
+    });
   }
 
   void exchange() {
@@ -92,6 +112,9 @@ class _GameState extends State<Game> {
       //todo improve
       currentPlayerIndex++;
       currentPlayerIndex %= numberOfPlayers;
+
+      playerMovesThisTurn.clear();
+
       print(currentPlayerIndex);
       currentLetters = playerLetters[currentPlayerIndex];
     });
@@ -108,8 +131,13 @@ class _GameState extends State<Game> {
             isTaken: true,
             tileColor: AppColors.cream,
             function: placeLetterOnBoard);
+
         print(boardTiles[x][y].letter);
         currentLetters.remove(currentLetter);
+
+        playerMovesThisTurn.add(Pair(x, y));
+
+        currentLetter = null;
       });
     }
   }
