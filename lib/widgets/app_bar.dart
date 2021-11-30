@@ -16,7 +16,6 @@ class BabbleAppBar extends StatelessWidget with PreferredSizeWidget {
           icon: Image.asset('assets/images/BabbleHome.png',
               color: AppColors.white),
           onPressed: () {
-            // todo chyba start popup cos zepsul bo po kliknieciu w logo jest czarny ekran
             Navigator.of(context).pop();
 
             Navigator.push(

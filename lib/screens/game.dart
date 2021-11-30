@@ -122,7 +122,7 @@ class _GameState extends State<Game> {
   }
 
   void placeLetterOnBoard(int x, int y) {
-    if (currentLetter != null) {
+    if (currentLetter != null && !boardTiles[x][y].isTaken) {
       print("Placing ${currentLetter!.letter} on tile $x $y");
       setState(() {
         boardTiles[x][y] = BoardTile(
