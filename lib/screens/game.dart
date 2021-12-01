@@ -95,27 +95,33 @@ class _GameState extends State<Game> {
   }
 
   void exchange() {
-
+    // exchange one piece
     print("Exchange");
+
   }
 
   void shuffle() {
     // exchange whole hand
-    // TODO add restriction
-    // TODO (e.g. you may shuffle once per game or shuffle ends turn)
-    // TODO you cant shuffle after start
-    // TODO add old letters to bag
+    if (currentLetters.length !=  handSize) {
+        print("You can't shuffle. Remove your tiles from board!");
+        return;
+    }
     print("Shuffle");
     setState(() {
-      playerLetters[currentPlayerIndex].clear();
+      List<HandLetter> tempLetters = playerLetters[currentPlayerIndex]; //remember current hand
+      playerLetters[currentPlayerIndex].clear();  // clear current hand
+      // draw new letters
       playerLetters[currentPlayerIndex].addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
             letter: letter,
             function: newCurrentLetter,
           )));
-
-      currentLetters = playerLetters[currentPlayerIndex];
+      // add old letters to the bag
+      letterBag.addLettersToBag(
+          tempLetters.map((handLetter) => handLetter.letter));
+      currentLetters = playerLetters[currentPlayerIndex]; // switch current letters (new hand)
     });
+    endTurn(); // end turn
   }
 
   void endTurn() {
