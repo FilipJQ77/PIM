@@ -20,6 +20,7 @@ class GameHand extends StatelessWidget {
             child: Container(
               color: AppColors.mistyWhite,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: playerLetters,
               ),
             ),

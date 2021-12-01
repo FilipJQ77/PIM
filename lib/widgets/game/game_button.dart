@@ -13,13 +13,13 @@ var _gameButtonStyle = ElevatedButton.styleFrom(
 class _GameButton extends StatelessWidget {
   final String text;
   final IconData icon;
-  final Function function;
+  final Function onPressed;
 
   const _GameButton(
       {Key? key,
       required this.text,
       required this.icon,
-      required this.function})
+      required this.onPressed})
       : super(key: key);
 
   @override
@@ -46,58 +46,65 @@ class _GameButton extends StatelessWidget {
         ],
       ),
       onPressed: () {
-        function();
+        onPressed();
       },
     );
   }
 }
 
 class UndoButton extends StatelessWidget {
-  final Function function;
+  final Function undoFunction;
 
-  const UndoButton({Key? key, required this.function}) : super(key: key);
+  const UndoButton({Key? key, required this.undoFunction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _GameButton(
-        text: "UNDO", icon: Icons.undo_rounded, function: function);
+        text: "UNDO", icon: Icons.undo_rounded, onPressed: undoFunction);
   }
 }
 
 class ExchangeButton extends StatelessWidget {
-  final Function function;
+  final Function exchangeFunction;
 
-  const ExchangeButton({Key? key, required this.function}) : super(key: key);
+  const ExchangeButton({Key? key, required this.exchangeFunction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _GameButton(
         text: "EXCHANGE",
         icon: Icons.change_circle_rounded,
-        function: function);
+        onPressed: exchangeFunction);
   }
 }
 
 class ShuffleButton extends StatelessWidget {
-  final Function function;
+  final Function shuffleFunction;
 
-  const ShuffleButton({Key? key, required this.function}) : super(key: key);
+  const ShuffleButton({Key? key, required this.shuffleFunction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _GameButton(
-        text: "SHUFFLE", icon: Icons.shuffle_on_rounded, function: function);
+        text: "SHUFFLE",
+        icon: Icons.shuffle_on_rounded,
+        onPressed: shuffleFunction);
   }
 }
 
 class EndTurnButton extends StatelessWidget {
-  final Function function;
+  final Function endTurnFunction;
 
-  const EndTurnButton({Key? key, required this.function}) : super(key: key);
+  const EndTurnButton({Key? key, required this.endTurnFunction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _GameButton(
-        icon: Icons.skip_next_rounded, text: 'END TURN', function: function);
+        icon: Icons.skip_next_rounded,
+        text: 'END TURN',
+        onPressed: endTurnFunction);
   }
 }
