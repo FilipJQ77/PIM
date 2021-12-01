@@ -113,6 +113,9 @@ class _GameState extends State<Game> {
       letterBag.addLettersToBag([choosenLetter.letter]);
       currentLetters = playerLetters[currentPlayerIndex]; // switch current letters (new hand)
     });
+
+    // after exchanging set current letter for null as it was exchanged
+    currentLetter = null;
     endTurn(); // end turn
   }
 
