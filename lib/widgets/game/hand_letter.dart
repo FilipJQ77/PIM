@@ -13,26 +13,29 @@ class HandLetter extends StatelessWidget {
     return Expanded(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          TextButton(
-            onPressed: () {
-              print(letter);
-              function(this);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: AppColors.navyBlue,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.mistyWhite),
-              ),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Center(
-                    child: Text(letter,
-                        style: const TextStyle(
-                            color: AppColors.mistyWhite,
-                            fontWeight: FontWeight.bold))),
+        children: <Widget>[
+          SizedBox(
+            height: 60,
+            child: TextButton(
+              onPressed: () {
+                print(letter);
+                function(this);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.navyBlue,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.mistyWhite),
+                ),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Center(
+                      child: Text(letter,
+                          style: const TextStyle(
+                              color: AppColors.mistyWhite,
+                              fontWeight: FontWeight.bold))),
+                ),
               ),
             ),
           ),
