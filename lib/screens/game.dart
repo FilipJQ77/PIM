@@ -95,11 +95,24 @@ class _GameState extends State<Game> {
   }
 
   void exchange() {
+
     print("Exchange");
   }
 
   void shuffle() {
+    // exchange whole hand
+    // TODO add restriction (e.g. you may shuffle once per game)
     print("Shuffle");
+    setState(() {
+      playerLetters[currentPlayerIndex].clear();
+      playerLetters[currentPlayerIndex].addAll(
+          letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
+            letter: letter,
+            function: newCurrentLetter,
+          )));
+
+      currentLetters = playerLetters[currentPlayerIndex];
+    });
   }
 
   void endTurn() {
