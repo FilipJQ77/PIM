@@ -101,7 +101,10 @@ class _GameState extends State<Game> {
 
   void shuffle() {
     // exchange whole hand
-    // TODO add restriction (e.g. you may shuffle once per game)
+    // TODO add restriction
+    // TODO (e.g. you may shuffle once per game or shuffle ends turn)
+    // TODO you cant shuffle after start
+    // TODO add old letters to bag
     print("Shuffle");
     setState(() {
       playerLetters[currentPlayerIndex].clear();
