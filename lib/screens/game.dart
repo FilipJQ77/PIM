@@ -10,6 +10,7 @@ import 'package:pim_word_builder/widgets/game/game_button_row.dart';
 import 'package:pim_word_builder/widgets/game/game_hand.dart';
 import 'package:pim_word_builder/widgets/game/game_info.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
+import 'package:pim_word_builder/widgets/game/game_popups.dart';
 
 const int numberOfPlayers = 2;
 const int handSize = 7;
@@ -29,6 +30,7 @@ class _GameState extends State<Game> {
   late List<HandLetter> currentLetters;
   HandLetter? currentLetter;
   late int currentPlayerIndex;
+  late bool isExchanging;
 
   late List<List<BoardTile>> boardTiles; // n x n list of tiles
   late LetterBag letterBag;
@@ -42,6 +44,7 @@ class _GameState extends State<Game> {
     players = [];
     letterBag = LetterBag();
     playerLetters = [];
+    isExchanging = false;
 
     for (var i = 0; i < numberOfPlayers; i++) {
       players.add(Player("Player ${i + 1}", Colors.deepPurple));
@@ -94,9 +97,40 @@ class _GameState extends State<Game> {
     });
   }
 
+  void exchangeChoosenLetter() {
+    if(currentLetter == null) {
+      print("Exchange will not happen as no letter was selected");
+      return;
+    }
+    HandLetter choosenLetter = currentLetter!;
+    setState(() {
+      playerLetters[currentPlayerIndex].remove(choosenLetter);  // clear choosen letter
+      // draw new letter
+      playerLetters[currentPlayerIndex].add(
+          HandLetter(
+            letter: letterBag.getLettersFromBag(1)[0],
+            function: newCurrentLetter,
+          ));
+      // add old letter to the bag
+      letterBag.addLettersToBag([choosenLetter.letter]);
+      currentLetters = playerLetters[currentPlayerIndex]; // switch current letters (new hand)
+    });
+    endTurn(); // end turn
+  }
+
   void exchange() {
     // exchange one piece
+    if (currentLetters.length !=  handSize) {
+      print("You can't exchange. Remove your tiles from board!");
+      return;
+    }
     print("Exchange");
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ExchangePopUp(
+        playerLetters: currentLetters, function: exchangeChoosenLetter),
+    );
 
   }
 
