@@ -18,7 +18,6 @@ class FunctionButtonRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
