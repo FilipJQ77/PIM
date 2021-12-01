@@ -30,7 +30,6 @@ class _GameState extends State<Game> {
   late List<HandLetter> currentLetters;
   HandLetter? currentLetter;
   late int currentPlayerIndex;
-  late bool isExchanging;
 
   late List<List<BoardTile>> boardTiles; // n x n list of tiles
   late LetterBag letterBag;
@@ -44,7 +43,6 @@ class _GameState extends State<Game> {
     players = [];
     letterBag = LetterBag();
     playerLetters = [];
-    isExchanging = false;
 
     for (var i = 0; i < numberOfPlayers; i++) {
       players.add(Player("Player ${i + 1}", Colors.deepPurple));
