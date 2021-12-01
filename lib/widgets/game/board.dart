@@ -10,37 +10,34 @@ class Board extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 5,
-      child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.navyBlue,
-                width: 2,
-              ),
+    return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.navyBlue,
+              width: 2,
             ),
-            child: InteractiveViewer(
-              minScale: 1,
-              maxScale: 4,
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Column(
-                  children: [
-                    for (var i = 0; i < boardSize; i++)
-                      Expanded(
-                        child: Row(
-                          children: [
-                            for (var j = 0; j < boardSize; j++) boardTiles[i][j]
-                          ],
-                        ),
+          ),
+          child: InteractiveViewer(
+            minScale: 1,
+            maxScale: 4,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Column(
+                children: [
+                  for (var i = 0; i < boardSize; i++)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          for (var j = 0; j < boardSize; j++) boardTiles[i][j]
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
