@@ -3,10 +3,14 @@ import 'package:pim_word_builder/classes/app_colors.dart';
 
 class HandLetter extends StatelessWidget {
   final String letter;
+  final bool active;
   final Function(HandLetter thisLetter) newCurrentLetter;
 
   const HandLetter(
-      {Key? key, required this.letter, required this.newCurrentLetter})
+      {Key? key,
+      required this.letter,
+      required this.newCurrentLetter,
+      required this.active})
       : super(key: key);
 
   @override
@@ -24,7 +28,7 @@ class HandLetter extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.navyBlue,
+              color: active ? AppColors.purple : AppColors.navyBlue,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.mistyWhite),
             ),

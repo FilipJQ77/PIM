@@ -26,10 +26,10 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   late List<Player> players;
   late List<List<HandLetter>> playerLetters; // list of letters for every player
+  late int currentPlayerIndex;
 
   late List<HandLetter> currentLetters;
   HandLetter? currentLetter;
-  late int currentPlayerIndex;
 
   late List<List<BoardTile>> boardTiles; // n x n list of tiles
   late LetterBag letterBag;
@@ -52,6 +52,7 @@ class _GameState extends State<Game> {
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
                 letter: letter,
                 newCurrentLetter: newCurrentLetter,
+                active: false,
               )));
     }
 
@@ -90,8 +91,11 @@ class _GameState extends State<Game> {
           tileColor: BoardTile.getTileColor(x, y),
           function: placeLetterOnBoard);
 
-      currentLetters
-          .add(HandLetter(letter: letter, newCurrentLetter: newCurrentLetter));
+      currentLetters.add(HandLetter(
+        letter: letter,
+        newCurrentLetter: newCurrentLetter,
+        active: false,
+      ));
     });
   }
 
@@ -109,8 +113,12 @@ class _GameState extends State<Game> {
       currentLetters.remove(chosenLetter);
 
       // draw new letter
-      currentLetters.addAll(letterBag.getLettersFromBag(1).map((letter) =>
-          HandLetter(letter: letter, newCurrentLetter: newCurrentLetter)));
+      currentLetters
+          .addAll(letterBag.getLettersFromBag(1).map((letter) => HandLetter(
+                letter: letter,
+                newCurrentLetter: newCurrentLetter,
+                active: false,
+              )));
 
       // add old letter to the bag
       letterBag.addLettersToBag([chosenLetter.letter]);
@@ -131,8 +139,9 @@ class _GameState extends State<Game> {
 
     showDialog(
       context: context,
-      builder: (BuildContext context) => ExchangePopUp(
-          playerLetters: currentLetters, function: exchangeChosenLetter),
+      builder: (BuildContext context) => ExchangePopup(
+          playerLetters: currentLetters,
+          exchangeChosenLetter: exchangeChosenLetter),
     );
   }
 
@@ -156,6 +165,7 @@ class _GameState extends State<Game> {
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
                 letter: letter,
                 newCurrentLetter: newCurrentLetter,
+                active: false,
               )));
 
       // add old letters to the bag
@@ -171,8 +181,12 @@ class _GameState extends State<Game> {
       // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
-          .map((letter) =>
-              HandLetter(letter: letter, newCurrentLetter: newCurrentLetter)));
+          .map((letter) => HandLetter(
+                letter: letter,
+                newCurrentLetter: newCurrentLetter,
+                active: false,
+              )));
+      clearActiveLetter();
 
       // players[currentPlayerIndex].points += 10; // this works already btw
 
@@ -211,9 +225,31 @@ class _GameState extends State<Game> {
 
   void newCurrentLetter(HandLetter handLetter) {
     setState(() {
-      currentLetter = handLetter;
+      int handLetterIndex = currentLetters.indexOf(handLetter);
+
+      clearActiveLetter();
+
+      currentLetters[handLetterIndex] = HandLetter(
+          letter: handLetter.letter,
+          newCurrentLetter: newCurrentLetter,
+          active: true);
+
+      currentLetter = currentLetters[handLetterIndex];
+
       print("Current letter is now ${currentLetter!.letter}");
     });
+  }
+
+  void clearActiveLetter() {
+    if (currentLetter != null) {
+      int currentLetterIndex = currentLetters.indexOf(currentLetter!);
+      currentLetters[currentLetterIndex] = HandLetter(
+          letter: currentLetter!.letter,
+          newCurrentLetter: newCurrentLetter,
+          active: false);
+
+      currentLetter = null;
+    }
   }
 
   @override
