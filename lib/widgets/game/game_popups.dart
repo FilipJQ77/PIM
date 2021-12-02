@@ -18,6 +18,7 @@ class ExchangePopUp extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
+              height: MediaQuery.of(context).size.height*0.14,
               color: AppColors.mistyWhite,
               // color: AppColors.aqua, // testing
               child: Column(
