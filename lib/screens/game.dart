@@ -10,6 +10,7 @@ import 'package:pim_word_builder/widgets/game/game_button_row.dart';
 import 'package:pim_word_builder/widgets/game/game_hand.dart';
 import 'package:pim_word_builder/widgets/game/game_info.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
+import 'package:pim_word_builder/widgets/game/game_popups.dart';
 
 const int numberOfPlayers = 2;
 const int handSize = 7;
@@ -94,17 +95,80 @@ class _GameState extends State<Game> {
     });
   }
 
+  void exchangeChosenLetter() {
+    if (currentLetter == null) {
+      print("Exchange will not happen as no letter was selected");
+      // todo 'error' popup
+      return;
+    }
+
+    HandLetter chosenLetter = currentLetter!;
+
+    setState(() {
+      // get chosen letter
+      currentLetters.remove(chosenLetter);
+
+      // draw new letter
+      currentLetters.addAll(letterBag.getLettersFromBag(1).map(
+          (letter) => HandLetter(letter: letter, function: newCurrentLetter)));
+
+      // add old letter to the bag
+      letterBag.addLettersToBag([chosenLetter.letter]);
+
+      // after exchanging set current letter to null as it was exchanged
+      currentLetter = null;
+    });
+
+    // end turn
+    endTurn();
+  }
+
   void exchange() {
-    print("Exchange");
+    if (currentLetters.length != handSize) {
+      print("You can't exchange. Remove your tiles from board!");
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ExchangePopUp(
+          playerLetters: currentLetters, function: exchangeChosenLetter),
+    );
   }
 
   void shuffle() {
-    print("Shuffle");
+    // exchange whole hand
+    if (currentLetters.length != handSize) {
+      print("You can't shuffle. Remove your tiles from board!");
+      // todo 'error' popup
+      return;
+    }
+
+    setState(() {
+      // remember current hand
+      List<HandLetter> tempLetters = currentLetters;
+
+      // clear current hand
+      currentLetters.clear();
+
+      // draw new letters
+      currentLetters.addAll(
+          letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
+                letter: letter,
+                function: newCurrentLetter,
+              )));
+
+      // add old letters to the bag
+      letterBag
+          .addLettersToBag(tempLetters.map((handLetter) => handLetter.letter));
+    });
+    endTurn(); // end turn
   }
 
   void endTurn() {
     print("End Turn");
     setState(() {
+      // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
           .map((letter) =>
