@@ -95,66 +95,72 @@ class _GameState extends State<Game> {
     });
   }
 
-  void exchangeChoosenLetter() {
-    if(currentLetter == null) {
+  void exchangeChosenLetter() {
+    if (currentLetter == null) {
       print("Exchange will not happen as no letter was selected");
+      // todo 'error' popup
       return;
     }
-    HandLetter choosenLetter = currentLetter!;
+
+    HandLetter chosenLetter = currentLetter!;
+
     setState(() {
-      playerLetters[currentPlayerIndex].remove(choosenLetter);  // clear choosen letter
+      // get chosen letter
+      currentLetters.remove(chosenLetter);
+
       // draw new letter
-      playerLetters[currentPlayerIndex].add(
-          HandLetter(
-            letter: letterBag.getLettersFromBag(1)[0],
-            function: newCurrentLetter,
-          ));
+      currentLetters.addAll(letterBag.getLettersFromBag(1).map(
+          (letter) => HandLetter(letter: letter, function: newCurrentLetter)));
+
       // add old letter to the bag
-      letterBag.addLettersToBag([choosenLetter.letter]);
-      currentLetters = playerLetters[currentPlayerIndex]; // switch current letters (new hand)
+      letterBag.addLettersToBag([chosenLetter.letter]);
+
+      // after exchanging set current letter to null as it was exchanged
+      currentLetter = null;
     });
 
-    // after exchanging set current letter for null as it was exchanged
-    currentLetter = null;
-    endTurn(); // end turn
+    // end turn
+    endTurn();
   }
 
   void exchange() {
-    // exchange one piece
-    if (currentLetters.length !=  handSize) {
+    if (currentLetters.length != handSize) {
       print("You can't exchange. Remove your tiles from board!");
       return;
     }
-    print("Exchange");
 
     showDialog(
       context: context,
       builder: (BuildContext context) => ExchangePopUp(
-        playerLetters: currentLetters, function: exchangeChoosenLetter),
+          playerLetters: currentLetters, function: exchangeChosenLetter),
     );
-
   }
 
   void shuffle() {
     // exchange whole hand
-    if (currentLetters.length !=  handSize) {
-        print("You can't shuffle. Remove your tiles from board!");
-        return;
+    if (currentLetters.length != handSize) {
+      print("You can't shuffle. Remove your tiles from board!");
+      // todo 'error' popup
+      return;
     }
-    print("Shuffle");
+
     setState(() {
-      List<HandLetter> tempLetters = playerLetters[currentPlayerIndex]; //remember current hand
-      playerLetters[currentPlayerIndex].clear();  // clear current hand
+      // remember current hand
+      List<HandLetter> tempLetters = currentLetters;
+
+      // clear current hand
+      currentLetters.clear();
+
       // draw new letters
-      playerLetters[currentPlayerIndex].addAll(
+      currentLetters.addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
-            letter: letter,
-            function: newCurrentLetter,
-          )));
+                letter: letter,
+                function: newCurrentLetter,
+              )));
+
       // add old letters to the bag
-      letterBag.addLettersToBag(
-          tempLetters.map((handLetter) => handLetter.letter));
-      currentLetters = playerLetters[currentPlayerIndex]; // switch current letters (new hand)
+      letterBag
+          .addLettersToBag(tempLetters.map((handLetter) => handLetter.letter));
     });
     endTurn(); // end turn
   }
@@ -162,6 +168,7 @@ class _GameState extends State<Game> {
   void endTurn() {
     print("End Turn");
     setState(() {
+      // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
           .map((letter) =>
