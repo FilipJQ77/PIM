@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/app_colors.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 
 class GameHand extends StatelessWidget {
@@ -13,19 +12,9 @@ class GameHand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
       child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              color: AppColors.mistyWhite,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: playerLetters,
-              ),
-            ),
-          ),
-        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: playerLetters,
       ),
     );
   }

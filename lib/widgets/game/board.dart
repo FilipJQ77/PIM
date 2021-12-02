@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/widgets/game/board_tile.dart';
-import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/classes/app_colors.dart';
 import 'package:pim_word_builder/screens/game.dart' show boardSize;
 
 class Board extends StatelessWidget {
