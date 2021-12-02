@@ -4,6 +4,7 @@ class Player {
   String name;
   Color color;
   int points = 0;
+  bool active = false;
 
   Player(this.name, this.color);
 

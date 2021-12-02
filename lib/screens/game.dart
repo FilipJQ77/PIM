@@ -174,7 +174,8 @@ class _GameState extends State<Game> {
           .map((letter) =>
               HandLetter(letter: letter, function: newCurrentLetter)));
 
-      // players[currentPlayerIndex].points += 10; // this works already btw
+      players[currentPlayerIndex].points += 10; // this works already btw
+      players[currentPlayerIndex].active = true;
 
       //todo improve
       currentPlayerIndex++;

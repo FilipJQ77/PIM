@@ -17,8 +17,8 @@ class PlayerInfo extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const Icon(Icons.accessibility,
-                  size: 50, color: AppColors.purple),
+              Icon(Icons.accessibility,
+                  size: 50, color: player.active ? AppColors.red: AppColors.purple),
               Text(player.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
