@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/widgets/game/game_button.dart';
 
-class FunctionButtonRow extends StatelessWidget {
+class GameButtonRow extends StatelessWidget {
   final Function undoFunction;
   final Function exchangeFunction;
   final Function shuffleFunction;
   final Function endTurnFunction;
 
-  const FunctionButtonRow({
+  const GameButtonRow({
     Key? key,
     required this.undoFunction,
     required this.exchangeFunction,
@@ -21,7 +21,7 @@ class FunctionButtonRow extends StatelessWidget {
       flex: 1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
+        children: <Widget>[
           UndoButton(undoFunction: undoFunction),
           ExchangeButton(exchangeFunction: exchangeFunction),
           ShuffleButton(shuffleFunction: shuffleFunction),

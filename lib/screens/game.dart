@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/app_colors.dart';
-import 'package:pim_word_builder/letter_bag.dart';
-import 'package:pim_word_builder/pair.dart';
-import 'package:pim_word_builder/player.dart';
+import 'package:pim_word_builder/classes/app_colors.dart';
+import 'package:pim_word_builder/classes/letter_bag.dart';
+import 'package:pim_word_builder/classes/pair.dart';
+import 'package:pim_word_builder/classes/player.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
 import 'package:pim_word_builder/widgets/game/board.dart';
 import 'package:pim_word_builder/widgets/game/board_tile.dart';
@@ -51,7 +51,7 @@ class _GameState extends State<Game> {
       playerLetters[i].addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
                 letter: letter,
-                function: newCurrentLetter,
+                newCurrentLetter: newCurrentLetter,
               )));
     }
 
@@ -91,7 +91,7 @@ class _GameState extends State<Game> {
           function: placeLetterOnBoard);
 
       currentLetters
-          .add(HandLetter(letter: letter, function: newCurrentLetter));
+          .add(HandLetter(letter: letter, newCurrentLetter: newCurrentLetter));
     });
   }
 
@@ -109,8 +109,8 @@ class _GameState extends State<Game> {
       currentLetters.remove(chosenLetter);
 
       // draw new letter
-      currentLetters.addAll(letterBag.getLettersFromBag(1).map(
-          (letter) => HandLetter(letter: letter, function: newCurrentLetter)));
+      currentLetters.addAll(letterBag.getLettersFromBag(1).map((letter) =>
+          HandLetter(letter: letter, newCurrentLetter: newCurrentLetter)));
 
       // add old letter to the bag
       letterBag.addLettersToBag([chosenLetter.letter]);
@@ -155,7 +155,7 @@ class _GameState extends State<Game> {
       currentLetters.addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
                 letter: letter,
-                function: newCurrentLetter,
+                newCurrentLetter: newCurrentLetter,
               )));
 
       // add old letters to the bag
@@ -172,7 +172,7 @@ class _GameState extends State<Game> {
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
           .map((letter) =>
-              HandLetter(letter: letter, function: newCurrentLetter)));
+              HandLetter(letter: letter, newCurrentLetter: newCurrentLetter)));
 
       // players[currentPlayerIndex].points += 10; // this works already btw
 
@@ -227,7 +227,7 @@ class _GameState extends State<Game> {
               GameInfo(players: players, endTurnFunction: endTurn),
               Board(boardTiles: boardTiles),
               GameHand(playerLetters: currentLetters),
-              FunctionButtonRow(
+              GameButtonRow(
                   undoFunction: undo,
                   exchangeFunction: exchange,
                   shuffleFunction: shuffle,

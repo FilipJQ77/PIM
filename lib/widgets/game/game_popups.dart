@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/app_colors.dart';
+import 'package:pim_word_builder/classes/app_colors.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 
 class ExchangePopUp extends StatelessWidget {

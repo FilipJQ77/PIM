@@ -1,4 +1,4 @@
-import 'package:pim_word_builder/utils.dart';
+import 'package:pim_word_builder/classes/utils.dart';
 
 class LetterBag {
   /*
