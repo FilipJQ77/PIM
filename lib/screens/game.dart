@@ -121,8 +121,8 @@ class _GameState extends State<Game> {
       currentLetter = null;
     });
 
-    // end turn
-    endTurn();
+    // end turn without pop up
+    endPlayerTurn();
   }
 
   void exchange() {
@@ -167,7 +167,9 @@ class _GameState extends State<Game> {
       letterBag
           .addLettersToBag(tempLetters.map((handLetter) => handLetter.letter));
     });
-    endTurn(); // end turn
+
+    // end turn without pop up
+    endPlayerTurn();
   }
 
   void shuffle() {
@@ -186,17 +188,18 @@ class _GameState extends State<Game> {
 
   }
 
-  void endTurn() {
-    print("End Turn");
+  void endPlayerTurn() {
+    // end turn without pop up
+    // it is used after pop up confirmation and at the end of shuffle/exchange
     setState(() {
       // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
           .map((letter) => HandLetter(
-                letter: letter,
-                newCurrentLetter: newCurrentLetter,
-                active: false,
-              )));
+        letter: letter,
+        newCurrentLetter: newCurrentLetter,
+        active: false,
+      )));
       clearActiveLetter();
 
       // players[currentPlayerIndex].points += 10; // this works already btw
@@ -210,7 +213,20 @@ class _GameState extends State<Game> {
       print(currentPlayerIndex);
       currentLetters = playerLetters[currentPlayerIndex];
     });
+
   }
+
+  void endTurn() {
+    // end turn with pop up
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => EndTurnPopup(
+          endPlayerTurn: endPlayerTurn),
+    );
+
+
+  }
+
 
   void placeLetterOnBoard(int x, int y) {
     if (currentLetter != null && !boardTiles[x][y].isTaken) {

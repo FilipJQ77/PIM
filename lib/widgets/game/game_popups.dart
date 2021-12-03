@@ -81,11 +81,44 @@ class ShufflePopup extends StatelessWidget {
 }
 
 class EndTurnPopup extends StatelessWidget {
-  const EndTurnPopup({Key? key}) : super(key: key);
+  final Function() endPlayerTurn;
+
+  const EndTurnPopup({Key? key,
+    required this.endPlayerTurn}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return AlertDialog(
+      title: const Text('Do you want to end turn?'),
+      content: Container(
+        height: MediaQuery.of(context).size.height * 0.10,
+        child: Column(
+          children: const [
+            Text("Your word: 'pizza'",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text("Word value: 69",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child:
+          const Text('NO', style: TextStyle(color: AppColors.purple)),
+        ),
+        TextButton(
+          onPressed: () {
+            endPlayerTurn();
+            Navigator.of(context).pop();
+          },
+          child:
+          const Text('YES', style: TextStyle(color: AppColors.purple)),
+        ),
+      ],
+    );
   }
 }
 
