@@ -100,12 +100,6 @@ class _GameState extends State<Game> {
   }
 
   void exchangeChosenLetter() {
-    if (currentLetter == null) {
-      print("Exchange will not happen as no letter was selected");
-      // todo 'error' popup
-      return;
-    }
-
     HandLetter chosenLetter = currentLetter!;
 
     setState(() {
@@ -136,11 +130,19 @@ class _GameState extends State<Game> {
       print("You can't exchange. Remove your tiles from board!");
       return;
     }
+    if (currentLetter == null) {
+      print("Exchange will not happen as no letter was selected");
+      // todo 'error' popup
+      return;
+    }
+
+
+    HandLetter chosenLetter = currentLetter!;
 
     showDialog(
       context: context,
       builder: (BuildContext context) => ExchangePopup(
-          playerLetters: currentLetters,
+          chosenLetter: chosenLetter,
           exchangeChosenLetter: exchangeChosenLetter),
     );
   }
