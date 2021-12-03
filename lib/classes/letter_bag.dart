@@ -1,34 +1,37 @@
 import 'package:pim_word_builder/classes/utils.dart';
 
+/// A class simulating a bag with letters to give to players.
+///
+/// 100 tiles:
+/// - 2 blanks (0 points)
+/// - E×12, A×9, I×9, O×8, N×6, R×6, T×6, L×4, S×4, U×4 (1 p.)
+/// - D×4, G×3 (2 p.)
+/// - B×2, C×2, M×2, P×2 (3 p.)
+/// - F×2, H×2, V×2, W×2, Y×2 (4 p.)
+/// - K×1 (5 p.)
+/// - J×1, X×1 (8 p.)
+/// - Q×1, Z×1 (10 p.)
+///
+/// Source: https://en.wikipedia.org/wiki/Scrabble_letter_distributions
 class LetterBag {
-  /*
-    source: https://en.wikipedia.org/wiki/Scrabble_letter_distributions
-    - 100 letters
 
-    - 2 blank tiles (0 p.)
-    - E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4 (1 p.)
-    - D ×4, G ×3 (2 p.)
-    - B ×2, C ×2, M ×2, P ×2 (3 p.)
-    - F ×2, H ×2, V ×2, W ×2, Y ×2 (4 p.)
-    - K ×1 (5 p.)
-    - J ×1, X ×1 (8 p.)
-    - Q ×1, Z ×1 (10 p.)
+  /// List of letters currently in the bag.
+  final List<String> _letters = [];
 
-    - Each player draws seven letters
-  */
-  List<String> letters = [];
-
+  /// Creates a new, filled bag.
   LetterBag() {
-    fillBag();
+    fillStartingBag();
   }
 
+  /// Fills bag with [numberOfRepetitions] instances of a [letter].
   void fillBagWithLetter(String letter, int numberOfRepetitions) {
     for (var i = 0; i < numberOfRepetitions; i++) {
-      letters.add(letter);
+      _letters.add(letter);
     }
   }
 
-  void fillBag() {
+  /// Fills bag with a starting set of letters.
+  void fillStartingBag() {
     // blank tile - 0p
     fillBagWithLetter(' ', 2);
     // 1p
@@ -66,6 +69,7 @@ class LetterBag {
     fillBagWithLetter('Z', 1);
   }
 
+  /// How many points a [letter] gives to a player.
   static int getLetterValue(String letter) {
     switch (letter) {
       case 'Q':
@@ -109,10 +113,14 @@ class LetterBag {
     }
   }
 
+  /// Get how many letters are still in a bag.
   int getBagSize() {
-    return letters.length;
+    return _letters.length;
   }
 
+  /// Gets [numberOfLetters] letters from a bag.
+  ///
+  /// Throws an exception if there are not enough letters in a bag.
   List<String> getLettersFromBag(int numberOfLetters) {
     if (numberOfLetters > getBagSize()) {
       throw Exception("The letter bag does not have enough tiles");
@@ -120,16 +128,18 @@ class LetterBag {
 
     List<String> drawnLetters = [];
     for (var i = 0; i < numberOfLetters; i++) {
-      drawnLetters.add(letters.removeAt(Utils.randomInt(0, getBagSize())));
+      drawnLetters.add(_letters.removeAt(Utils.randomInt(0, getBagSize())));
     }
 
     return drawnLetters;
   }
 
+  /// Adds [lettersToAdd] letters back to the bag.
   void addLettersToBag(Iterable<String> lettersToAdd) {
-    letters.addAll(lettersToAdd);
+    _letters.addAll(lettersToAdd);
   }
 
+  /// Returns true if the bag is empty, false otherwise.
   bool isEmpty() {
     if (getBagSize() != 0) return false;
     return true;

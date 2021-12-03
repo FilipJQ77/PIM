@@ -25,16 +25,15 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   late List<Player> players;
-  late List<List<HandLetter>> playerLetters; // list of letters for every player
   late int currentPlayerIndex;
+  late Player currentPlayer;
 
-  late List<HandLetter> currentLetters;
   HandLetter? currentLetter;
 
   late List<List<BoardTile>> boardTiles; // n x n list of tiles
   late LetterBag letterBag;
 
-  late List<Pair<int, int>> playerMovesThisTurn;
+  late List<Pair<int, int>> movesThisTurn;
 
   @override
   initState() {
@@ -42,24 +41,25 @@ class _GameState extends State<Game> {
 
     players = [];
     letterBag = LetterBag();
-    playerLetters = [];
 
     for (var i = 0; i < numberOfPlayers; i++) {
-      players.add(Player("Player ${i + 1}", Colors.deepPurple));
-
-      playerLetters.add([]);
-      playerLetters[i].addAll(
-          letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
+      List<HandLetter> newLetters = letterBag
+          .getLettersFromBag(handSize)
+          .map((letter) => HandLetter(
                 letter: letter,
                 newCurrentLetter: newCurrentLetter,
                 active: false,
-              )));
+              ))
+          .toList();
+
+      players.add(Player("Player ${i + 1}", newLetters));
     }
 
     currentPlayerIndex = 0;
-    currentLetters = playerLetters[currentPlayerIndex];
+    currentPlayer = players[currentPlayerIndex];
+    currentPlayer.active = true;
 
-    playerMovesThisTurn = [];
+    movesThisTurn = [];
 
     boardTiles = [];
     for (var i = 0; i < boardSize; i++) {
@@ -77,8 +77,8 @@ class _GameState extends State<Game> {
   }
 
   void undo() {
-    if (playerMovesThisTurn.isEmpty) return;
-    var lastMove = playerMovesThisTurn.removeLast();
+    if (movesThisTurn.isEmpty) return;
+    var lastMove = movesThisTurn.removeLast();
     var x = lastMove.a;
     var y = lastMove.b;
     var letter = boardTiles[x][y].letter;
@@ -91,7 +91,7 @@ class _GameState extends State<Game> {
           tileColor: BoardTile.getTileColor(x, y),
           function: placeLetterOnBoard);
 
-      currentLetters.add(HandLetter(
+      currentPlayer.letters.add(HandLetter(
         letter: letter,
         newCurrentLetter: newCurrentLetter,
         active: false,
@@ -104,10 +104,10 @@ class _GameState extends State<Game> {
 
     setState(() {
       // get chosen letter
-      currentLetters.remove(chosenLetter);
+      currentPlayer.letters.remove(chosenLetter);
 
       // draw new letter
-      currentLetters
+      currentPlayer.letters
           .addAll(letterBag.getLettersFromBag(1).map((letter) => HandLetter(
                 letter: letter,
                 newCurrentLetter: newCurrentLetter,
@@ -126,7 +126,7 @@ class _GameState extends State<Game> {
   }
 
   void exchangePopup() {
-    if (currentLetters.length != handSize) {
+    if (currentPlayer.letters.length != handSize) {
       print("You can't exchange if you've put a letter on the board.");
       // todo popup
       return;
@@ -146,16 +146,23 @@ class _GameState extends State<Game> {
   }
 
   void shuffleHand() {
+    // exchange whole hand
+    if (currentPlayer.letters.length != handSize) {
+      print("You can't shuffle. Remove your tiles from board!");
+      // todo 'error' popup
+      return;
+    }
+
     setState(() {
       currentLetter = null;
       // remember current hand
-      List<HandLetter> tempLetters = currentLetters;
+      List<HandLetter> tempLetters = currentPlayer.letters;
 
       // clear current hand
-      currentLetters.clear();
+      currentPlayer.letters.clear();
 
       // draw new letters
-      currentLetters.addAll(
+      currentPlayer.letters.addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
                 letter: letter,
                 newCurrentLetter: newCurrentLetter,
@@ -172,7 +179,7 @@ class _GameState extends State<Game> {
   }
 
   void shufflePopup() {
-    if (currentLetters.length != handSize) {
+    if (currentPlayer.letters.length != handSize) {
       print("You can't shuffle if you've put a letter on the board.");
       // todo popup
       return;
@@ -189,8 +196,8 @@ class _GameState extends State<Game> {
     setState(() {
       currentLetter = null;
       // refill player hand
-      currentLetters.addAll(letterBag
-          .getLettersFromBag(handSize - currentLetters.length)
+      currentPlayer.letters.addAll(letterBag
+          .getLettersFromBag(handSize - currentPlayer.letters.length)
           .map((letter) => HandLetter(
                 letter: letter,
                 newCurrentLetter: newCurrentLetter,
@@ -198,16 +205,18 @@ class _GameState extends State<Game> {
               )));
       clearActiveLetter();
 
-      // players[currentPlayerIndex].points += 10; // this works already btw
+      players[currentPlayerIndex].points += 10; // this works already btw
 
-      //todo improve
+      currentPlayer.active = false;
+
       currentPlayerIndex++;
       currentPlayerIndex %= numberOfPlayers;
 
-      playerMovesThisTurn.clear();
+      currentPlayer = players[currentPlayerIndex];
 
-      print(currentPlayerIndex);
-      currentLetters = playerLetters[currentPlayerIndex];
+      currentPlayer.active = true;
+
+      movesThisTurn.clear();
     });
   }
 
@@ -235,9 +244,9 @@ class _GameState extends State<Game> {
             function: placeLetterOnBoard);
 
         print(boardTiles[x][y].letter);
-        currentLetters.remove(currentLetter);
+        currentPlayer.letters.remove(currentLetter);
 
-        playerMovesThisTurn.add(Pair(x, y));
+        movesThisTurn.add(Pair(x, y));
 
         currentLetter = null;
       });
@@ -246,16 +255,16 @@ class _GameState extends State<Game> {
 
   void newCurrentLetter(HandLetter handLetter) {
     setState(() {
-      int handLetterIndex = currentLetters.indexOf(handLetter);
+      int handLetterIndex = currentPlayer.letters.indexOf(handLetter);
 
       clearActiveLetter();
 
-      currentLetters[handLetterIndex] = HandLetter(
+      currentPlayer.letters[handLetterIndex] = HandLetter(
           letter: handLetter.letter,
           newCurrentLetter: newCurrentLetter,
           active: true);
 
-      currentLetter = currentLetters[handLetterIndex];
+      currentLetter = currentPlayer.letters[handLetterIndex];
 
       print("Current letter is now ${currentLetter!.letter}");
     });
@@ -263,8 +272,8 @@ class _GameState extends State<Game> {
 
   void clearActiveLetter() {
     if (currentLetter != null) {
-      int currentLetterIndex = currentLetters.indexOf(currentLetter!);
-      currentLetters[currentLetterIndex] = HandLetter(
+      int currentLetterIndex = currentPlayer.letters.indexOf(currentLetter!);
+      currentPlayer.letters[currentLetterIndex] = HandLetter(
           letter: currentLetter!.letter,
           newCurrentLetter: newCurrentLetter,
           active: false);
@@ -281,9 +290,9 @@ class _GameState extends State<Game> {
           appBar: const BabbleAppBar(),
           body: Column(
             children: <Widget>[
-              GameInfo(players: players, endTurnFunction: endPlayerTurn),
+              GameInfo(players: players, endTurn: endPlayerTurn),
               Board(boardTiles: boardTiles),
-              GameHand(playerLetters: currentLetters),
+              GameHand(playerLetters: currentPlayer.letters),
               GameButtonRow(
                   undoFunction: undo,
                   exchangeFunction: exchangePopup,
