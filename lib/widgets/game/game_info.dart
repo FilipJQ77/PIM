@@ -5,10 +5,10 @@ import 'package:pim_word_builder/widgets/game/timer.dart';
 
 class GameInfo extends StatelessWidget {
   final List<Player> players;
-  final Function endTurnFunction;
+  final Function endTurn;
 
   const GameInfo(
-      {Key? key, required this.players, required this.endTurnFunction})
+      {Key? key, required this.players, required this.endTurn})
       : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class GameInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           PlayerInfo(player: players[0]), // todo better in the future
-          Timer(endTurnFunction: endTurnFunction),
+          Timer(endTurnFunction: endTurn),
           PlayerInfo(player: players[1]),
         ],
       ),
