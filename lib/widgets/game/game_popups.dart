@@ -4,7 +4,7 @@ import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 
 class ExchangePopup extends StatelessWidget {
   final HandLetter chosenLetter;
-  final Function() exchangeChosenLetter;
+  final Function exchangeChosenLetter;
 
   const ExchangePopup(
       {Key? key,
@@ -15,11 +15,9 @@ class ExchangePopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Do you want to exchange this letter?'),
-      content: Container(
+      title: const Text('Exchange this letter?'),
+      content: SizedBox(
         height: MediaQuery.of(context).size.height * 0.14,
-        color: AppColors.mistyWhite,
-        // color: AppColors.aqua, // testing
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -32,16 +30,14 @@ class ExchangePopup extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child:
-          const Text('NO', style: TextStyle(color: AppColors.purple)),
+          child: const Text('NO', style: TextStyle(color: AppColors.purple)),
         ),
         TextButton(
           onPressed: () {
             exchangeChosenLetter();
             Navigator.of(context).pop();
           },
-          child:
-              const Text('YES', style: TextStyle(color: AppColors.purple)),
+          child: const Text('YES', style: TextStyle(color: AppColors.purple)),
         ),
       ],
     );
@@ -49,31 +45,28 @@ class ExchangePopup extends StatelessWidget {
 }
 
 class ShufflePopup extends StatelessWidget {
-  final Function() shuffleHand;
+  final Function shuffleHand;
 
-  const ShufflePopup({Key? key,
-  required this.shuffleHand}) : super(key: key);
+  const ShufflePopup({Key? key, required this.shuffleHand}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Do you want to shuffle letters?'),
+      title: const Text('Shuffle your letters?'),
       //content:
       actions: <Widget>[
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child:
-          const Text('NO', style: TextStyle(color: AppColors.purple)),
+          child: const Text('NO', style: TextStyle(color: AppColors.purple)),
         ),
         TextButton(
           onPressed: () {
             shuffleHand();
             Navigator.of(context).pop();
           },
-          child:
-          const Text('YES', style: TextStyle(color: AppColors.purple)),
+          child: const Text('YES', style: TextStyle(color: AppColors.purple)),
         ),
       ],
     );
@@ -81,45 +74,37 @@ class ShufflePopup extends StatelessWidget {
 }
 
 class EndTurnPopup extends StatelessWidget {
-  final Function() endPlayerTurn;
+  final int pointsGained;
+  final Function endPlayerTurn;
 
-  const EndTurnPopup({Key? key,
-    required this.endPlayerTurn}) : super(key: key);
+  const EndTurnPopup(
+      {Key? key, required this.endPlayerTurn, required this.pointsGained})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Do you want to end turn?'),
-      content: Container(
+      title: const Text('End turn?'),
+      content: SizedBox(
         height: MediaQuery.of(context).size.height * 0.10,
-        child: Column(
-          children: const [
-            Text("Your word: 'pizza'",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            Text("Word value: 69",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          ],
-        ),
+        child: Text("Points gained this round: $pointsGained",
+            style: const TextStyle(fontWeight: FontWeight.bold)),
       ),
       actions: <Widget>[
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child:
-          const Text('NO', style: TextStyle(color: AppColors.purple)),
+          child: const Text('NO', style: TextStyle(color: AppColors.purple)),
         ),
         TextButton(
           onPressed: () {
             endPlayerTurn();
             Navigator.of(context).pop();
           },
-          child:
-          const Text('YES', style: TextStyle(color: AppColors.purple)),
+          child: const Text('YES', style: TextStyle(color: AppColors.purple)),
         ),
       ],
     );
   }
 }
-
-

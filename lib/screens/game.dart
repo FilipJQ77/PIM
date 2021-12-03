@@ -125,24 +125,22 @@ class _GameState extends State<Game> {
     endPlayerTurn();
   }
 
-  void exchange() {
+  void exchangePopup() {
     if (currentLetters.length != handSize) {
-      print("You can't exchange. Remove your tiles from board!");
+      print("You can't exchange if you've put a letter on the board.");
+      // todo popup
       return;
     }
     if (currentLetter == null) {
-      print("Exchange will not happen as no letter was selected");
-      // todo 'error' popup
+      print("You must choose a letter to exchange first.");
+      // todo popup
       return;
     }
-
-
-    HandLetter chosenLetter = currentLetter!;
 
     showDialog(
       context: context,
       builder: (BuildContext context) => ExchangePopup(
-          chosenLetter: chosenLetter,
+          chosenLetter: currentLetter!,
           exchangeChosenLetter: exchangeChosenLetter),
     );
   }
@@ -158,10 +156,10 @@ class _GameState extends State<Game> {
       // draw new letters
       currentLetters.addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
-            letter: letter,
-            newCurrentLetter: newCurrentLetter,
-            active: false,
-          )));
+                letter: letter,
+                newCurrentLetter: newCurrentLetter,
+                active: false,
+              )));
 
       // add old letters to the bag
       letterBag
@@ -172,34 +170,30 @@ class _GameState extends State<Game> {
     endPlayerTurn();
   }
 
-  void shuffle() {
-    // exchange whole hand
+  void shufflePopup() {
     if (currentLetters.length != handSize) {
-      print("You can't shuffle. Remove your tiles from board!");
-      // todo 'error' popup
+      print("You can't shuffle if you've put a letter on the board.");
+      // todo popup
       return;
     }
 
     showDialog(
       context: context,
-      builder: (BuildContext context) => ShufflePopup(
-          shuffleHand: shuffleHand),
+      builder: (BuildContext context) => ShufflePopup(shuffleHand: shuffleHand),
     );
-
   }
 
+  /// Ends turn without a popup.
   void endPlayerTurn() {
-    // end turn without pop up
-    // it is used after pop up confirmation and at the end of shuffle/exchange
     setState(() {
       // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
           .map((letter) => HandLetter(
-        letter: letter,
-        newCurrentLetter: newCurrentLetter,
-        active: false,
-      )));
+                letter: letter,
+                newCurrentLetter: newCurrentLetter,
+                active: false,
+              )));
       clearActiveLetter();
 
       // players[currentPlayerIndex].points += 10; // this works already btw
@@ -213,20 +207,16 @@ class _GameState extends State<Game> {
       print(currentPlayerIndex);
       currentLetters = playerLetters[currentPlayerIndex];
     });
-
   }
 
-  void endTurn() {
-    // end turn with pop up
+  /// Ends player turn with a question popup.
+  void endTurnPopup() {
     showDialog(
       context: context,
-      builder: (BuildContext context) => EndTurnPopup(
-          endPlayerTurn: endPlayerTurn),
+      builder: (BuildContext context) =>
+          EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 69), // todo currentPlayerPoints po mergu
     );
-
-
   }
-
 
   void placeLetterOnBoard(int x, int y) {
     if (currentLetter != null && !boardTiles[x][y].isTaken) {
@@ -287,14 +277,14 @@ class _GameState extends State<Game> {
           appBar: const BabbleAppBar(),
           body: Column(
             children: <Widget>[
-              GameInfo(players: players, endTurnFunction: endTurn),
+              GameInfo(players: players, endTurnFunction: endPlayerTurn),
               Board(boardTiles: boardTiles),
               GameHand(playerLetters: currentLetters),
               GameButtonRow(
                   undoFunction: undo,
-                  exchangeFunction: exchange,
-                  shuffleFunction: shuffle,
-                  endTurnFunction: endTurn),
+                  exchangeFunction: exchangePopup,
+                  shuffleFunction: shufflePopup,
+                  endTurnFunction: endTurnPopup),
             ],
           )),
     );
