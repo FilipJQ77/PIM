@@ -147,6 +147,7 @@ class _GameState extends State<Game> {
 
   void shuffleHand() {
     setState(() {
+      currentLetter = null;
       // remember current hand
       List<HandLetter> tempLetters = currentLetters;
 
@@ -186,6 +187,7 @@ class _GameState extends State<Game> {
   /// Ends turn without a popup.
   void endPlayerTurn() {
     setState(() {
+      currentLetter = null;
       // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
@@ -211,11 +213,13 @@ class _GameState extends State<Game> {
 
   /// Ends player turn with a question popup.
   void endTurnPopup() {
+
     showDialog(
       context: context,
       builder: (BuildContext context) =>
           EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 69), // todo currentPlayerPoints po mergu
     );
+
   }
 
   void placeLetterOnBoard(int x, int y) {
