@@ -47,3 +47,46 @@ class ExchangePopup extends StatelessWidget {
     );
   }
 }
+
+class ShufflePopup extends StatelessWidget {
+  final Function() shuffleHand;
+
+  const ShufflePopup({Key? key,
+  required this.shuffleHand}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Do you want to shuffle letters?'),
+      //content:
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child:
+          const Text('NO', style: TextStyle(color: AppColors.purple)),
+        ),
+        TextButton(
+          onPressed: () {
+            shuffleHand();
+            Navigator.of(context).pop();
+          },
+          child:
+          const Text('YES', style: TextStyle(color: AppColors.purple)),
+        ),
+      ],
+    );
+  }
+}
+
+class EndTurnPopup extends StatelessWidget {
+  const EndTurnPopup({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+

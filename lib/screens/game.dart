@@ -147,14 +147,7 @@ class _GameState extends State<Game> {
     );
   }
 
-  void shuffle() {
-    // exchange whole hand
-    if (currentLetters.length != handSize) {
-      print("You can't shuffle. Remove your tiles from board!");
-      // todo 'error' popup
-      return;
-    }
-
+  void shuffleHand() {
     setState(() {
       // remember current hand
       List<HandLetter> tempLetters = currentLetters;
@@ -165,16 +158,32 @@ class _GameState extends State<Game> {
       // draw new letters
       currentLetters.addAll(
           letterBag.getLettersFromBag(handSize).map((letter) => HandLetter(
-                letter: letter,
-                newCurrentLetter: newCurrentLetter,
-                active: false,
-              )));
+            letter: letter,
+            newCurrentLetter: newCurrentLetter,
+            active: false,
+          )));
 
       // add old letters to the bag
       letterBag
           .addLettersToBag(tempLetters.map((handLetter) => handLetter.letter));
     });
     endTurn(); // end turn
+  }
+
+  void shuffle() {
+    // exchange whole hand
+    if (currentLetters.length != handSize) {
+      print("You can't shuffle. Remove your tiles from board!");
+      // todo 'error' popup
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ShufflePopup(
+          shuffleHand: shuffleHand),
+    );
+
   }
 
   void endTurn() {
