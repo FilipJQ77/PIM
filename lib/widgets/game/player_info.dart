@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pim_word_builder/app_colors.dart';
-import 'package:pim_word_builder/player.dart';
+import 'package:pim_word_builder/classes/app_colors.dart';
+import 'package:pim_word_builder/classes/player.dart';
 
-// todo przerobic to potem na stateful (?)
 class PlayerInfo extends StatelessWidget {
   final Player player;
 

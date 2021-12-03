@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pim_word_builder/utils.dart';
+import 'package:pim_word_builder/classes/utils.dart';
 
 void getWordsFromFileTest() async {}
 
