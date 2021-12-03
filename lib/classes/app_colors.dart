@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// De facto static class with defined colors used in the app.
 class AppColors {
   static const purple = Colors.deepPurple;
   static const white = Colors.white;
