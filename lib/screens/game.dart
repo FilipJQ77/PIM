@@ -100,12 +100,6 @@ class _GameState extends State<Game> {
   }
 
   void exchangeChosenLetter() {
-    if (currentLetter == null) {
-      print("Exchange will not happen as no letter was selected");
-      // todo 'error' popup
-      return;
-    }
-
     HandLetter chosenLetter = currentLetter!;
 
     setState(() {
@@ -127,33 +121,33 @@ class _GameState extends State<Game> {
       currentLetter = null;
     });
 
-    // end turn
-    endTurn();
+    // end turn without pop up
+    endPlayerTurn();
   }
 
-  void exchange() {
+  void exchangePopup() {
     if (currentLetters.length != handSize) {
-      print("You can't exchange. Remove your tiles from board!");
+      print("You can't exchange if you've put a letter on the board.");
+      // todo popup
+      return;
+    }
+    if (currentLetter == null) {
+      print("You must choose a letter to exchange first.");
+      // todo popup
       return;
     }
 
     showDialog(
       context: context,
       builder: (BuildContext context) => ExchangePopup(
-          playerLetters: currentLetters,
+          chosenLetter: currentLetter!,
           exchangeChosenLetter: exchangeChosenLetter),
     );
   }
 
-  void shuffle() {
-    // exchange whole hand
-    if (currentLetters.length != handSize) {
-      print("You can't shuffle. Remove your tiles from board!");
-      // todo 'error' popup
-      return;
-    }
-
+  void shuffleHand() {
     setState(() {
+      currentLetter = null;
       // remember current hand
       List<HandLetter> tempLetters = currentLetters;
 
@@ -172,12 +166,28 @@ class _GameState extends State<Game> {
       letterBag
           .addLettersToBag(tempLetters.map((handLetter) => handLetter.letter));
     });
-    endTurn(); // end turn
+
+    // end turn without pop up
+    endPlayerTurn();
   }
 
-  void endTurn() {
-    print("End Turn");
+  void shufflePopup() {
+    if (currentLetters.length != handSize) {
+      print("You can't shuffle if you've put a letter on the board.");
+      // todo popup
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => ShufflePopup(shuffleHand: shuffleHand),
+    );
+  }
+
+  /// Ends turn without a popup.
+  void endPlayerTurn() {
     setState(() {
+      currentLetter = null;
       // refill player hand
       currentLetters.addAll(letterBag
           .getLettersFromBag(handSize - currentLetters.length)
@@ -199,6 +209,17 @@ class _GameState extends State<Game> {
       print(currentPlayerIndex);
       currentLetters = playerLetters[currentPlayerIndex];
     });
+  }
+
+  /// Ends player turn with a question popup.
+  void endTurnPopup() {
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) =>
+          EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 69), // todo currentPlayerPoints po mergu
+    );
+
   }
 
   void placeLetterOnBoard(int x, int y) {
@@ -260,14 +281,14 @@ class _GameState extends State<Game> {
           appBar: const BabbleAppBar(),
           body: Column(
             children: <Widget>[
-              GameInfo(players: players, endTurnFunction: endTurn),
+              GameInfo(players: players, endTurnFunction: endPlayerTurn),
               Board(boardTiles: boardTiles),
               GameHand(playerLetters: currentLetters),
               GameButtonRow(
                   undoFunction: undo,
-                  exchangeFunction: exchange,
-                  shuffleFunction: shuffle,
-                  endTurnFunction: endTurn),
+                  exchangeFunction: exchangePopup,
+                  shuffleFunction: shufflePopup,
+                  endTurnFunction: endTurnPopup),
             ],
           )),
     );
