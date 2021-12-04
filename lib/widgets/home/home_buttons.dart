@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pim_word_builder/classes/app_colors.dart';
 import 'package:pim_word_builder/widgets/home/home_popups.dart';
+import 'package:pim_word_builder/screens/game.dart';
 import 'dart:io' as io;
 
 var _homeButtonStyle = ElevatedButton.styleFrom(
@@ -43,9 +44,9 @@ class StartGameButton extends StatelessWidget {
     return _GenericHomeButton(
         text: "Start Game",
         function: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => const StartGamePopup(),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Game()),
           );
         });
   }
