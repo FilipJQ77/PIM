@@ -90,21 +90,27 @@ class RulesPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: const <Widget>[
             Text("Description\n",
-                style: TextStyle(fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: AppColors.purple, fontWeight: FontWeight.bold)),
             Text(
-                "BabbleWords! is a word game in which two players score points by "
+                "\"BabbleWords!\" is a word game in which two players score points by "
                 "placing tiles, each bearing a single letter, "
                 "onto a game board divided into a 15×15 grid of squares. "
                 "The tiles must form words that, in crossword fashion, "
-                "read 'left to right' in rows or 'downward' in columns, "
+                "read \"left to right\" in rows or \"downward\" in columns, "
                 "and be included in a standard dictionary or lexicon.",
                 textAlign: TextAlign.justify),
-            Text("\nGameplay\n", style: TextStyle(fontWeight: FontWeight.bold)),
+            Text("\nGameplay\n",
+                style: TextStyle(
+                    color: AppColors.purple, fontWeight: FontWeight.bold)),
             Text(
-                "1. The first player combines two or more of their letters to form "
+                "When the game starts, each player have 2 minutes to place tiles onto a board to create existing word(s). "
+                "After that time round is automaticly ended and next player have their turn.\n"),
+            Text(
+                "1. The first player combines two or more of their letters from \"hand\" to form "
                 "a word and places it on the board to read either across "
-                "or down with one letter on the center square. "
-                "Diagonal words are not allowed.\n",
+                "or down with one word starting on the center square. "
+                "Diagonal words are not allowed!\n",
                 textAlign: TextAlign.justify),
             Text(
                 "2. The player completes their turn by clicking the End Turn Button. "
@@ -131,7 +137,9 @@ class RulesPopup extends StatelessWidget {
                 " - Placing a complete word parallel to a word already played "
                 "so that adjacent letters also form complete words.",
                 textAlign: TextAlign.justify),
-            Text("\nBonuses\n", style: TextStyle(fontWeight: FontWeight.bold)),
+            Text("\nBonuses\n",
+                style: TextStyle(
+                    color: AppColors.purple, fontWeight: FontWeight.bold)),
             Text.rich(
                 TextSpan(
                   children: <TextSpan>[
@@ -170,6 +178,19 @@ class RulesPopup extends StatelessWidget {
                 "Each bonus can only be used once, "
                 "the effect of two premium squares are multiplying.\n\n",
                 textAlign: TextAlign.justify),
+            Text("Buttons\n",
+                style: TextStyle(
+                    color: AppColors.purple, fontWeight: FontWeight.bold)),
+            Text(
+              "On screen we have 4 different buttons:\n",
+            ),
+            Text(
+              "Undo - undo your last placed letter    \n",
+            ),
+            Text(
+                "Exchange - Select letter and change it into a different one, end your turn!\n"),
+            Text("Shuffle - Exchange all your letters, end your turn!\n"),
+            Text("End turn - end your turn.                        \n"),
             Text("Jackpot!\n",
                 style: TextStyle(
                     color: AppColors.purple, fontWeight: FontWeight.bold)),
