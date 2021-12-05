@@ -14,7 +14,6 @@ import 'package:pim_word_builder/classes/utils.dart';
 ///
 /// Source: https://en.wikipedia.org/wiki/Scrabble_letter_distributions
 class LetterBag {
-
   /// List of letters currently in the bag.
   final List<String> _letters = [];
 

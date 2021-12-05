@@ -57,7 +57,7 @@ class _GameState extends State<Game> {
 
     currentPlayerIndex = 0;
     currentPlayer = players[currentPlayerIndex];
-    currentPlayer.active = true;
+    currentPlayer.toggleActive();
 
     movesThisTurn = [];
 
@@ -205,16 +205,16 @@ class _GameState extends State<Game> {
               )));
       clearActiveLetter();
 
-      players[currentPlayerIndex].points += 10; // this works already btw
+      players[currentPlayerIndex].addPoints(10); // this works already btw
 
-      currentPlayer.active = false;
+      currentPlayer.toggleActive();
 
       currentPlayerIndex++;
       currentPlayerIndex %= numberOfPlayers;
 
       currentPlayer = players[currentPlayerIndex];
 
-      currentPlayer.active = true;
+      currentPlayer.toggleActive();
 
       movesThisTurn.clear();
     });
