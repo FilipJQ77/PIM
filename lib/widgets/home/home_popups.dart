@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/classes/app_colors.dart';
 import 'package:pim_word_builder/screens/game.dart';
@@ -104,8 +105,11 @@ class RulesPopup extends StatelessWidget {
                 style: TextStyle(
                     color: AppColors.purple, fontWeight: FontWeight.bold)),
             Text(
-                "When the game starts, each player have 2 minutes to place tiles onto a board to create existing word(s). "
-                "After that time round is automaticly ended and next player have their turn.\n"),
+                "Each player has 2 minutes to place some of their tiles "
+                "on the board to create existing word(s). "
+                "After that time the round is automatically ended "
+                "and the next player has their turn.\n",
+                textAlign: TextAlign.justify),
             Text(
                 "1. The first player combines two or more of their letters from \"hand\" to form "
                 "a word and places it on the board to read either across "
@@ -175,29 +179,33 @@ class RulesPopup extends StatelessWidget {
                 ),
                 textAlign: TextAlign.justify),
             Text(
-                "Each bonus can only be used once, "
-                "the effect of two premium squares are multiplying.\n\n",
+                "Bonuses can be be used multiple times. "
+                "If many bonuses apply, their effect is multiplied.\n\n",
                 textAlign: TextAlign.justify),
             Text("Buttons\n",
                 style: TextStyle(
                     color: AppColors.purple, fontWeight: FontWeight.bold)),
             Text(
-              "On screen we have 4 different buttons:\n",
-            ),
-            Text(
-              "Undo - undo your last placed letter    \n",
-            ),
-            Text(
-                "Exchange - Select letter and change it into a different one, end your turn!\n"),
-            Text("Shuffle - Exchange all your letters, end your turn!\n"),
-            Text("End turn - end your turn.                        \n"),
+                "On the screen there are 4 different buttons:\n\n"
+                "Undo - put last played tile back into player hand.\n\n"
+                "Exchange - choose a letter and change it into a different one. "
+                "Only available if a player has not put a tile on the board. "
+                "Automatically ends player turn.\n\n"
+                "Shuffle - change all player letters into different ones from "
+                "the letter bag. Only available if a player has not put a tile "
+                "on the board. Automatically ends player turn.\n\n"
+                "End turn - if a player put some tiles on the board, "
+                "and they make acceptable words, the player gets appropriate "
+                "points for them. If a player has not put any letters "
+                "on the board, they can simply pass a turn without doing anything.\n",
+                textAlign: TextAlign.justify),
             Text("Jackpot!\n",
                 style: TextStyle(
                     color: AppColors.purple, fontWeight: FontWeight.bold)),
             Text(
                 "If a player plays all seven tiles from their hand on a turn, "
-                "they score a bonus of 50 points after counting"
-                " all other points from the turn.",
+                "they score a bonus of 50 points after counting "
+                "all other points from the turn.",
                 textAlign: TextAlign.justify)
           ],
         ),
