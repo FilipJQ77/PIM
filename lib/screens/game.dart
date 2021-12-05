@@ -12,10 +12,16 @@ import 'package:pim_word_builder/widgets/game/game_info.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 import 'package:pim_word_builder/widgets/game/game_popups.dart';
 
+/// Number of players.
 const int numberOfPlayers = 2;
+
+/// How many letters a player has.
 const int handSize = 7;
+
+/// Size of the n x n board. (n == [boardSize])
 const int boardSize = 15;
 
+/// Game screen.
 class Game extends StatefulWidget {
   const Game({Key? key}) : super(key: key);
 
@@ -23,16 +29,27 @@ class Game extends StatefulWidget {
   State<Game> createState() => _GameState();
 }
 
+/// Game state.
 class _GameState extends State<Game> {
+  /// List of players.
   late List<Player> players;
+
+  /// Helper variable counting which player's turn it is now.
   late int currentPlayerIndex;
+
+  /// Current player.
   late Player currentPlayer;
 
+  /// Currently chosen letter.
   HandLetter? currentLetter;
 
-  late List<List<BoardTile>> boardTiles; // n x n list of tiles
+  /// [boardSize] x [boardSize] board of tiles.
+  late List<List<BoardTile>> boardTiles;
+
+  /// Letter bag.
   late LetterBag letterBag;
 
+  /// List of coordinates of placed tiles this turn.
   late List<Pair<int, int>> movesThisTurn;
 
   @override
@@ -65,17 +82,57 @@ class _GameState extends State<Game> {
     for (var i = 0; i < boardSize; i++) {
       boardTiles.add([]);
       for (var j = 0; j < boardSize; j++) {
-        boardTiles[i].add(BoardTile(
-            x: i,
-            y: j,
-            letter: "",
-            isTaken: false,
-            tileColor: BoardTile.getTileColor(i, j),
-            function: placeLetterOnBoard));
+        boardTiles[i].add(BoardTile(x: i, y: j, letter: "", isTaken: false, color: BoardTile.getTileColor(i, j), placeLetterOnBoard: placeLetterOnBoard));
       }
     }
   }
 
+  void placeLetterOnBoard(int x, int y) {
+    if (currentLetter != null && !boardTiles[x][y].isTaken) {
+      print("Placing ${currentLetter!.letter} on tile $x $y");
+      setState(() {
+        boardTiles[x][y] = BoardTile(x: x, y: y, letter: currentLetter!.letter, isTaken: true, color: AppColors.cream, placeLetterOnBoard: placeLetterOnBoard);
+
+        print(boardTiles[x][y].letter);
+        currentPlayer.letters.remove(currentLetter);
+
+        movesThisTurn.add(Pair(x, y));
+
+        currentLetter = null;
+      });
+    }
+  }
+
+  void newCurrentLetter(HandLetter handLetter) {
+    setState(() {
+      int handLetterIndex = currentPlayer.letters.indexOf(handLetter);
+
+      clearActiveLetter();
+
+      currentPlayer.letters[handLetterIndex] = HandLetter(
+          letter: handLetter.letter,
+          newCurrentLetter: newCurrentLetter,
+          active: true);
+
+      currentLetter = currentPlayer.letters[handLetterIndex];
+
+      print("Current letter is now ${currentLetter!.letter}");
+    });
+  }
+
+  void clearActiveLetter() {
+    if (currentLetter != null) {
+      int currentLetterIndex = currentPlayer.letters.indexOf(currentLetter!);
+      currentPlayer.letters[currentLetterIndex] = HandLetter(
+          letter: currentLetter!.letter,
+          newCurrentLetter: newCurrentLetter,
+          active: false);
+
+      currentLetter = null;
+    }
+  }
+
+  /// Removes last placed tile from the board and puts it back to player hand.
   void undo() {
     if (movesThisTurn.isEmpty) return;
     var lastMove = movesThisTurn.removeLast();
@@ -83,19 +140,10 @@ class _GameState extends State<Game> {
     var y = lastMove.b;
     var letter = boardTiles[x][y].letter;
     setState(() {
-      boardTiles[x][y] = BoardTile(
-          x: x,
-          y: y,
-          letter: "",
-          isTaken: false,
-          tileColor: BoardTile.getTileColor(x, y),
-          function: placeLetterOnBoard);
+      boardTiles[x][y] = BoardTile(x: x, y: y, letter: "", isTaken: false, color: BoardTile.getTileColor(x, y), placeLetterOnBoard: placeLetterOnBoard);
 
       currentPlayer.letters.add(HandLetter(
-        letter: letter,
-        newCurrentLetter: newCurrentLetter,
-        active: false,
-      ));
+          letter: letter, newCurrentLetter: newCurrentLetter, active: false));
     });
   }
 
@@ -126,11 +174,12 @@ class _GameState extends State<Game> {
   }
 
   void exchangePopup() {
-    if (currentPlayer.letters.length != handSize) {
+    if (movesThisTurn.isNotEmpty) {
       print("You can't exchange if you've put a letter on the board.");
       // todo popup
       return;
     }
+
     if (currentLetter == null) {
       print("You must choose a letter to exchange first.");
       // todo popup
@@ -147,7 +196,7 @@ class _GameState extends State<Game> {
 
   void shuffleHand() {
     // exchange whole hand
-    if (currentPlayer.letters.length != handSize) {
+    if (movesThisTurn.isNotEmpty) {
       print("You can't shuffle. Remove your tiles from board!");
       // todo 'error' popup
       return;
@@ -222,64 +271,10 @@ class _GameState extends State<Game> {
 
   /// Ends player turn with a question popup.
   void endTurnPopup() {
-
     showDialog(
-      context: context,
-      builder: (BuildContext context) =>
-          EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 69), // todo currentPlayerPoints po mergu
-    );
-
-  }
-
-  void placeLetterOnBoard(int x, int y) {
-    if (currentLetter != null && !boardTiles[x][y].isTaken) {
-      print("Placing ${currentLetter!.letter} on tile $x $y");
-      setState(() {
-        boardTiles[x][y] = BoardTile(
-            x: x,
-            y: y,
-            letter: currentLetter!.letter,
-            isTaken: true,
-            tileColor: AppColors.cream,
-            function: placeLetterOnBoard);
-
-        print(boardTiles[x][y].letter);
-        currentPlayer.letters.remove(currentLetter);
-
-        movesThisTurn.add(Pair(x, y));
-
-        currentLetter = null;
-      });
-    }
-  }
-
-  void newCurrentLetter(HandLetter handLetter) {
-    setState(() {
-      int handLetterIndex = currentPlayer.letters.indexOf(handLetter);
-
-      clearActiveLetter();
-
-      currentPlayer.letters[handLetterIndex] = HandLetter(
-          letter: handLetter.letter,
-          newCurrentLetter: newCurrentLetter,
-          active: true);
-
-      currentLetter = currentPlayer.letters[handLetterIndex];
-
-      print("Current letter is now ${currentLetter!.letter}");
-    });
-  }
-
-  void clearActiveLetter() {
-    if (currentLetter != null) {
-      int currentLetterIndex = currentPlayer.letters.indexOf(currentLetter!);
-      currentPlayer.letters[currentLetterIndex] = HandLetter(
-          letter: currentLetter!.letter,
-          newCurrentLetter: newCurrentLetter,
-          active: false);
-
-      currentLetter = null;
-    }
+        context: context,
+        builder: (BuildContext context) =>
+            EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 69));
   }
 
   @override

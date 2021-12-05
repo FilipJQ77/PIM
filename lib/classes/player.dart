@@ -44,6 +44,7 @@ class Player {
   final List<HandLetter> _letters;
 
   /// [_letters] getter.
+  /// TODO probably remove access to this and create functions in the future.
   List<HandLetter> get letters => _letters;
 
   Player(this._name, this._letters);
