@@ -132,22 +132,130 @@ class _GameState extends State<Game> {
     return false;
   }
 
+  /// Establish which letter should be first (based on placed letters)
+  Pair<int, int> getFirstLetterCordsOfPlacedLetters(List<Pair<int, int>> movesThisTurn){
+    Pair<int, int> firstLetterCords = Pair(0, 0);
+    // word is on 'X' axis
+    if(movesThisTurn[0].a == movesThisTurn[1].a){
+      int closestYCord = 100;
+      for(var i=0;i<movesThisTurn.length;i++){
+        if(closestYCord > movesThisTurn[i].b) {
+          closestYCord = movesThisTurn[i].b;
+          firstLetterCords = movesThisTurn[i];
+        }
+      }
+    } else {  // word is on 'Y' axis
+      int closestXCord = 100;
+      for(var i=0;i<movesThisTurn.length;i++){
+        if(closestXCord > movesThisTurn[i].a) {
+          closestXCord = movesThisTurn[i].a;
+          firstLetterCords = movesThisTurn[i];
+        }
+      }
+    }
+    return firstLetterCords;
+  }
+
+  /// Establish which letter should be last (based on placed letters)
+  Pair<int, int> getLastLetterCordsOfPlacedLetters(List<Pair<int, int>> movesThisTurn){
+    Pair<int, int> lastLetterCords = Pair(0, 0);
+    // word is on 'X' axis
+    if(movesThisTurn[0].a == movesThisTurn[1].a){
+      int furthestYCord = -1;
+      for(var i=0;i<movesThisTurn.length;i++){
+        if(furthestYCord < movesThisTurn[i].b) {
+          furthestYCord = movesThisTurn[i].b;
+          lastLetterCords = movesThisTurn[i];
+        }
+      }
+    } else {  // word is on 'Y' axis
+      int furthestXCord = -1;
+      for(var i=0;i<movesThisTurn.length;i++){
+        if(furthestXCord < movesThisTurn[i].a) {
+          furthestXCord = movesThisTurn[i].a;
+          lastLetterCords = movesThisTurn[i];
+        }
+      }
+    }
+    return lastLetterCords;
+  }
+
+  /// This will get all tiles coordinates between two given tiles coordinates
+  List<Pair<int, int>> getAllLettersCordsBetweenTwoLettersCords(
+      Pair<int, int> firstLetterCords, Pair<int, int> lastLetterCords){
+
+    List<Pair<int, int>> allLettersCords = [];
+
+    if(firstLetterCords.a == lastLetterCords.a){ // word is on 'X' axis
+      int wordLength = lastLetterCords.b - firstLetterCords.b + 1;
+      for(var i=0; i< wordLength; i++)
+        {allLettersCords.add(Pair(firstLetterCords.a, firstLetterCords.b + i));}
+    } else { // firstMove.b == lastMove.b, word is on 'Y' axis
+      int wordLength = lastLetterCords.a - firstLetterCords.a + 1;
+      for(var i=0; i< wordLength; i++)
+        {allLettersCords.add(Pair(firstLetterCords.a + i, firstLetterCords.b));}
+    }
+    return allLettersCords;
+  }
+
+  /// get cords of all letters which main word is build of
   List<Pair<int, int>> getMainWordTilesCords(List<Pair<int, int>> movesThisTurn){
     // Words can be written in two orders: from up to bottom and from left to right
-    List<Pair<int, int>> mainWordTilesCords = [];
-    Pair<int, int> firstMove =  movesThisTurn.first;
-    Pair<int, int> lastMove =  movesThisTurn.last;
 
-    if(firstMove.a == lastMove.a){
-      int mainWordLength = lastMove.b - firstMove.b + 1;
-      for(var i=0; i< mainWordLength; i++)
-        {mainWordTilesCords.add(Pair(firstMove.a, firstMove.b + i));}
-    } else { // firstMove.b == lastMove.b
-      int mainWordLength = lastMove.a - firstMove.a + 1;
-      for(var i=0; i< mainWordLength; i++)
-        {mainWordTilesCords.add(Pair(firstMove.a + i, firstMove.b));}
+    Pair<int, int> firstMove =  getFirstLetterCordsOfPlacedLetters(movesThisTurn);
+    Pair<int, int> lastMove =  getLastLetterCordsOfPlacedLetters(movesThisTurn);
+
+    print("First move: ${firstMove.a} ${firstMove.b}");
+    print("Last move: ${lastMove.a} ${lastMove.b}");
+
+    Pair<int, int> startOfWord = firstMove;
+    Pair<int, int> endOfWord = lastMove;
+
+    // TODO take into account 'end of board' cases !!!
+
+    // sufix case
+    if(boardTiles[firstMove.a - 1][firstMove.b].isTaken ||
+       boardTiles[firstMove.a][firstMove.b - 1].isTaken){
+      var i = 1;
+      if(boardTiles[firstMove.a - 1][firstMove.b].isTaken){
+        while(boardTiles[firstMove.a - i][firstMove.b].isTaken){
+          startOfWord = Pair(firstMove.a - i, firstMove.b);
+          i++;
+        }
+        return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
+      }
+      if(boardTiles[firstMove.a][firstMove.b - 1].isTaken){
+        while(boardTiles[firstMove.a][firstMove.b - i].isTaken){
+          startOfWord = Pair(firstMove.a, firstMove.b - i);
+          i++;
+        }
+        return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
+      }
     }
-    return mainWordTilesCords;
+
+    // prefix case
+    if(boardTiles[firstMove.a + 1][firstMove.b].isTaken ||
+       boardTiles[firstMove.a][firstMove.b + 1].isTaken){
+      var i = 1;
+      if(boardTiles[firstMove.a + 1][firstMove.b].isTaken){
+        while(boardTiles[firstMove.a + i][firstMove.b].isTaken){
+          endOfWord = Pair(firstMove.a + i, firstMove.b);
+          i++;
+        }
+        return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
+      }
+      if(boardTiles[firstMove.a][firstMove.b + 1].isTaken){
+        while(boardTiles[firstMove.a][firstMove.b + i].isTaken){
+          endOfWord = Pair(firstMove.a, firstMove.b + i);
+          i++;
+        }
+        return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
+      }
+    }
+
+    // standard (whole) word case
+    return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
+
   }
 
   /// Returns list of <word, scoreForThisWord>
