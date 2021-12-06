@@ -132,12 +132,51 @@ class _GameState extends State<Game> {
     return false;
   }
 
-  List<String> createdWordsThisTurn(List<Pair<int, int>> movesThisTurn) {
-    return List.empty(); // TODO
+  /// Returns list of <word, scoreForThisWord>
+  List<Pair<String, int>> createdWordsThisTurn(List<Pair<int, int>> movesThisTurn) {
+    // TODO check additional words - for now only main word is verified
+    // Only main word should have bonuses
+    List <Pair<String, int>> createdWords = [];
+
+    String mainWord = "";
+    int mainWordScore = 0;
+    bool doubleWordBonus = false;
+    bool tripleWordBonus = false;
+
+    for(var i=0; i<movesThisTurn.length; i++) {
+      Pair<int, int> move = movesThisTurn[i];
+      BoardTile tile = boardTiles[move.a][move.b];
+      Color tileColor = BoardTile.getTileColor(move.a, move.b);
+      mainWord += tile.letter;
+
+      // get value of a letter
+      int letterValue = LetterBag.getLetterValue(tile.letter);
+      // Check bonuses
+      if(tileColor == AppColors.gold) {doubleWordBonus = true;}
+      else if(tileColor == AppColors.pink) {doubleWordBonus = true;}
+      else if(tileColor == AppColors.red) {tripleWordBonus = true;}
+      else if(tileColor == AppColors.aqua) {letterValue *= 2;}
+      else if(tileColor == AppColors.darkBlue) {letterValue *= 3;}
+      //
+      mainWordScore += letterValue;
+    }
+
+    if(doubleWordBonus) mainWordScore *= 2;
+    if(tripleWordBonus) mainWordScore *= 3;
+
+    print("Main word: ${mainWord}, main word score ${mainWordScore}");
+
+    createdWords.add(Pair(mainWord, mainWordScore));
+    return createdWords;
   }
 
-  int calculateTurnPoints(List<String> words) {
-    return 0; // TODO
+  /// Sums points for all words that have been created
+  int calculateTurnPoints(List<Pair<String, int>> words) {
+    int score = 0;
+    for(var i=0; i<words.length; i++) {
+      score += words[i].b;
+    }
+    return score;
   }
 
   int parseTurn() {
