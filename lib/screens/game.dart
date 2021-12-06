@@ -202,8 +202,16 @@ class _GameState extends State<Game> {
   List<Pair<int, int>> getMainWordTilesCords(List<Pair<int, int>> movesThisTurn){
     // Words can be written in two orders: from up to bottom and from left to right
 
-    Pair<int, int> firstMove =  getFirstLetterCordsOfPlacedLetters(movesThisTurn);
-    Pair<int, int> lastMove =  getLastLetterCordsOfPlacedLetters(movesThisTurn);
+    Pair<int, int> firstMove =  Pair(0, 0);
+    Pair<int, int> lastMove =  Pair(0, 0);
+
+    if(movesThisTurn.length == 1){
+      firstMove =  movesThisTurn[0];
+      lastMove =  movesThisTurn[0];
+    }else{
+      firstMove =  getFirstLetterCordsOfPlacedLetters(movesThisTurn);
+      lastMove =  getLastLetterCordsOfPlacedLetters(movesThisTurn);
+    }
 
     print("First move: ${firstMove.a} ${firstMove.b}");
     print("Last move: ${lastMove.a} ${lastMove.b}");
