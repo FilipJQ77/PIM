@@ -132,10 +132,30 @@ class _GameState extends State<Game> {
     return false;
   }
 
+  List<Pair<int, int>> getMainWordTilesCords(List<Pair<int, int>> movesThisTurn){
+    // Words can be written in two orders: from up to bottom and from left to right
+    List<Pair<int, int>> mainWordTilesCords = [];
+    Pair<int, int> firstMove =  movesThisTurn.first;
+    Pair<int, int> lastMove =  movesThisTurn.last;
+
+    if(firstMove.a == lastMove.a){
+      int mainWordLength = lastMove.b - firstMove.b + 1;
+      for(var i=0; i< mainWordLength; i++)
+        {mainWordTilesCords.add(Pair(firstMove.a, firstMove.b + i));}
+    } else { // firstMove.b == lastMove.b
+      int mainWordLength = lastMove.a - firstMove.a + 1;
+      for(var i=0; i< mainWordLength; i++)
+        {mainWordTilesCords.add(Pair(firstMove.a + i, firstMove.b));}
+    }
+    return mainWordTilesCords;
+  }
+
   /// Returns list of <word, scoreForThisWord>
   List<Pair<String, int>> createdWordsThisTurn(List<Pair<int, int>> movesThisTurn) {
     // TODO check additional words - for now only main word is verified
     // Only main word should have bonuses
+    // Bonuses can be reused (for now - easier implementation)
+    List<Pair<int, int>> mainWordTilesCords = getMainWordTilesCords(movesThisTurn);
     List <Pair<String, int>> createdWords = [];
 
     String mainWord = "";
@@ -143,10 +163,10 @@ class _GameState extends State<Game> {
     bool doubleWordBonus = false;
     bool tripleWordBonus = false;
 
-    for(var i=0; i<movesThisTurn.length; i++) {
-      Pair<int, int> move = movesThisTurn[i];
-      BoardTile tile = boardTiles[move.a][move.b];
-      Color tileColor = BoardTile.getTileColor(move.a, move.b);
+    for(var i=0; i<mainWordTilesCords.length; i++) {
+      Pair<int, int> tileCords = mainWordTilesCords[i];
+      BoardTile tile = boardTiles[tileCords.a][tileCords.b];
+      Color tileColor = BoardTile.getTileColor(tileCords.a, tileCords.b);
       mainWord += tile.letter;
 
       // get value of a letter
