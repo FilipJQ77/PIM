@@ -75,7 +75,7 @@ class ShufflePopup extends StatelessWidget {
 
 class EndTurnPopup extends StatelessWidget {
   final int pointsGained;
-  final Function endPlayerTurn;
+  final Function(int) endPlayerTurn;
 
   const EndTurnPopup(
       {Key? key, required this.endPlayerTurn, required this.pointsGained})
@@ -99,7 +99,7 @@ class EndTurnPopup extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            endPlayerTurn();
+            endPlayerTurn(pointsGained);
             Navigator.of(context).pop();
           },
           child: const Text('YES', style: TextStyle(color: AppColors.purple)),

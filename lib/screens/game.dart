@@ -52,6 +52,9 @@ class _GameState extends State<Game> {
   /// List of coordinates of placed tiles this turn.
   late List<Pair<int, int>> movesThisTurn;
 
+  /// True if the first word is being placed, false otherwise.
+  late bool firstTurn;
+
   @override
   initState() {
     super.initState();
@@ -82,7 +85,13 @@ class _GameState extends State<Game> {
     for (var i = 0; i < boardSize; i++) {
       boardTiles.add([]);
       for (var j = 0; j < boardSize; j++) {
-        boardTiles[i].add(BoardTile(x: i, y: j, letter: "", isTaken: false, color: BoardTile.getTileColor(i, j), placeLetterOnBoard: placeLetterOnBoard));
+        boardTiles[i].add(BoardTile(
+            x: i,
+            y: j,
+            letter: "",
+            isTaken: false,
+            color: BoardTile.getTileColor(i, j),
+            placeLetterOnBoard: placeLetterOnBoard));
       }
     }
   }
@@ -91,9 +100,14 @@ class _GameState extends State<Game> {
     if (currentLetter != null && !boardTiles[x][y].isTaken) {
       print("Placing ${currentLetter!.letter} on tile $x $y");
       setState(() {
-        boardTiles[x][y] = BoardTile(x: x, y: y, letter: currentLetter!.letter, isTaken: true, color: AppColors.cream, placeLetterOnBoard: placeLetterOnBoard);
+        boardTiles[x][y] = BoardTile(
+            x: x,
+            y: y,
+            letter: currentLetter!.letter,
+            isTaken: true,
+            color: AppColors.cream,
+            placeLetterOnBoard: placeLetterOnBoard);
 
-        print(boardTiles[x][y].letter);
         currentPlayer.letters.remove(currentLetter);
 
         movesThisTurn.add(Pair(x, y));
@@ -101,6 +115,40 @@ class _GameState extends State<Game> {
         currentLetter = null;
       });
     }
+  }
+
+  bool isCorrectTurn(List<Pair<int, int>> movesThisTurn) {
+    int x = movesThisTurn.first.a;
+    int y = movesThisTurn.first.b;
+
+    // if the move is in one column or one row
+    // and the center tile has been taken
+    if (boardTiles[7][7].isTaken &&
+        (movesThisTurn.every((move) => move.a == x) ||
+            movesThisTurn.every((move) => move.b == y))) {
+      print("Correct turn"); // todo
+      return true;
+    }
+    return false;
+  }
+
+  List<String> createdWordsThisTurn(List<Pair<int, int>> movesThisTurn) {
+    return List.empty(); // TODO
+  }
+
+  int calculateTurnPoints(List<String> words) {
+    return 0; // TODO
+  }
+
+  int parseTurn() {
+    bool correct = isCorrectTurn(movesThisTurn);
+    if (correct) {
+      var words = createdWordsThisTurn(movesThisTurn);
+      if (words.isNotEmpty) {
+        return calculateTurnPoints(words);
+      }
+    }
+    return -1;
   }
 
   void newCurrentLetter(HandLetter handLetter) {
@@ -140,7 +188,13 @@ class _GameState extends State<Game> {
     var y = lastMove.b;
     var letter = boardTiles[x][y].letter;
     setState(() {
-      boardTiles[x][y] = BoardTile(x: x, y: y, letter: "", isTaken: false, color: BoardTile.getTileColor(x, y), placeLetterOnBoard: placeLetterOnBoard);
+      boardTiles[x][y] = BoardTile(
+          x: x,
+          y: y,
+          letter: "",
+          isTaken: false,
+          color: BoardTile.getTileColor(x, y),
+          placeLetterOnBoard: placeLetterOnBoard);
 
       currentPlayer.letters.add(HandLetter(
           letter: letter, newCurrentLetter: newCurrentLetter, active: false));
@@ -170,7 +224,7 @@ class _GameState extends State<Game> {
     });
 
     // end turn without pop up
-    endPlayerTurn();
+    endPlayerTurn(0);
   }
 
   void exchangePopup() {
@@ -224,7 +278,7 @@ class _GameState extends State<Game> {
     });
 
     // end turn without pop up
-    endPlayerTurn();
+    endPlayerTurn(0);
   }
 
   void shufflePopup() {
@@ -241,7 +295,7 @@ class _GameState extends State<Game> {
   }
 
   /// Ends turn without a popup.
-  void endPlayerTurn() {
+  void endPlayerTurn(int points) {
     setState(() {
       currentLetter = null;
       // refill player hand
@@ -254,7 +308,7 @@ class _GameState extends State<Game> {
               )));
       clearActiveLetter();
 
-      players[currentPlayerIndex].addPoints(10); // this works already btw
+      players[currentPlayerIndex].addPoints(points); // this works already btw
 
       currentPlayer.toggleActive();
 
@@ -271,10 +325,22 @@ class _GameState extends State<Game> {
 
   /// Ends player turn with a question popup.
   void endTurnPopup() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) =>
-            EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 69));
+    if (movesThisTurn.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 0));
+    } else {
+      var points = parseTurn();
+      if (points >= 0) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) => EndTurnPopup(
+                endPlayerTurn: endPlayerTurn, pointsGained: points));
+      } else {
+        //todo popup o niepoprawnej rundzie
+      }
+    }
   }
 
   @override
@@ -285,7 +351,7 @@ class _GameState extends State<Game> {
           appBar: const BabbleAppBar(),
           body: Column(
             children: <Widget>[
-              GameInfo(players: players, endTurn: endPlayerTurn),
+              GameInfo(players: players, endPlayerTurn: endPlayerTurn),
               Board(boardTiles: boardTiles),
               GameHand(playerLetters: currentPlayer.letters),
               GameButtonRow(
