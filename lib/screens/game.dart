@@ -117,67 +117,22 @@ class _GameState extends State<Game> {
     }
   }
 
-  bool isCorrectTurn(List<Pair<int, int>> movesThisTurn) {
-    int x = movesThisTurn.first.a;
-    int y = movesThisTurn.first.b;
+  /// Checks if the turn is correct, and if so, sort the moves.
+  bool checkCorrectTurnAndSort(List<Pair<int, int>> movesThisTurn) {
+    int x = movesThisTurn[0].a;
+    int y = movesThisTurn[0].b;
 
-    // if the move is in one column or one row
-    // and the center tile has been taken
-    if (boardTiles[7][7].isTaken &&
-        (movesThisTurn.every((move) => move.a == x) ||
-            movesThisTurn.every((move) => move.b == y))) {
-      print("Correct turn"); // todo
-      return true;
+    // word is on 'Y' axis
+    if (movesThisTurn.every((move) => move.a == x)) {
+      movesThisTurn.sort((pair1, pair2) => pair1.b.compareTo(pair2.b));
     }
-    return false;
-  }
-
-  /// Establish which letter should be first (based on placed letters)
-  Pair<int, int> getFirstLetterCordsOfPlacedLetters(List<Pair<int, int>> movesThisTurn){
-    Pair<int, int> firstLetterCords = Pair(0, 0);
     // word is on 'X' axis
-    if(movesThisTurn[0].a == movesThisTurn[1].a){
-      int closestYCord = 100;
-      for(var i=0;i<movesThisTurn.length;i++){
-        if(closestYCord > movesThisTurn[i].b) {
-          closestYCord = movesThisTurn[i].b;
-          firstLetterCords = movesThisTurn[i];
-        }
-      }
-    } else {  // word is on 'Y' axis
-      int closestXCord = 100;
-      for(var i=0;i<movesThisTurn.length;i++){
-        if(closestXCord > movesThisTurn[i].a) {
-          closestXCord = movesThisTurn[i].a;
-          firstLetterCords = movesThisTurn[i];
-        }
-      }
+    else if (movesThisTurn.every((move) => move.b == y)) {
+      movesThisTurn.sort((pair1, pair2) => pair1.a.compareTo(pair2.a));
+    } else {
+      return false;
     }
-    return firstLetterCords;
-  }
-
-  /// Establish which letter should be last (based on placed letters)
-  Pair<int, int> getLastLetterCordsOfPlacedLetters(List<Pair<int, int>> movesThisTurn){
-    Pair<int, int> lastLetterCords = Pair(0, 0);
-    // word is on 'X' axis
-    if(movesThisTurn[0].a == movesThisTurn[1].a){
-      int furthestYCord = -1;
-      for(var i=0;i<movesThisTurn.length;i++){
-        if(furthestYCord < movesThisTurn[i].b) {
-          furthestYCord = movesThisTurn[i].b;
-          lastLetterCords = movesThisTurn[i];
-        }
-      }
-    } else {  // word is on 'Y' axis
-      int furthestXCord = -1;
-      for(var i=0;i<movesThisTurn.length;i++){
-        if(furthestXCord < movesThisTurn[i].a) {
-          furthestXCord = movesThisTurn[i].a;
-          lastLetterCords = movesThisTurn[i];
-        }
-      }
-    }
-    return lastLetterCords;
+    return true;
   }
 
   /// This will get all tiles coordinates between two given tiles coordinates
@@ -189,29 +144,22 @@ class _GameState extends State<Game> {
     if(firstLetterCords.a == lastLetterCords.a){ // word is on 'X' axis
       int wordLength = lastLetterCords.b - firstLetterCords.b + 1;
       for(var i=0; i< wordLength; i++)
-        {allLettersCords.add(Pair(firstLetterCords.a, firstLetterCords.b + i));}
+      {allLettersCords.add(Pair(firstLetterCords.a, firstLetterCords.b + i));}
     } else { // firstMove.b == lastMove.b, word is on 'Y' axis
       int wordLength = lastLetterCords.a - firstLetterCords.a + 1;
       for(var i=0; i< wordLength; i++)
-        {allLettersCords.add(Pair(firstLetterCords.a + i, firstLetterCords.b));}
+      {allLettersCords.add(Pair(firstLetterCords.a + i, firstLetterCords.b));}
     }
     return allLettersCords;
   }
 
   /// get cords of all letters which main word is build of
-  List<Pair<int, int>> getMainWordTilesCords(List<Pair<int, int>> movesThisTurn){
+  List<Pair<int, int>> getMainWordTilesCords(
+      List<Pair<int, int>> movesThisTurn) {
     // Words can be written in two orders: from up to bottom and from left to right
 
-    Pair<int, int> firstMove =  Pair(0, 0);
-    Pair<int, int> lastMove =  Pair(0, 0);
-
-    if(movesThisTurn.length == 1){
-      firstMove =  movesThisTurn[0];
-      lastMove =  movesThisTurn[0];
-    }else{
-      firstMove =  getFirstLetterCordsOfPlacedLetters(movesThisTurn);
-      lastMove =  getLastLetterCordsOfPlacedLetters(movesThisTurn);
-    }
+    var firstMove = movesThisTurn.first;
+    var lastMove = movesThisTurn.last;
 
     print("First move: ${firstMove.a} ${firstMove.b}");
     print("Last move: ${lastMove.a} ${lastMove.b}");
@@ -221,19 +169,19 @@ class _GameState extends State<Game> {
 
     // TODO take into account 'end of board' cases !!!
 
-    // sufix case
-    if(boardTiles[firstMove.a - 1][firstMove.b].isTaken ||
-       boardTiles[firstMove.a][firstMove.b - 1].isTaken){
+    // suffix case
+    if (boardTiles[firstMove.a - 1][firstMove.b].isTaken ||
+        boardTiles[firstMove.a][firstMove.b - 1].isTaken) {
       var i = 1;
-      if(boardTiles[firstMove.a - 1][firstMove.b].isTaken){
-        while(boardTiles[firstMove.a - i][firstMove.b].isTaken){
+      if (boardTiles[firstMove.a - 1][firstMove.b].isTaken) {
+        while (boardTiles[firstMove.a - i][firstMove.b].isTaken) {
           startOfWord = Pair(firstMove.a - i, firstMove.b);
           i++;
         }
         return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
       }
-      if(boardTiles[firstMove.a][firstMove.b - 1].isTaken){
-        while(boardTiles[firstMove.a][firstMove.b - i].isTaken){
+      if (boardTiles[firstMove.a][firstMove.b - 1].isTaken) {
+        while (boardTiles[firstMove.a][firstMove.b - i].isTaken) {
           startOfWord = Pair(firstMove.a, firstMove.b - i);
           i++;
         }
@@ -242,18 +190,18 @@ class _GameState extends State<Game> {
     }
 
     // prefix case
-    if(boardTiles[firstMove.a + 1][firstMove.b].isTaken ||
-       boardTiles[firstMove.a][firstMove.b + 1].isTaken){
+    if (boardTiles[firstMove.a + 1][firstMove.b].isTaken ||
+        boardTiles[firstMove.a][firstMove.b + 1].isTaken) {
       var i = 1;
-      if(boardTiles[firstMove.a + 1][firstMove.b].isTaken){
-        while(boardTiles[firstMove.a + i][firstMove.b].isTaken){
+      if (boardTiles[firstMove.a + 1][firstMove.b].isTaken) {
+        while (boardTiles[firstMove.a + i][firstMove.b].isTaken) {
           endOfWord = Pair(firstMove.a + i, firstMove.b);
           i++;
         }
         return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
       }
-      if(boardTiles[firstMove.a][firstMove.b + 1].isTaken){
-        while(boardTiles[firstMove.a][firstMove.b + i].isTaken){
+      if (boardTiles[firstMove.a][firstMove.b + 1].isTaken) {
+        while (boardTiles[firstMove.a][firstMove.b + i].isTaken) {
           endOfWord = Pair(firstMove.a, firstMove.b + i);
           i++;
         }
@@ -263,23 +211,24 @@ class _GameState extends State<Game> {
 
     // standard (whole) word case
     return getAllLettersCordsBetweenTwoLettersCords(startOfWord, endOfWord);
-
   }
 
   /// Returns list of <word, scoreForThisWord>
-  List<Pair<String, int>> createdWordsThisTurn(List<Pair<int, int>> movesThisTurn) {
+  List<Pair<String, int>> createdWordsThisTurn(
+      List<Pair<int, int>> movesThisTurn) {
     // TODO check additional words - for now only main word is verified
     // Only main word should have bonuses
     // Bonuses can be reused (for now - easier implementation)
-    List<Pair<int, int>> mainWordTilesCords = getMainWordTilesCords(movesThisTurn);
-    List <Pair<String, int>> createdWords = [];
+    List<Pair<int, int>> mainWordTilesCords =
+        getMainWordTilesCords(movesThisTurn);
+    List<Pair<String, int>> createdWords = [];
 
     String mainWord = "";
     int mainWordScore = 0;
     bool doubleWordBonus = false;
     bool tripleWordBonus = false;
 
-    for(var i=0; i<mainWordTilesCords.length; i++) {
+    for (var i = 0; i < mainWordTilesCords.length; i++) {
       Pair<int, int> tileCords = mainWordTilesCords[i];
       BoardTile tile = boardTiles[tileCords.a][tileCords.b];
       Color tileColor = BoardTile.getTileColor(tileCords.a, tileCords.b);
@@ -288,17 +237,23 @@ class _GameState extends State<Game> {
       // get value of a letter
       int letterValue = LetterBag.getLetterValue(tile.letter);
       // Check bonuses
-      if(tileColor == AppColors.gold) {doubleWordBonus = true;}
-      else if(tileColor == AppColors.pink) {doubleWordBonus = true;}
-      else if(tileColor == AppColors.red) {tripleWordBonus = true;}
-      else if(tileColor == AppColors.aqua) {letterValue *= 2;}
-      else if(tileColor == AppColors.darkBlue) {letterValue *= 3;}
+      if (tileColor == AppColors.gold) {
+        doubleWordBonus = true;
+      } else if (tileColor == AppColors.pink) {
+        doubleWordBonus = true;
+      } else if (tileColor == AppColors.red) {
+        tripleWordBonus = true;
+      } else if (tileColor == AppColors.aqua) {
+        letterValue *= 2;
+      } else if (tileColor == AppColors.darkBlue) {
+        letterValue *= 3;
+      }
       //
       mainWordScore += letterValue;
     }
 
-    if(doubleWordBonus) mainWordScore *= 2;
-    if(tripleWordBonus) mainWordScore *= 3;
+    if (doubleWordBonus) mainWordScore *= 2;
+    if (tripleWordBonus) mainWordScore *= 3;
 
     print("Main word: ${mainWord}, main word score ${mainWordScore}");
 
@@ -309,15 +264,14 @@ class _GameState extends State<Game> {
   /// Sums points for all words that have been created
   int calculateTurnPoints(List<Pair<String, int>> words) {
     int score = 0;
-    for(var i=0; i<words.length; i++) {
+    for (var i = 0; i < words.length; i++) {
       score += words[i].b;
     }
     return score;
   }
 
   int parseTurn() {
-    bool correct = isCorrectTurn(movesThisTurn);
-    if (correct) {
+    if (checkCorrectTurnAndSort(movesThisTurn)) {
       var words = createdWordsThisTurn(movesThisTurn);
       if (words.isNotEmpty) {
         return calculateTurnPoints(words);

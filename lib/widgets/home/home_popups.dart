@@ -113,7 +113,7 @@ class RulesPopup extends StatelessWidget {
             Text(
                 "1. The first player combines two or more of their letters from \"hand\" to form "
                 "a word and places it on the board to read either across "
-                "or down with one word starting on the center square. "
+                "or down covering the center square. "
                 "Diagonal words are not allowed!\n",
                 textAlign: TextAlign.justify),
             Text(

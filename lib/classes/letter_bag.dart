@@ -32,7 +32,7 @@ class LetterBag {
   /// Fills bag with a starting set of letters.
   void fillStartingBag() {
     // blank tile - 0p
-    fillBagWithLetter(' ', 2);
+    // fillBagWithLetter(' ', 2);
     // 1p
     fillBagWithLetter('E', 12);
     fillBagWithLetter('A', 9);
