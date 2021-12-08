@@ -39,12 +39,12 @@ class GameOver extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Player 1: ${players[0].points}",
+                        child: Text("${players[0].name}: ${players[0].points}",
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Player 2: ${players[1].points}",
+                        child: Text("${players[1].name}: ${players[1].points}",
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                       ),
                       Padding(
