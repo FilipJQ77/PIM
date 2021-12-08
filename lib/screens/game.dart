@@ -231,6 +231,7 @@ class _GameState extends State<Game> {
         wordString += boardTiles[pair.a][pair.b].letter;
       }
       wordString = wordString.toLowerCase();
+      // Comment when debugging
       if (!allowedWords.contains(wordString)) {
         print(wordString);
         throw Exception(
@@ -383,6 +384,12 @@ class _GameState extends State<Game> {
       return;
     }
 
+    if(!letterBag.canIDrawLetters(1)){
+      print("You can't exchange. There are not enough letters in the bag!");
+      // todo 'error' popup
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) => ExchangePopup(
@@ -391,13 +398,14 @@ class _GameState extends State<Game> {
     );
   }
 
+  /// Exchange whole hand, then end turn
   void shuffleHand() {
-    // exchange whole hand
-    if (movesThisTurn.isNotEmpty) {
-      print("You can't shuffle. Remove your tiles from board!");
-      // todo 'error' popup
-      return;
-    }
+    // not needed - it should be in shuffle Pop Up and there already is similar case
+    // if (movesThisTurn.isNotEmpty) {
+    //   print("You can't shuffle. Remove your tiles from board!");
+    //   // todo 'error' popup
+    //   return;
+    // }
 
     setState(() {
       currentLetter = null;
@@ -431,6 +439,12 @@ class _GameState extends State<Game> {
       return;
     }
 
+    if(!letterBag.canIDrawLetters(handSize)){
+      print("You can't shuffle. There are not enough letters in the bag!");
+      // todo 'error' popup
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) => ShufflePopup(shuffleHand: shuffleHand),
@@ -438,9 +452,20 @@ class _GameState extends State<Game> {
   }
 
   /// Ends turn without a popup.
-  void endPlayerTurn(int points) {
+ bool endPlayerTurn(int points) {
+
+   // check 'end of game' condition
+   if(!letterBag.canIDrawLetters(handSize - currentPlayer.letters.length)){
+     setState(() {
+       players[currentPlayerIndex].addPoints(points); // add player points before ending
+       // TODO before ending - clear/delete anything that needs to be cleaned up
+     });
+     return false;
+   }
+
     setState(() {
       currentLetter = null;
+
       // refill player hand
       currentPlayer.letters.addAll(letterBag
           .getLettersFromBag(handSize - currentPlayer.letters.length)
@@ -464,6 +489,7 @@ class _GameState extends State<Game> {
 
       movesThisTurn.clear();
     });
+    return true;
   }
 
   /// Ends player turn with a question popup.
@@ -472,14 +498,14 @@ class _GameState extends State<Game> {
       showDialog(
           context: context,
           builder: (BuildContext context) =>
-              EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 0));
+              EndTurnPopup(endPlayerTurn: endPlayerTurn, pointsGained: 0, players: players));
     } else {
       var points = parseTurn();
       if (points >= 0) {
         showDialog(
             context: context,
             builder: (BuildContext context) => EndTurnPopup(
-                endPlayerTurn: endPlayerTurn, pointsGained: points));
+                endPlayerTurn: endPlayerTurn, pointsGained: points, players: players));
       } else {
         //todo popup o niepoprawnej rundzie
         print("Not correct turn pls");

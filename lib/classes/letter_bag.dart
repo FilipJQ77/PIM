@@ -20,6 +20,7 @@ class LetterBag {
   /// Creates a new, filled bag.
   LetterBag() {
     fillStartingBag();
+    // fillStartingBagWithFewLettersForTestingGameOver();
   }
 
   /// Fills bag with [numberOfRepetitions] instances of a [letter].
@@ -27,6 +28,13 @@ class LetterBag {
     for (var i = 0; i < numberOfRepetitions; i++) {
       _letters.add(letter);
     }
+  }
+
+  void fillStartingBagWithFewLettersForTestingGameOver(){
+    fillBagWithLetter('E', 12);
+    fillBagWithLetter('A', 9);
+    fillBagWithLetter('I', 9);
+    fillBagWithLetter('O', 8);
   }
 
   /// Fills bag with a starting set of letters.
@@ -115,6 +123,11 @@ class LetterBag {
   /// Get how many letters are still in a bag.
   int getBagSize() {
     return _letters.length;
+  }
+
+  bool canIDrawLetters(int numberOfLetters){
+    if (numberOfLetters > getBagSize()) {return false;}
+    return true;
   }
 
   /// Gets [numberOfLetters] letters from a bag.
