@@ -7,4 +7,13 @@ class Pair<T1, T2> {
   final T2 b;
 
   Pair(this.a, this.b);
+
+  @override
+  bool operator ==(Object other) {
+    return other is Pair && a == other.a && b == other.b;
+  }
+
+  @override
+  // TODO: implement this better sometime whatever lmao
+  int get hashCode => a.hashCode * b.hashCode;
 }
