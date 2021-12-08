@@ -5,16 +5,16 @@ class BoardTile extends StatelessWidget {
   final int x;
   final int y;
   final String letter;
-  final bool isTaken;
   final Color color;
   final Function(int x, int y) placeLetterOnBoard;
+
+  bool get isTaken => letter.length == 1;
 
   const BoardTile(
       {Key? key,
       required this.x,
       required this.y,
       required this.letter,
-      required this.isTaken,
       required this.color,
       required this.placeLetterOnBoard})
       : super(key: key);

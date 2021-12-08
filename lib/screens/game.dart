@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pim_word_builder/classes/app_colors.dart';
 import 'package:pim_word_builder/classes/letter_bag.dart';
 import 'package:pim_word_builder/classes/pair.dart';
 import 'package:pim_word_builder/classes/player.dart';
+import 'package:pim_word_builder/classes/utils.dart';
 import 'package:pim_word_builder/widgets/app_bar.dart';
 import 'package:pim_word_builder/widgets/game/board.dart';
 import 'package:pim_word_builder/widgets/game/board_tile.dart';
@@ -56,7 +60,7 @@ class _GameState extends State<Game> {
   late bool firstTurn;
 
   /// todo
-  late List<String> allowedWords = ["zig"]; // todo list->set
+  late Set<String> allowedWords = {};
 
   @override
   initState() {
@@ -92,11 +96,20 @@ class _GameState extends State<Game> {
             x: i,
             y: j,
             letter: "",
-            isTaken: false,
             color: BoardTile.getTileColor(i, j),
             placeLetterOnBoard: placeLetterOnBoard));
       }
     }
+    // todo because of async bullshit this technically finishes
+    //  after initState but I dont give a fuck anymore
+    getAllowedWords("assets/data/wordsGB.txt");
+  }
+
+  void getAllowedWords(String path) async {
+    var allWords = await rootBundle.loadString(path);
+    allowedWords.addAll(allWords.split('\n').map((x) => x.trim()));
+
+    print("Allowed words ${allowedWords.length}");
   }
 
   void placeLetterOnBoard(int x, int y) {
@@ -107,7 +120,6 @@ class _GameState extends State<Game> {
             x: x,
             y: y,
             letter: currentLetter!.letter,
-            isTaken: true,
             color: AppColors.cream,
             placeLetterOnBoard: placeLetterOnBoard);
 
@@ -151,12 +163,14 @@ class _GameState extends State<Game> {
   /// Returns a list of words, where a word is represented by a list of tiles (their position)
   List<List<Pair<int, int>>> getAllCreatedWords(
       List<Pair<int, int>> movesThisTurn) {
-    Set<Pair<int, int>> usedTiles = {};
+    var notUsedTiles = <Pair<int, int>>[];
+
+    notUsedTiles.addAll(movesThisTurn);
 
     List<List<Pair<int, int>>> wordsTiles = [];
 
     for (var move in movesThisTurn) {
-      if (usedTiles.contains(move)) {
+      if (!notUsedTiles.contains(move)) {
         continue;
       }
 
@@ -176,8 +190,9 @@ class _GameState extends State<Game> {
       List<Pair<int, int>> newPossibleWord = [];
       while (wordX < boardSize && boardTiles[wordX][moveY].isTaken) {
         var tile = Pair(wordX, moveY);
-        usedTiles.add(tile);
+        notUsedTiles.remove(tile);
         newPossibleWord.add(tile);
+        wordX++;
       }
       if (newPossibleWord.length > 1) {
         wordsTiles.add(newPossibleWord);
@@ -191,11 +206,12 @@ class _GameState extends State<Game> {
       }
       wordY++;
 
-      newPossibleWord.clear();
+      newPossibleWord = [];
       while (wordY < boardSize && boardTiles[moveX][wordY].isTaken) {
-        var tile = Pair(wordX, moveY);
-        usedTiles.add(tile);
+        var tile = Pair(moveX, wordY);
+        notUsedTiles.remove(tile);
         newPossibleWord.add(tile);
+        wordY++;
       }
       if (newPossibleWord.length > 1) {
         wordsTiles.add(newPossibleWord);
@@ -210,12 +226,13 @@ class _GameState extends State<Game> {
     List<Pair<String, int>> createdWords = [];
 
     for (var word in wordsTiles) {
-      StringBuffer wordBuffer = StringBuffer();
-      wordBuffer
-          .writeAll(word.map((pair) => boardTiles[pair.a][pair.b].letter));
-
-      String wordString = wordBuffer.toString();
+      String wordString = "";
+      for (var pair in word) {
+        wordString += boardTiles[pair.a][pair.b].letter;
+      }
+      wordString = wordString.toLowerCase();
       if (!allowedWords.contains(wordString)) {
+        print(wordString);
         throw Exception(
             "Cannot end turn not allowed word"); // todo albo zwroc puste
       }
@@ -319,7 +336,6 @@ class _GameState extends State<Game> {
           x: x,
           y: y,
           letter: "",
-          isTaken: false,
           color: BoardTile.getTileColor(x, y),
           placeLetterOnBoard: placeLetterOnBoard);
 
