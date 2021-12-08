@@ -16,28 +16,26 @@ class HandLetter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LimitedBox(
-      maxHeight: 55,
-      maxWidth: 55,
+      maxHeight: 40,
+      maxWidth: 40,
       child: AspectRatio(
         aspectRatio: 1,
-        child: TextButton(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: active ? AppColors.purple : AppColors.navyBlue,
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
           onPressed: () {
             print(letter);
             newCurrentLetter(this);
           },
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: active ? AppColors.purple : AppColors.navyBlue,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.mistyWhite),
-            ),
-            child: Center(
-                child: Text(letter,
-                    style: const TextStyle(
-                        color: AppColors.mistyWhite,
-                        fontWeight: FontWeight.bold))),
-          ),
+          child: Text(letter,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: AppColors.mistyWhite, fontWeight: FontWeight.bold)),
         ),
       ),
     );
