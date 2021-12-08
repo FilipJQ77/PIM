@@ -16,10 +16,10 @@ class GameInfo extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           PlayerInfo(player: players[0]), // todo better in the future
-          Timer(endPlayerTurn: endPlayerTurn),
+          //Timer(endPlayerTurn: endPlayerTurn),
           PlayerInfo(player: players[1]),
         ],
       ),
