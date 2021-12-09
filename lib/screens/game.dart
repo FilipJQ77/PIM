@@ -234,8 +234,7 @@ class _GameState extends State<Game> {
       // Comment when debugging
       if (!allowedWords.contains(wordString)) {
         print(wordString);
-        throw Exception(
-            "Cannot end turn not allowed word"); // todo albo zwroc puste
+        return [];
       }
 
       bool doubleWordBonus = false;
@@ -276,6 +275,9 @@ class _GameState extends State<Game> {
   /// Sums points for all words that have been created
   int calculateTurnPoints(List<Pair<String, int>> words) {
     int score = 0;
+    if (words.isEmpty){
+      return -1;
+    }
     for (var i = 0; i < words.length; i++) {
       score += words[i].b;
     }
@@ -374,19 +376,32 @@ class _GameState extends State<Game> {
   void exchangePopup() {
     if (movesThisTurn.isNotEmpty) {
       print("You can't exchange if you've put a letter on the board.");
-      // todo popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const ErrorPopup(
+            errorMessage: "You can't exchange if you've put a letter on the board."),
+      );
+
       return;
     }
 
     if (currentLetter == null) {
       print("You must choose a letter to exchange first.");
-      // todo popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const ErrorPopup(
+            errorMessage: "You must choose a letter to exchange first."),
+      );
       return;
     }
 
     if(!letterBag.canIDrawLetters(1)){
       print("You can't exchange. There are not enough letters in the bag!");
-      // todo 'error' popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const ErrorPopup(
+            errorMessage: "You can't exchange. There are not enough letters in the bag!"),
+      );
       return;
     }
 
@@ -400,13 +415,6 @@ class _GameState extends State<Game> {
 
   /// Exchange whole hand, then end turn
   void shuffleHand() {
-    // not needed - it should be in shuffle Pop Up and there already is similar case
-    // if (movesThisTurn.isNotEmpty) {
-    //   print("You can't shuffle. Remove your tiles from board!");
-    //   // todo 'error' popup
-    //   return;
-    // }
-
     setState(() {
       currentLetter = null;
       // remember current hand
@@ -435,13 +443,21 @@ class _GameState extends State<Game> {
   void shufflePopup() {
     if (currentPlayer.letters.length != handSize) {
       print("You can't shuffle if you've put a letter on the board.");
-      // todo popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const ErrorPopup(
+            errorMessage: "You can't shuffle if you've put a letter on the board."),
+      );
       return;
     }
 
     if(!letterBag.canIDrawLetters(handSize)){
       print("You can't shuffle. There are not enough letters in the bag!");
-      // todo 'error' popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => const ErrorPopup(
+            errorMessage: "You can't shuffle. There are not enough letters in the bag!"),
+      );
       return;
     }
 
@@ -464,7 +480,7 @@ class _GameState extends State<Game> {
    }
 
     setState(() {
-      currentLetter = null;
+      clearActiveLetter();
 
       // refill player hand
       currentPlayer.letters.addAll(letterBag
@@ -507,8 +523,12 @@ class _GameState extends State<Game> {
             builder: (BuildContext context) => EndTurnPopup(
                 endPlayerTurn: endPlayerTurn, pointsGained: points, players: players));
       } else {
-        //todo popup o niepoprawnej rundzie
         print("Not correct turn pls");
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => const ErrorPopup(
+              errorMessage: "You did not place the tiles correctly or the words you created are not allowed."),
+        );
       }
     }
   }

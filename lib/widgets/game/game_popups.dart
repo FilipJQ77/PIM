@@ -118,3 +118,28 @@ class EndTurnPopup extends StatelessWidget {
     );
   }
 }
+
+class ErrorPopup extends StatelessWidget {
+  final String errorMessage;
+
+  const ErrorPopup({Key? key, required this.errorMessage}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Error'),
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.10,
+        child: Text(errorMessage),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('OK', style: TextStyle(color: AppColors.purple)),
+        ),
+      ],
+    );
+  }
+}
