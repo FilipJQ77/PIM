@@ -5,18 +5,18 @@ class BoardTile extends StatelessWidget {
   final int x;
   final int y;
   final String letter;
-  final bool isTaken;
-  final Color tileColor;
-  final Function(int x, int y) function;
+  final Color color;
+  final Function(int x, int y) placeLetterOnBoard;
+
+  bool get isTaken => letter.length == 1;
 
   const BoardTile(
       {Key? key,
       required this.x,
       required this.y,
       required this.letter,
-      required this.isTaken,
-      required this.tileColor,
-      required this.function})
+      required this.color,
+      required this.placeLetterOnBoard})
       : super(key: key);
 
   static Color getTileColor(int x, int y) {
@@ -49,11 +49,11 @@ class BoardTile extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          function(x, y);
+          placeLetterOnBoard(x, y);
         },
         child: Container(
           decoration: BoxDecoration(
-              color: tileColor, border: Border.all(color: AppColors.black)),
+              color: color, border: Border.all(color: AppColors.black)),
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Center(

@@ -14,13 +14,13 @@ import 'package:pim_word_builder/classes/utils.dart';
 ///
 /// Source: https://en.wikipedia.org/wiki/Scrabble_letter_distributions
 class LetterBag {
-
   /// List of letters currently in the bag.
   final List<String> _letters = [];
 
   /// Creates a new, filled bag.
   LetterBag() {
     fillStartingBag();
+    // fillStartingBagWithFewLettersForTestingGameOver();
   }
 
   /// Fills bag with [numberOfRepetitions] instances of a [letter].
@@ -30,10 +30,17 @@ class LetterBag {
     }
   }
 
+  void fillStartingBagWithFewLettersForTestingGameOver(){
+    fillBagWithLetter('E', 12);
+    fillBagWithLetter('A', 9);
+    fillBagWithLetter('I', 9);
+    fillBagWithLetter('O', 8);
+  }
+
   /// Fills bag with a starting set of letters.
   void fillStartingBag() {
     // blank tile - 0p
-    fillBagWithLetter(' ', 2);
+    // fillBagWithLetter(' ', 2);
     // 1p
     fillBagWithLetter('E', 12);
     fillBagWithLetter('A', 9);
@@ -116,6 +123,11 @@ class LetterBag {
   /// Get how many letters are still in a bag.
   int getBagSize() {
     return _letters.length;
+  }
+
+  bool canIDrawLetters(int numberOfLetters){
+    if (numberOfLetters > getBagSize()) {return false;}
+    return true;
   }
 
   /// Gets [numberOfLetters] letters from a bag.

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pim_word_builder/classes/app_colors.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
+import 'package:pim_word_builder/screens/game_over.dart';
+import 'package:pim_word_builder/classes/player.dart';
 
 class ExchangePopup extends StatelessWidget {
   final HandLetter chosenLetter;
@@ -75,10 +77,11 @@ class ShufflePopup extends StatelessWidget {
 
 class EndTurnPopup extends StatelessWidget {
   final int pointsGained;
-  final Function endPlayerTurn;
+  final Function(int) endPlayerTurn;
+  final List<Player> players;
 
   const EndTurnPopup(
-      {Key? key, required this.endPlayerTurn, required this.pointsGained})
+      {Key? key, required this.endPlayerTurn, required this.pointsGained, required this.players})
       : super(key: key);
 
   @override
@@ -99,10 +102,42 @@ class EndTurnPopup extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            endPlayerTurn();
+            bool gameContinues = endPlayerTurn(pointsGained);
             Navigator.of(context).pop();
+            if(!gameContinues){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GameOver(players: players))
+              );
+            }
+
           },
           child: const Text('YES', style: TextStyle(color: AppColors.purple)),
+        ),
+      ],
+    );
+  }
+}
+
+class ErrorPopup extends StatelessWidget {
+  final String errorMessage;
+
+  const ErrorPopup({Key? key, required this.errorMessage}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Error'),
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.10,
+        child: Text(errorMessage),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('OK', style: TextStyle(color: AppColors.purple)),
         ),
       ],
     );
