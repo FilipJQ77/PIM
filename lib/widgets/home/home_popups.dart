@@ -104,12 +104,12 @@ class RulesPopup extends StatelessWidget {
             Text("\nGameplay\n",
                 style: TextStyle(
                     color: AppColors.purple, fontWeight: FontWeight.bold)),
-            Text(
-                "Each player has 2 minutes to place some of their tiles "
-                "on the board to create existing word(s). "
-                "After that time the round is automatically ended "
-                "and the next player has their turn.\n",
-                textAlign: TextAlign.justify),
+            // Text(
+            //     "Each player has 2 minutes to place some of their tiles "
+            //     "on the board to create existing word(s). "
+            //     "After that time the round is automatically ended "
+            //     "and the next player has their turn.\n",
+            //     textAlign: TextAlign.justify),
             Text(
                 "1. The first player combines two or more of their letters from \"hand\" to form "
                 "a word and places it on the board to read either across "
@@ -139,7 +139,14 @@ class RulesPopup extends StatelessWidget {
                 "The new word must use one of the letters already on the board "
                 "or must add a letter to it.\n"
                 " - Placing a complete word parallel to a word already played "
-                "so that adjacent letters also form complete words.",
+                "so that adjacent letters also form complete words.\n",
+                textAlign: TextAlign.justify),
+            Text(
+                "5. The Game ends when:\n"
+                " - The player wants to match the letters to the size of his hand (7),"
+                " but he doesn't have that many letters.\n"
+                " - One of the players will reach (or exceed) the maximum (defined)"
+                " number of points.",
                 textAlign: TextAlign.justify),
             Text("\nBonuses\n",
                 style: TextStyle(
