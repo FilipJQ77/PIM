@@ -16,6 +16,9 @@ import 'package:pim_word_builder/widgets/game/game_info.dart';
 import 'package:pim_word_builder/widgets/game/hand_letter.dart';
 import 'package:pim_word_builder/widgets/game/game_popups.dart';
 
+/// Max number of points - end game
+const int maxNumberOfPoints = 50;
+
 /// Number of players.
 const int numberOfPlayers = 2;
 
@@ -470,12 +473,13 @@ class _GameState extends State<Game> {
   /// Ends turn without a popup.
  bool endPlayerTurn(int points) {
 
+    // add players points
+    setState(() {
+      players[currentPlayerIndex].addPoints(points);
+    });
+
    // check 'end of game' condition
-   if(!letterBag.canIDrawLetters(handSize - currentPlayer.letters.length)){
-     setState(() {
-       players[currentPlayerIndex].addPoints(points); // add player points before ending
-       // TODO before ending - clear/delete anything that needs to be cleaned up
-     });
+   if(!letterBag.canIDrawLetters(handSize - currentPlayer.letters.length) || (currentPlayer.points >= maxNumberOfPoints)){
      return false;
    }
 
@@ -492,7 +496,7 @@ class _GameState extends State<Game> {
               )));
       clearActiveLetter();
 
-      players[currentPlayerIndex].addPoints(points); // this works already btw
+       // this works already btw
 
       currentPlayer.toggleActive();
 
@@ -523,7 +527,7 @@ class _GameState extends State<Game> {
             builder: (BuildContext context) => EndTurnPopup(
                 endPlayerTurn: endPlayerTurn, pointsGained: points, players: players));
       } else {
-        print("Not correct turn pls");
+        print("The tiles were placed incorrectly or the words are not allowed.");
         showDialog(
           context: context,
           builder: (BuildContext context) => const ErrorPopup(
